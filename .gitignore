@@ -1,0 +1,11 @@
+# build output — regenerate with ./build.sh
+dist/
+
+# editors / OS
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# dependencies, if you ever add a toolchain
+node_modules/

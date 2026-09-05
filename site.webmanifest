@@ -1,0 +1,14 @@
+{
+  "name": "PetalX",
+  "short_name": "PetalX",
+  "description": "An IT company in Tsuwano, Shimane, connecting Japanese engineering craft with companies across the United States.",
+  "lang": "en",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#0B2545",
+  "icons": [
+    { "src": "/assets/img/favicon.svg", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "/assets/img/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}

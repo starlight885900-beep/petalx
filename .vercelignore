@@ -1,0 +1,4 @@
+# Build tooling and docs are not part of the deployed site.
+tools/
+dist/
+README.md

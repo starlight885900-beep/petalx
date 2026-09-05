@@ -1,0 +1,98 @@
+/* ===========================================================================
+   base.css: reset, typography, layout primitives, scroll reveal.
+   Loads after tokens.css.
+   =========================================================================== */
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:var(--ground);   /* explicit: the host paints its own ground behind us */
+  color:var(--ink);
+  font-family:var(--font);
+  font-size:16px;
+  line-height:1.7;
+  letter-spacing:-.005em;
+  -webkit-font-smoothing:antialiased;
+  font-feature-settings:"cv05" 1,"ss01" 1;
+}
+
+/* Display headings are the serif. Serifs do not want the tight negative
+   tracking Inter is set with, so it is nearly reset here. */
+h1,h2{
+  margin:0;text-wrap:balance;
+  font-family:var(--font-display);
+  font-weight:700;letter-spacing:-.012em;line-height:1.16;
+}
+h3,h4{margin:0;text-wrap:balance;font-weight:600;letter-spacing:-.02em;line-height:1.25}
+p{margin:0}
+a{color:inherit}
+img,svg,canvas{display:block;max-width:100%}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent-ink);outline-offset:3px;border-radius:2px}
+
+/* Japanese: Gothic for body, Mincho for headings, the same serif/sans split
+   the Latin pages use. Negative tracking is a Latin convention that mangles
+   kana, so it is reset, and lines are given more room for mixed script. */
+html[lang="ja"] body{font-family:var(--jp);letter-spacing:0;line-height:1.9}
+html[lang="ja"] h1,html[lang="ja"] h2{font-family:var(--jp-display);letter-spacing:.01em;line-height:1.45}
+html[lang="ja"] h3,html[lang="ja"] h4{letter-spacing:.01em;line-height:1.5}
+html[lang="ja"] .hero h1{font-size:clamp(1.95rem,4vw,3.05rem)}
+html[lang="ja"] .h2{font-size:clamp(1.55rem,2.7vw,2.2rem);letter-spacing:.01em;line-height:1.5}
+html[lang="ja"] .lead{line-height:1.95}
+html[lang="ja"] .eyebrow{letter-spacing:.1em}
+/* Japanese has no spaces, so the Latin balancer happily breaks mid-word
+   ("ひ|とつの"). auto-phrase breaks at grammatical phrase boundaries instead;
+   browsers without it simply fall back to normal wrapping. */
+html[lang="ja"] h1,html[lang="ja"] h2,
+html[lang="ja"] h3,html[lang="ja"] h4{text-wrap:auto;word-break:auto-phrase}
+html[lang="ja"] .petal-card p,html[lang="ja"] .quote blockquote{word-break:auto-phrase}
+
+/* --- layout primitives --- */
+.rail{width:100%;max-width:var(--rail);margin-inline:auto;padding-inline:var(--gut)}
+.sec{padding-block:var(--sec)}
+.sec--tight{padding-top:0}
+
+.grid{display:grid;gap:18px}
+.g4{grid-template-columns:repeat(4,1fr)}
+.g2{grid-template-columns:repeat(2,1fr)}
+@media (max-width:980px){.g4{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:620px){.g4,.g2{grid-template-columns:1fr}}
+
+/* --- type roles --- */
+.eyebrow{
+  font-size:.6875rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--accent-ink);margin:0 0 22px;display:flex;align-items:center;gap:12px;
+}
+.eyebrow::before{content:"";width:26px;height:1px;background:var(--accent);flex:none}
+.h2{
+  font-family:var(--font-display);
+  font-size:clamp(1.9rem,3.4vw,2.85rem);font-weight:700;letter-spacing:-.014em;line-height:1.18;
+}
+.lead{font-size:clamp(1.0625rem,1.35vw,1.1875rem);color:var(--ink-2);max-width:46ch;line-height:1.8}
+.sec-head{max-width:60ch;margin-bottom:clamp(44px,5vw,72px)}
+.sec-head .lead{margin-top:22px}
+
+/* --- skip link --- */
+.skip{position:absolute;left:-9999px}
+.skip:focus{
+  left:var(--gut);top:12px;z-index:99;background:var(--primary);color:var(--on-primary);
+  padding:10px 18px;border-radius:var(--r);font-weight:600;font-size:.875rem;
+}
+
+/* --- scroll reveal: the only entrance animation in the system ---
+   Gated on .js, which reveal.js confirms it can run (see the bootstrap script
+   in index.html). Without that class every .rv renders normally, so a blocked,
+   failed or absent module script can never leave the page blank. */
+.js .rv{
+  opacity:0;transform:translateY(20px);
+  transition:opacity .8s var(--ease), transform .8s var(--ease);
+  transition-delay:var(--d,0ms);
+}
+.js .rv.in{opacity:1;transform:none}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}
+  .js .rv{opacity:1;transform:none}
+}

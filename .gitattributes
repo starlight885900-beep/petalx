@@ -1,0 +1,9 @@
+# Normalise to LF in the repository. The site is edited on Windows but served
+# from Linux, and CRLF churn in diffs hides real changes.
+* text=auto eol=lf
+
+# Binary assets must never be line-ending converted.
+*.png binary
+*.ico binary
+*.woff  binary
+*.woff2 binary

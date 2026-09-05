@@ -1,0 +1,157 @@
+/* ===========================================================================
+   tokens.css: the PetalX design system.
+   Every colour, radius and rhythm value in the site resolves through here.
+   Change a value in this file and it propagates everywhere.
+
+   Palette: navy and brass, in the restrained institutional register of the
+   reference this site was aligned to. The sakura stays the company's symbol, and
+   it is now drawn in brass rather than pink.
+
+     Navy        #0B2545   primary, and the colour body text is set in
+     Brass       #C8A04D   accent: fills, marks, petals
+     Brass Ink   #8A6D2E   brass dark enough to pass contrast AS TEXT
+     Mist        #EAF0F7   pale blue, for tinted panels
+     White       #FFFFFF   page background
+   =========================================================================== */
+
+:root{
+  /* --- raw brand values, never used directly by components --- */
+  --navy:#0B2545;
+  --navy-2:#0F2E55;
+  --brass:#C8A04D;
+  --brass-lt:#DDBE7E;
+  --mist:#EAF0F7;
+
+  /* --- semantic surface + ink --- */
+  --ground:#FFFFFF;
+  --surface:#FFFFFF;
+  --surface-2:#EAF0F7;
+  --field:#FFFFFF;
+  --ink:#0B2545;        /* navy, not black; the reference sets body copy in it */
+  --ink-2:#52606D;
+  --ink-3:#6B7684;
+
+  /* --- accent (brass) --- */
+  --accent:#C8A04D;       /* fills, rules, marks, petals */
+  --accent-ink:#8A6D2E;   /* accent used as TEXT, contrast-safe, 4.9:1 on white */
+  --accent-soft:#F7F0E1;  /* tinted backgrounds */
+  --on-accent:#0B2545;    /* text sitting on --accent */
+
+  /* --- primary action (navy in light, brass in dark, so a button is always
+         high-contrast against the page it sits on) --- */
+  --primary:#0B2545;
+  --on-primary:#FFFFFF;
+  --primary-hover:#0F2E55;
+
+  /* --- lines + elevation --- */
+  --line:rgba(11,37,69,.12);
+  --line-2:rgba(11,37,69,.18);
+  --hair:rgba(138,109,46,.28);
+  --shadow:0 1px 2px rgba(11,37,69,.04), 0 12px 32px -14px rgba(11,37,69,.16);
+  --shadow-lift:0 2px 4px rgba(11,37,69,.06), 0 26px 50px -18px rgba(11,37,69,.24);
+
+  /* --- canvas blossom (read by JS via getComputedStyle) --- */
+  --petal-a:#FFFFFF;
+  --petal-b:#DDBE7E;
+  --petal-hi:#C8A04D;
+  --petal-stroke:rgba(138,109,46,.24);
+  /* Flat fill for the big Five Petals diagram. The hero blossom keeps its
+     white→brass gradient; these are translucent on purpose, so the five petals
+     deepen where they overlap and the copy reads against the page ground
+     rather than against the petal. */
+  --petal-face:rgba(200,160,77,.20);
+  --petal-face-hi:rgba(200,160,77,.46);
+  --petal-edge:rgba(138,109,46,.11);
+  --petal-edge-hi:rgba(138,109,46,.32);
+
+  /* --- type stacks ---
+     Display is a serif; body is Inter. That pairing is what makes the page
+     read institutional rather than startup-y. --jp / --jp-display put a
+     Japanese face in front for the /ja/ page: Mincho for headings, Gothic
+     for body, mirroring the serif/sans split. -------------------------------- */
+  --font: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+  --jp: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic",
+        "Yu Gothic UI", Meiryo, var(--font);
+  --jp-display: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho",
+                "YuMincho", "MS PMincho", var(--font-display);
+
+  /* --- geometry + rhythm --- */
+  --r:4px;              /* the reference is near-square; corners are a hint */
+  --r-sm:3px;
+  --r-pill:999px;
+  --rail:1120px;
+  --gut:clamp(20px, 5vw, 40px);
+  --sec:clamp(88px, 11vw, 148px);
+
+  /* --- motion --- */
+  --ease:cubic-bezier(.2,.7,.3,1);
+}
+
+/* ---------------------------------------------------------------------------
+   Dark theme. Two selectors, deliberately:
+     1. the media query covers viewers on the default "system" setting, where
+        nothing is stamped on <html>; guarded so an explicit light choice wins.
+     2. the [data-theme="dark"] block covers an explicit dark choice.
+   Only TOKENS are redefined here, never component rules.
+   --------------------------------------------------------------------------- */
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#071426;
+    --surface:#0E1F33;
+    --surface-2:#12263C;
+    --field:#0A1B2C;
+    --ink:#F2F5F9;
+    --ink-2:#A8B4C2;
+    --ink-3:#8A97A6;
+    --accent:#DDBE7E;
+    --accent-ink:#DDBE7E;
+    --accent-soft:rgba(221,190,126,.10);
+    --on-accent:#071426;
+    --primary:#C8A04D;
+    --on-primary:#0B2545;
+    --primary-hover:#DDBE7E;
+    --line:rgba(221,190,126,.16);
+    --line-2:rgba(221,190,126,.22);
+    --hair:rgba(221,190,126,.26);
+    --shadow:0 1px 2px rgba(0,0,0,.5), 0 18px 44px -18px rgba(0,0,0,.7);
+    --shadow-lift:0 2px 6px rgba(0,0,0,.5), 0 30px 60px -20px rgba(0,0,0,.8);
+    --petal-a:#12263C;
+    --petal-b:#DDBE7E;
+    --petal-hi:#F0DCB4;
+    --petal-stroke:rgba(221,190,126,.34);
+    --petal-face:rgba(221,190,126,.075);
+    --petal-face-hi:rgba(221,190,126,.20);
+    --petal-edge:rgba(221,190,126,.13);
+    --petal-edge-hi:rgba(221,190,126,.38);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#071426;
+  --surface:#0E1F33;
+  --surface-2:#12263C;
+  --field:#0A1B2C;
+  --ink:#F2F5F9;
+  --ink-2:#A8B4C2;
+  --ink-3:#8A97A6;
+  --accent:#DDBE7E;
+  --accent-ink:#DDBE7E;
+  --accent-soft:rgba(221,190,126,.10);
+  --on-accent:#071426;
+  --primary:#C8A04D;
+  --on-primary:#0B2545;
+  --primary-hover:#DDBE7E;
+  --line:rgba(221,190,126,.16);
+  --line-2:rgba(221,190,126,.22);
+  --hair:rgba(221,190,126,.26);
+  --shadow:0 1px 2px rgba(0,0,0,.5), 0 18px 44px -18px rgba(0,0,0,.7);
+  --shadow-lift:0 2px 6px rgba(0,0,0,.5), 0 30px 60px -20px rgba(0,0,0,.8);
+  --petal-a:#12263C;
+  --petal-b:#DDBE7E;
+  --petal-hi:#F0DCB4;
+  --petal-stroke:rgba(221,190,126,.34);
+  --petal-face:rgba(221,190,126,.075);
+  --petal-face-hi:rgba(221,190,126,.20);
+  --petal-edge:rgba(221,190,126,.13);
+  --petal-edge-hi:rgba(221,190,126,.38);
+}

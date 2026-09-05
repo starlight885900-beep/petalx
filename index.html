@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>PetalX | Craft, Collaboration, Opportunity</title>
+<meta name="description" content="PetalX is an IT company in Tsuwano, Shimane, Japan. We connect Japanese engineering craft with companies across the United States: software development, cloud, web, mobile and AI.">
+<link rel="canonical" href="https://petalx.ai/">
+
+<link rel="alternate" hreflang="en" href="https://petalx.ai/">
+<link rel="alternate" hreflang="ja" href="https://petalx.ai/ja/">
+<link rel="alternate" hreflang="x-default" href="https://petalx.ai/">
+
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#071426" media="(prefers-color-scheme: dark)">
+
+<!-- Open Graph / social -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PetalX">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="ja_JP">
+<meta property="og:title" content="PetalX | Craft, Collaboration, Opportunity">
+<meta property="og:description" content="An IT company in Tsuwano, Shimane, connecting Japanese engineering craft with companies across the United States.">
+<meta property="og:url" content="https://petalx.ai/">
+<meta property="og:image" content="https://petalx.ai/assets/img/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="PetalX | Craft, Collaboration, Opportunity">
+<meta name="twitter:description" content="An IT company in Tsuwano, Shimane, connecting Japanese engineering craft with companies across the United States.">
+<meta name="twitter:image" content="https://petalx.ai/assets/img/og-image.png">
+
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap">
+
+<!-- Cascade order matters: tokens → base → components → sections -->
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/sections.css">
+
+<!-- Reveal bootstrap. Adds .js before first paint so the scroll reveals in
+     base.css arm without a flash of un-hidden content. Anything that stops
+     reveal.js from running takes the class straight back off, so the page
+     falls back to plain, fully visible HTML instead of a blank screen:
+       * the module failing to load  -> onerror on the tag below (this is what
+         happens over file://, where browsers refuse to fetch ES modules)
+       * a runtime error, or a browser without IntersectionObserver
+         -> the load handler, since reveal.js never set data-reveal-ready -->
+<script>
+(function(){
+  var root = document.documentElement;
+  root.classList.add('js');
+  window.unarmReveal = function(){
+    if (!root.hasAttribute('data-reveal-ready')) root.classList.remove('js');
+  };
+  window.addEventListener('load', function(){ setTimeout(window.unarmReveal, 0); });
+})();
+</script>
+
+<script type="module" src="assets/js/main.js" defer onerror="unarmReveal()"></script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "PetalX",
+  "url": "https://petalx.ai/",
+  "logo": "https://petalx.ai/assets/img/logo.svg",
+  "description": "An IT company in Tsuwano, Shimane, Japan, connecting Japanese engineering craft with companies across the United States.",
+  "slogan": "Craft, Collaboration, Opportunity",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Tsuwano",
+    "addressRegion": "Shimane",
+    "addressCountry": "JP"
+  },
+  "knowsLanguage": ["en", "ja"],
+  "knowsAbout": ["Software development", "Cloud infrastructure", "Web development", "Mobile development", "Large language models", "Data engineering"]
+}
+</script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- The five-petal mark, defined once and referenced by <use> below. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="petal-mark" viewBox="0 0 24 24">
+    <g fill="#C8A04D" fill-opacity=".9" stroke="rgba(138,109,46,.5)" stroke-width=".6">
+      <path d="M12 12C12 12 9.6 9.4 10 6.6 10.3 4.6 11.4 3.6 12 3.6c.6 0 1.7 1 2 3 .4 2.8-2 5.4-2 5.4Z"/>
+      <path d="M12 12C12 12 9.6 9.4 10 6.6 10.3 4.6 11.4 3.6 12 3.6c.6 0 1.7 1 2 3 .4 2.8-2 5.4-2 5.4Z" transform="rotate(72 12 12)"/>
+      <path d="M12 12C12 12 9.6 9.4 10 6.6 10.3 4.6 11.4 3.6 12 3.6c.6 0 1.7 1 2 3 .4 2.8-2 5.4-2 5.4Z" transform="rotate(144 12 12)"/>
+      <path d="M12 12C12 12 9.6 9.4 10 6.6 10.3 4.6 11.4 3.6 12 3.6c.6 0 1.7 1 2 3 .4 2.8-2 5.4-2 5.4Z" transform="rotate(216 12 12)"/>
+      <path d="M12 12C12 12 9.6 9.4 10 6.6 10.3 4.6 11.4 3.6 12 3.6c.6 0 1.7 1 2 3 .4 2.8-2 5.4-2 5.4Z" transform="rotate(288 12 12)"/>
+    </g>
+  </symbol>
+  <symbol id="arrow-right" viewBox="0 0 16 16">
+    <path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+</svg>
+
+<!-- ======================================================== NAV ========= -->
+<header class="nav" id="nav">
+  <div class="rail nav-in">
+    <a class="brand" href="#top">
+      <svg width="24" height="24" aria-hidden="true"><use href="#petal-mark"/></svg>
+      PetalX
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#beliefs">Our philosophy</a></li>
+      <li><a href="#petals">Five Petals</a></li>
+      <li><a href="#services">What we do</a></li>
+      <li><a href="#mission">Our mission</a></li>
+    </ul>
+    <a class="lang" href="ja/" hreflang="ja" lang="ja">日本語</a>
+    <a class="btn btn-primary nav-cta" href="#contact">Contact</a>
+  </div>
+</header>
+
+<main id="main">
+<span id="top"></span>
+
+<!-- ======================================================= HERO ========= -->
+<section class="hero">
+  <canvas class="hero__field" id="petalField" aria-hidden="true"></canvas>
+  <div class="rail">
+    <div class="hero-in">
+      <p class="hero-kicker rv" style="--d:40ms">Tsuwano, Shimane &middot; Japan</p>
+      <h1 class="rv" style="--d:80ms">PetalX</h1>
+      <p class="hero-tag rv" style="--d:120ms">Connecting Craft<span class="sep">&middot;</span>Technology<span class="sep">&middot;</span>Opportunity</p>
+      <p class="lead rv" style="--d:180ms">PetalX began in the IT industry in Tsuwano, Shimane, and grew with technology at its core. Today our work reaches beyond IT alone. We connect Japanese craft with the companies that need it, and connect the people of this region with work that once meant leaving it.</p>
+      <div class="hero-cta rv" style="--d:250ms">
+        <a class="btn btn-primary btn-lg" href="#about">Learn more</a>
+        <a class="btn btn-ghost btn-lg" href="#contact">Contact us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== AT A GLANCE ======== -->
+<section class="glance-wrap">
+  <div class="rail">
+    <dl class="glance rv">
+      <div><dt>Where we are</dt><dd>Tsuwano, Shimane<span class="sub">Western Japan</span></dd></div>
+      <div><dt>Who we serve</dt><dd>United States<span class="sub">Mainly US companies</span></dd></div>
+      <div><dt>Our time zone</dt><dd>JST &middot; UTC+9<span class="sub">13&ndash;16h ahead of the US</span></dd></div>
+      <div><dt>We work in</dt><dd>English &amp; <span lang="ja">日本語</span><span class="sub">Both, every day</span></dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- ====================================================== ABOUT ========= -->
+<section class="sec" id="about">
+  <div class="rail split rv">
+    <div>
+      <p class="eyebrow">Who we are</p>
+      <h2 class="h2">We connect Japanese craft with global ambition</h2>
+    </div>
+    <div class="split__body">
+      <p>We began with servers, code, and the ordinary work of keeping systems running. Technology is still at our core, but it was never the point. What we actually do is join two things that rarely meet: the discipline of Japanese engineering, and companies on the other side of the world who need software built properly.</p>
+      <p>Our clients are mainly in the United States. Our engineers are in Shimane. Between them sits a working day that begins as America&rsquo;s ends, and a way of building that treats a defect as something to prevent rather than triage.</p>
+      <p>We are a small company by design. Staying small is what lets the person who designed your system still be the person answering questions about it three years later.</p>
+      <a class="link" href="#beliefs">What we believe <svg width="16" height="16" aria-hidden="true"><use href="#arrow-right"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================== QUOTE ========= -->
+<section class="quote">
+  <div class="rail rv">
+    <div class="mark" aria-hidden="true"></div>
+    <blockquote>Software is not typed. It is made from knowledge, discipline, tools, and the patience to finish things properly.</blockquote>
+    <cite>Our definition of craft</cite>
+  </div>
+</section>
+
+<!-- ====================================================== TRIAD ========= -->
+<section class="sec sec--tight">
+  <div class="rail">
+    <dl class="triad rv">
+      <div>
+        <dt>Our foundation</dt>
+        <dd><b>Technology</b><p>Where the company began, and still the thing we are best at. Everything else here is built on it.</p></dd>
+      </div>
+      <div>
+        <dt>Our strength</dt>
+        <dd><b>People</b><p>Small teams who stay. The engineer who designed your system is usually still the one answering questions about it.</p></dd>
+      </div>
+      <div>
+        <dt>Our purpose</dt>
+        <dd><b>Opportunity</b><p>Careers here, and better software there. Both come out of the same work, which is the point of doing it this way.</p></dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<!-- ==================================================== BELIEFS ========= -->
+<section class="sec sec--tight" id="beliefs">
+  <div class="rail">
+    <div class="sec-head rv">
+      <p class="eyebrow">What we believe</p>
+      <h2 class="h2">Software does not come from tools alone. It comes from people.</h2>
+      <p class="lead">Every person carries skill. When those skills meet through cooperation and a clear division of labour, something appears that no one could have built alone.</p>
+    </div>
+    <div class="beliefs">
+      <div class="belief rv">
+        <h3>Skill comes from many places</h3>
+        <p>Engineers, designers and testers. And equally the people who keep the office running, who know the town, who train the next intake. Each carries something the work needs.</p>
+      </div>
+      <div class="belief rv" style="--d:90ms">
+        <h3>Cooperation creates value</h3>
+        <p>When different skills meet through cooperation and a clear division of labour, something is created that no single person could have built alone.</p>
+      </div>
+      <div class="belief rv" style="--d:180ms">
+        <h3>Opportunity reveals potential</h3>
+        <p>Some people have abilities they have not discovered, only because nobody has yet handed them the chance. A good deal of our hiring works on that assumption.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================================================== 5 PETALS ======== -->
+<section class="sec" id="petals">
+  <div class="rail">
+    <div class="sec-head rv">
+      <p class="eyebrow">What we believe</p>
+      <h2 class="h2">Five strategies, one blossom</h2>
+      <p class="lead">The sakura is our symbol. It opens with five petals, and so does the way we work. Five strategies that carry equal weight, none of which stands without the other four.</p>
+    </div>
+  </div>
+
+  <!-- Its own wrapper: the blossom is deliberately wider than the text rail. -->
+  <div class="bloom-rail">
+    <div class="bloom rv">
+      <canvas class="bloom__canvas" id="bloomCore" width="1280" height="1280"
+              role="img" aria-label="The five strategies, laid out on the five petals of a cherry blossom"></canvas>
+
+      <article class="petal-card" data-petal="0" style="--x:50%;--y:23.1%">
+        <h3>Craftsmanship</h3>
+        <p>Monozukuri applied to software: reviewed, tested, and built to last.</p>
+      </article>
+      <article class="petal-card" data-petal="1" style="--x:75.6%;--y:41.7%">
+        <h3>Global Reach</h3>
+        <p>Built in Japan, delivered on American time. Progress lands overnight.</p>
+      </article>
+      <article class="petal-card" data-petal="2" style="--x:65.8%;--y:71.8%">
+        <h3>Technology</h3>
+        <p>A modern stack chosen for fit, not fashion. AI where it earns its place.</p>
+      </article>
+      <article class="petal-card" data-petal="3" style="--x:34.2%;--y:71.8%">
+        <h3>Trust</h3>
+        <p>Partnership over ticket-taking: the same engineers, telling you the truth.</p>
+      </article>
+      <article class="petal-card" data-petal="4" style="--x:24.4%;--y:41.7%">
+        <h3>Roots</h3>
+        <p>We hire and grow people in Tsuwano. Low turnover, deep local ties.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- =================================================== SERVICES ========= -->
+<section class="sec sec--tight" id="services">
+  <div class="rail">
+    <div class="sec-head rv">
+      <p class="eyebrow">What we do</p>
+      <h2 class="h2">Technology-led work, across four practices</h2>
+      <p class="lead">Most clients begin with one of these and grow into the others. The same team carries the work across all four.</p>
+    </div>
+    <div class="svc-grid rv">
+      <article class="svc">
+        <svg class="mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="m11 10-6 6 6 6M21 10l6 6-6 6M18.5 6l-5 20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>Software Development</h3>
+        <p>Custom systems, from greenfield builds to modernising code that has been running for a decade.</p>
+        <ul><li>Backend</li><li>APIs</li><li>Legacy</li></ul>
+      </article>
+      <article class="svc">
+        <svg class="mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M9.5 25a6 6 0 0 1-.6-11.97 8 8 0 0 1 15.44 1.55A5.5 5.5 0 0 1 23.5 25h-14Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        <h3>Cloud &amp; Infrastructure</h3>
+        <p>Design, migration and day-two operations on AWS, Azure and Google Cloud.</p>
+        <ul><li>AWS</li><li>Kubernetes</li><li>IaC</li></ul>
+      </article>
+      <article class="svc">
+        <svg class="mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="2" stroke="currentColor" stroke-width="1.6"/><rect x="21" y="12" width="7.5" height="14.5" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M9 22.5h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <h3>Web &amp; Mobile</h3>
+        <p>Interfaces your customers actually use: accessible, fast, and tested on real devices.</p>
+        <ul><li>React</li><li>iOS</li><li>Android</li></ul>
+      </article>
+      <article class="svc">
+        <svg class="mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 3.5 18.6 12l8.5 2.6-8.5 2.6L16 25.7l-2.6-8.5-8.5-2.6L13.4 12 16 3.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="25.5" cy="24.5" r="3" stroke="currentColor" stroke-width="1.5"/></svg>
+        <h3>AI &amp; Data</h3>
+        <p>LLM and data systems grounded in your own corpus, with retrieval and evaluation you can audit.</p>
+        <ul><li>LLM</li><li>RAG</li><li>Analytics</li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ==================================================== MISSION ========= -->
+<section class="sec sec--tight" id="mission">
+  <div class="rail">
+    <div class="mission rv">
+      <div class="mission__head">
+        <p class="eyebrow">Our mission</p>
+        <h2 class="h2">Helping people and companies use everything they have</h2>
+        <p class="lead">Two things drive this company, and they are the same thing seen from two directions.</p>
+      </div>
+      <ul class="mission-list">
+        <li>
+          <b>Develop the potential already in the room</b>
+          <p>People arrive able to do more than their title says. Most of our senior engineers were hired before they looked senior on paper.</p>
+        </li>
+        <li>
+          <b>Join technology to the people who live with it</b>
+          <p>A system is only finished when the people who depend on it can run it without us in the room.</p>
+        </li>
+        <li>
+          <b>Leave lasting value in the region</b>
+          <p>Not only in the product. A town this size feels every job that stays in it.</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================== COLLABORATION ========= -->
+<section class="collab">
+  <div class="rail rv">
+    <h2>Whether you are a business owner, an engineer, a researcher, or someone ready to find out what you are capable of, PetalX is open to working together.</h2>
+    <p class="collab__tag">Together, we build things that last.</p>
+    <a class="btn btn-primary" href="#contact">Contact us <svg class="arw" width="16" height="16" aria-hidden="true"><use href="#arrow-right"/></svg></a>
+  </div>
+</section>
+
+<!-- ==================================================== CONTACT ========= -->
+<section class="sec sec--tight" id="contact">
+  <div class="rail">
+    <div class="band rv">
+      <div class="band-in" id="contactInner">
+        <div>
+          <p class="eyebrow">Contact</p>
+          <h2>Tell us what you are building</h2>
+          <p class="band__intro">Send us the problem. We reply within one Japanese business day, in English or Japanese, and the first conversation is with an engineer rather than a salesperson.</p>
+          <ul class="band-facts">
+            <li>Tsuwano, Shimane, Japan</li>
+            <li>Working with companies across the United States</li>
+            <li>No obligation, no sales script</li>
+          </ul>
+        </div>
+        <form id="contactForm" novalidate>
+          <div class="form-grid">
+            <div class="field">
+              <label for="c-name">Your name</label>
+              <input id="c-name" name="name" type="text" autocomplete="name" placeholder="Jane Doe" required>
+              <span class="err">Please tell us your name.</span>
+            </div>
+            <div class="field">
+              <label for="c-company">Company</label>
+              <input id="c-company" name="company" type="text" autocomplete="organization" placeholder="Acme Inc." required>
+              <span class="err">Please tell us your company.</span>
+            </div>
+            <div class="field">
+              <label for="c-email">Work email</label>
+              <input id="c-email" name="email" type="email" autocomplete="email" placeholder="you@company.com" required>
+              <span class="err">Please enter a valid email address.</span>
+            </div>
+            <div class="field">
+              <label for="c-country">Country</label>
+              <select id="c-country" name="country" required>
+                <option value="" selected disabled>Select a country</option>
+              </select>
+              <span class="err">Please select your country.</span>
+            </div>
+            <div class="field span2">
+              <label for="c-message">What are you building? <span class="opt">(a few sentences is plenty)</span></label>
+              <textarea id="c-message" name="message" placeholder="We need a team to modernise a warehouse system that has been running since 2014…" required></textarea>
+              <span class="err">Please tell us a little about the work.</span>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-lg btn-block" type="submit">Send enquiry</button>
+          <p class="fine">Demo build. This form validates but does not yet send. Wire <code>submitForm</code> in <code>assets/js/forms.js</code> to a real endpoint, then delete this line.</p>
+        </form>
+      </div>
+      <div class="done" id="contactDone">
+        <div class="tick" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Thank you. Your message is with us</h3>
+        <p>We will reply within one Japanese business day. If it is urgent, say so in a follow-up and we will move it up the queue.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ====================================================== FOOTER ======== -->
+<footer class="foot">
+  <div class="rail">
+    <div class="foot-in">
+      <div>
+        <a class="brand" href="#top">
+          <svg width="22" height="22" aria-hidden="true"><use href="#petal-mark"/></svg>
+          PetalX
+        </a>
+        <p>An IT company in Tsuwano, Shimane, connecting Japanese engineering craft with companies across the United States.</p>
+      </div>
+      <div>
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#beliefs">What we believe</a></li>
+          <li><a href="#petals">Five Petals</a></li>
+          <li><a href="#services">What we do</a></li>
+          <li><a href="#mission">Our mission</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>What we do</h4>
+        <ul><li><a href="#services">Software Development</a></li><li><a href="#services">Cloud &amp; Infrastructure</a></li><li><a href="#services">Web &amp; Mobile</a></li><li><a href="#services">AI &amp; Data</a></li></ul>
+      </div>
+      <div>
+        <h4>Get in touch</h4>
+        <dl class="foot-rows">
+          <div><dt>Website</dt><dd>petalx.ai</dd></div>
+          <div><dt>Email</dt><dd><a href="mailto:hello@petalx.ai">hello@petalx.ai</a></dd></div>
+          <div><dt>Location</dt><dd>Tsuwano, Kanoashi District,<br>Shimane, Japan</dd></div>
+          <div><dt>Language</dt><dd><a href="ja/" hreflang="ja" lang="ja">日本語のページ</a></dd></div>
+        </dl>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>&copy; 2026 PetalX. Tsuwano, Shimane, Japan.</span>
+      <span class="foot-tag">Connecting craft, technology, and opportunity.</span>
+      <span class="petals-row" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

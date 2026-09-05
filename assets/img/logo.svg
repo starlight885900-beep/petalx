@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 64" width="260" height="64">
+  <g fill="#C8A04D" stroke="#8A6D2E" stroke-opacity=".35" stroke-width="1.2">
+    <path id="p" d="M32 34c0 0-7-7.6-5.8-15.8C27 12.4 30.2 9.6 32 9.6s5 2.8 5.8 8.6C39 26.4 32 34 32 34Z"/>
+    <use href="#p" transform="rotate(72 32 32)"/>
+    <use href="#p" transform="rotate(144 32 32)"/>
+    <use href="#p" transform="rotate(216 32 32)"/>
+    <use href="#p" transform="rotate(288 32 32)"/>
+  </g>
+  <circle cx="32" cy="32" r="3" fill="#8A6D2E" fill-opacity=".55"/>
+  <text x="74" y="41" font-family="Playfair Display, Georgia, Times New Roman, serif"
+        font-size="26" font-weight="700" letter-spacing="-.8" fill="#0B2545">PetalX</text>
+</svg>
