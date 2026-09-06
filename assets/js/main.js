@@ -25,7 +25,9 @@ const values = coreBloom
 const field = petalField ? initPetalField(petalField) : null;
 
 initReveal();
-initStickyNav(document.getElementById('nav'), document.getElementById('top'));
+// The sentinel is the hero, not #top: the nav only turns into its light bar
+// once the dark hero has scrolled out from under it.
+initStickyNav(document.getElementById('nav'), document.querySelector('.hero'));
 initSmoothScroll();
 initForms();
 

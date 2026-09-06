@@ -173,6 +173,33 @@ deliberately looks identical in both themes.
 | `--primary`     | `#0B2545` | Buttons                                   |
 | `--r`           | `4px`     | Corner radius, a hint, not a shape       |
 
+**Section rhythm.** The reference alternates its section backgrounds and uses
+*two* navies rather than one, so its dark blocks never read as the same band
+repeated. PetalX follows that:
+
+| Section | Background |
+|---------|------------|
+| Nav + hero | `--hero-bg` `#071A33`, the darker navy |
+| At a glance, Who we are | white |
+| Quote | `--navy` `#0B2545` |
+| Triad | white |
+| What we believe | `--surface-2` `#EAF0F7` |
+| Five Petals | white |
+| What we do | `--surface-2` |
+| Our mission | white, with a pale panel |
+| Invitation | `--surface-2` |
+| Contact, footer | white, with a navy band |
+
+`--hero-bg` is a token rather than a literal because on the near-black dark
+theme a `#071A33` hero would vanish into the page; there it lightens instead.
+
+**The nav follows the hero.** It sits above the hero rather than over it, so at
+rest it takes the hero's own colour and the two read as one dark block. Once
+`reveal.js` sees the hero scroll past, `.stuck` returns it to the light bar the
+rest of the page needs. Those inverted styles are scoped to `.js`, so a page
+whose module never runs keeps the light nav rather than stranding white type on
+white. The sticky sentinel is the hero element, not `#top`.
+
 **Why two brasses.** `#C8A04D` on white measures about 2.6:1, under the 4.5:1
 needed for body text. So brass does every rule, mark and petal, and the derived
 `#8A6D2E` (4.9:1) carries eyebrows, links and small type. Same hue, no visible

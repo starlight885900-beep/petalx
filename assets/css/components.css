@@ -38,9 +38,33 @@
   background:color-mix(in srgb, var(--ground) 88%, transparent);
   backdrop-filter:saturate(160%) blur(16px);
   -webkit-backdrop-filter:saturate(160%) blur(16px);
-  border-bottom:1px solid transparent;transition:border-color .4s;
+  border-bottom:1px solid transparent;
+  transition:background .4s, border-color .4s, color .4s;
 }
 .nav.stuck{border-bottom-color:var(--line)}
+
+/* The nav sits above the hero rather than over it, so at the top it takes the
+   hero's own colour and the two read as one dark block. reveal.js adds .stuck
+   once the hero has scrolled past, and it returns to the light bar above.
+   Scoped to .js so that if the module never runs the nav stays light and
+   legible rather than stranding white type on white further down. */
+.js .nav:not(.stuck){
+  background:var(--hero-bg);
+  backdrop-filter:none;-webkit-backdrop-filter:none;
+}
+.js .nav:not(.stuck) .brand{color:#FFFFFF}
+.js .nav:not(.stuck) .nav-links a{color:rgba(255,255,255,.76)}
+.js .nav:not(.stuck) .nav-links a:hover{color:#FFFFFF}
+.js .nav:not(.stuck) .lang{color:rgba(255,255,255,.84);border-color:rgba(255,255,255,.3)}
+.js .nav:not(.stuck) .lang:hover{
+  color:#FFFFFF;border-color:var(--brass);background:rgba(255,255,255,.08);
+}
+.js .nav:not(.stuck) .btn-primary{
+  background:var(--brass);color:#0B2545;border-color:var(--brass);
+}
+.js .nav:not(.stuck) .btn-primary:hover{
+  background:var(--brass-lt);border-color:var(--brass-lt);
+}
 .nav-in{display:flex;align-items:center;gap:28px;height:76px}
 .brand{
   display:flex;align-items:center;gap:12px;text-decoration:none;

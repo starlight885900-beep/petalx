@@ -8,6 +8,7 @@
    it is now drawn in brass rather than pink.
 
      Navy        #0B2545   primary, and the colour body text is set in
+     Navy 900    #071A33   the darker navy the hero sits on
      Brass       #C8A04D   accent: fills, marks, petals
      Brass Ink   #8A6D2E   brass dark enough to pass contrast AS TEXT
      Mist        #EAF0F7   pale blue, for tinted panels
@@ -18,6 +19,7 @@
   /* --- raw brand values, never used directly by components --- */
   --navy:#0B2545;
   --navy-2:#0F2E55;
+  --navy-900:#071A33;
   --brass:#C8A04D;
   --brass-lt:#DDBE7E;
   --mist:#EAF0F7;
@@ -27,6 +29,7 @@
   --surface:#FFFFFF;
   --surface-2:#EAF0F7;
   --field:#FFFFFF;
+  --hero-bg:#071A33;
   --ink:#0B2545;        /* navy, not black; the reference sets body copy in it */
   --ink-2:#52606D;
   --ink-3:#6B7684;
@@ -101,6 +104,7 @@
     --surface:#0E1F33;
     --surface-2:#12263C;
     --field:#0A1B2C;
+    --hero-bg:#101F35;
     --ink:#F2F5F9;
     --ink-2:#A8B4C2;
     --ink-3:#8A97A6;
@@ -131,6 +135,7 @@
   --surface:#0E1F33;
   --surface-2:#12263C;
   --field:#0A1B2C;
+  --hero-bg:#101F35;
   --ink:#F2F5F9;
   --ink-2:#A8B4C2;
   --ink-3:#8A97A6;

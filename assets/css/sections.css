@@ -9,19 +9,23 @@
    and duplicating it in the hero weakened both. All that is left of it up here
    is the drifting petal field, at low opacity.
    -------------------------------------------------------------------------- */
-.hero{position:relative;overflow:hidden;padding-block:clamp(80px,11vw,164px) clamp(72px,9vw,128px)}
-.hero__field{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.5}
-.hero::before{                       /* a faint wash, top right */
+.hero{
+  position:relative;overflow:hidden;
+  padding-block:clamp(96px,12vw,180px) clamp(72px,9vw,128px);
+  background:var(--hero-bg);color:#FFFFFF;
+}
+.hero__field{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.55}
+.hero::before{                       /* a faint brass wash, top right */
   content:"";position:absolute;z-index:0;pointer-events:none;
   width:min(70vw,820px);aspect-ratio:1;right:-16%;top:-34%;
-  background:radial-gradient(circle, var(--accent-soft) 0%, transparent 68%);
+  background:radial-gradient(circle, rgba(200,160,77,.13) 0%, transparent 68%);
 }
 .hero-in{position:relative;z-index:1;max-width:78ch}
 .hero-kicker{
   font-size:.6875rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
-  color:var(--accent-ink);margin:0 0 26px;display:flex;align-items:center;gap:12px;
+  color:var(--brass-lt);margin:0 0 26px;display:flex;align-items:center;gap:12px;
 }
-.hero-kicker::before{content:"";width:26px;height:1px;background:var(--accent);flex:none}
+.hero-kicker::before{content:"";width:26px;height:1px;background:var(--brass);flex:none}
 html[lang="ja"] .hero-kicker{letter-spacing:.1em;text-transform:none}
 .hero h1{
   font-size:clamp(2.6rem,6.5vw,5.25rem);font-weight:700;
@@ -30,12 +34,19 @@ html[lang="ja"] .hero-kicker{letter-spacing:.1em;text-transform:none}
 .hero-tag{                 /* the triad, as a subtitle under the name */
   margin-top:22px;font-family:var(--font-display);
   font-size:clamp(1.25rem,2.3vw,1.85rem);font-weight:400;font-style:italic;
-  letter-spacing:-.01em;line-height:1.35;color:var(--accent-ink);
+  letter-spacing:-.01em;line-height:1.35;color:var(--brass-lt);
 }
 html[lang="ja"] .hero-tag{font-style:normal;font-size:clamp(1.15rem,2vw,1.6rem)}
-.hero-tag .sep{font-style:normal;color:var(--accent);margin-inline:.1em}
-.hero .lead{margin-top:30px;font-size:clamp(1.0625rem,1.5vw,1.1875rem);max-width:58ch;line-height:1.85}
+.hero-tag .sep{font-style:normal;color:var(--brass);margin-inline:.1em}
+.hero .lead{
+  margin-top:30px;font-size:clamp(1.0625rem,1.5vw,1.1875rem);
+  max-width:58ch;line-height:1.85;color:rgba(255,255,255,.76);
+}
 .hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:42px}
+.hero .btn-primary{background:var(--brass);color:#0B2545;border-color:var(--brass)}
+.hero .btn-primary:hover{background:var(--brass-lt);border-color:var(--brass-lt)}
+.hero .btn-ghost{color:#FFFFFF;border-color:rgba(255,255,255,.3)}
+.hero .btn-ghost:hover{color:var(--brass-lt);border-color:var(--brass)}
 
 /* ------------------------------- at a glance ------------------------------
    Four hard facts under the hero, as a ruled row rather than a card. The
@@ -268,8 +279,12 @@ html[lang="ja"] .triad dt{letter-spacing:.1em}
 
 /* -------------------------------- beliefs ---------------------------------
    A heading and a short intro, then three statements. Prose, not cards.
-   the reference keeps this section deliberately unadorned.
+   the reference keeps this section deliberately unadorned. Sits on the pale
+   surface so the run of white sections between the quote and the contact
+   band is broken up.
    -------------------------------------------------------------------------- */
+#beliefs{background:var(--surface-2);padding-top:var(--sec)}
+#services{background:var(--surface-2);padding-top:var(--sec)}
 .beliefs{
   display:grid;grid-template-columns:repeat(3,1fr);
   gap:clamp(30px,4vw,56px);margin-top:clamp(44px,5vw,72px);
