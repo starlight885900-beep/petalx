@@ -53,6 +53,7 @@ Sakura/
 │   │   ├── blossom.js          the five-petal mark + card↔petal linking
 │   │   ├── petal-field.js      drifting petals behind the hero
 │   │   ├── reveal.js           scroll reveals, sticky nav, anchor scrolling
+│   │   ├── nav.js              the mobile menu disclosure
 │   │   ├── forms.js            contact form validation + the backend seam
 │   │   └── data/countries.js   48 countries, each as [english, 日本語]
 │   ├── img/                    favicon, logo, social card, touch icon
@@ -138,8 +139,8 @@ One scrolling page per language. The section sequence follows
 - **One page, not five.** The reference splits Home / About / What We Do /
   Our Philosophy / Contact. Keeping one page per language halves the surface
   that has to stay in sync across two languages.
-- **Four practices, not seven.** The reference lists seven. PetalX lists the
-  four it actually does; padding that list would be inventing capabilities.
+- **Six practices, not seven.** The reference lists seven. PetalX lists the
+  six it actually does; padding that list would be inventing capabilities.
 - **The blossom stays.** The reference has no motif at all. The sakura is
   PetalX's name and symbol, so it is kept, restyled in brass.
 - **The facts strip stays.** The reference makes no concrete claims. Location,
