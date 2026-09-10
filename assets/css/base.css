@@ -50,6 +50,9 @@ html[lang="ja"] .petal-card p,html[lang="ja"] .quote blockquote{word-break:auto-
 
 /* --- layout primitives --- */
 .rail{width:100%;max-width:var(--rail);margin-inline:auto;padding-inline:var(--gut)}
+/* The nav is sticky and 76px tall, so an anchored section would otherwise
+   land underneath it. Applies to scrollIntoView as well as to :target. */
+section[id],span[id]{scroll-margin-top:96px}
 .sec{padding-block:var(--sec)}
 .sec--tight{padding-top:0}
 

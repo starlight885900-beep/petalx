@@ -104,14 +104,18 @@
       <svg width="24" height="24" aria-hidden="true"><use href="#petal-mark"/></svg>
       PetalX
     </a>
-    <ul class="nav-links">
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#top">ホーム</a></li>
       <li><a href="#about">私たちについて</a></li>
-      <li><a href="#beliefs">私たちの信条</a></li>
       <li><a href="#petals">五つの花びら</a></li>
       <li><a href="#services">事業内容</a></li>
       <li><a href="#mission">私たちの使命</a></li>
+      <li class="nav-links__cta"><a href="#contact">お問い合わせ</a></li>
     </ul>
     <a class="lang" href="../" hreflang="en" lang="en">English</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navLinks">
+      <span class="nav-toggle__bars" aria-hidden="true"><i></i><i></i></span>メニュー
+    </button>
     <a class="btn btn-primary nav-cta" href="#contact">お問い合わせ</a>
   </div>
 </header>
@@ -263,8 +267,8 @@
   <div class="rail">
     <div class="sec-head rv">
       <p class="eyebrow">事業内容</p>
-      <h2 class="h2">技術を軸に、四つの領域で</h2>
-      <p class="lead">多くのお客様は一つの領域から始まり、やがて他の領域へ広がります。四つすべてを同じチームが担当します。</p>
+      <h2 class="h2">技術を軸に、六つの領域で</h2>
+      <p class="lead">多くのお客様は一つの領域から始まり、やがて他の領域へ広がります。六つすべてを同じチームが担当します。</p>
     </div>
     <div class="svc-grid rv">
       <article class="svc">
@@ -290,6 +294,18 @@
         <h3>AI・データ</h3>
         <p>自社データに基づくLLM・データ基盤。検索も評価も、監査できる形で。</p>
         <ul><li>LLM</li><li>RAG</li><li>データ分析</li></ul>
+      </article>
+      <article class="svc">
+        <svg class="mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M6 25V13M12.7 25V7M19.3 25v-9M26 25v-14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <h3>ITコンサルティング</h3>
+        <p>いまあるシステムを外の目で。残すもの、置き換えるもの、そしてそれぞれの費用を明らかにします。</p>
+        <ul><li>アーキテクチャ</li><li>診断</li><li>ロードマップ</li></ul>
+      </article>
+      <article class="svc">
+        <svg class="mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 6.5v7l5 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="16" cy="16" r="11" stroke="currentColor" stroke-width="1.6"/></svg>
+        <h3>業務自動化</h3>
+        <p>繰り返しの多い工程はソフトウェアへ。人は判断の要る仕事に集中できます。</p>
+        <ul><li>ワークフロー</li><li>連携</li><li>レポート</li></ul>
       </article>
     </div>
   </div>

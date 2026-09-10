@@ -39,6 +39,7 @@ JS_ORDER = [
     "blossom.js",
     "petal-field.js",
     "reveal.js",
+    "nav.js",
     "data/countries.js",
     "forms.js",
     "main.js",

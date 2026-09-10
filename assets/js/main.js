@@ -7,6 +7,7 @@ import {readPalette, onThemeChange} from './theme.js';
 import {linkCardsToPetals} from './blossom.js';
 import {initPetalField} from './petal-field.js';
 import {initReveal, initStickyNav, initSmoothScroll} from './reveal.js';
+import {initNav} from './nav.js';
 import {initForms} from './forms.js';
 
 const coreBloom = document.getElementById('bloomCore');
@@ -25,6 +26,7 @@ const values = coreBloom
 const field = petalField ? initPetalField(petalField) : null;
 
 initReveal();
+initNav(document.getElementById('nav'));
 // The sentinel is the hero, not #top: the nav only turns into its light bar
 // once the dark hero has scrolled out from under it.
 initStickyNav(document.getElementById('nav'), document.querySelector('.hero'));
