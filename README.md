@@ -7,9 +7,10 @@ Bilingual (English + 日本語), static, one page per language. No framework, no
 dependencies, no build step required. Five petals, five strategies:
 **Craftsmanship · Global Reach · Technology · Trust · Roots**.
 
-The visual language, navy and brass, serif display type, hairline rules
-instead of shadows, was aligned to `a3technologygroup.com` as a style
-reference. PetalX remains its own company: its own copy, its own positioning,
+The visual language is navy and brass with hairline rules instead of shadows.
+The display face was a serif, aligned to `a3technologygroup.com` as a style
+reference; it is now a single grotesk set tight and heavy, because the serif
+read editorial rather than software. PetalX remains its own company: its own copy, its own positioning,
 and the sakura it is named for.
 
 ---
@@ -98,20 +99,21 @@ your backend sees one consistent spelling from either page.
 
 ### Japanese typography
 
-The Latin pages pair **Playfair Display** (serif) for display headings with
-**Inter** for everything else. That pairing is most of what makes the page read
-institutional rather than startup-y.
+The Latin pages set everything in **Inter**, with display headings separated
+from body copy by weight (800) and tight negative tracking rather than by a
+change of face. The old Playfair pairing read institutional in the wrong
+direction for an IT company.
 
-`base.css` keys off `html[lang="ja"]` to mirror that split in Japanese:
-**Noto Serif JP** (明朝) for headings, **Noto Sans JP** (ゴシック) for body, the
-`--jp-display` and `--jp` stacks, each falling back through Hiragino / Yu / MS
-before the Latin stack. It also resets the negative letter-spacing that is a
+`base.css` keys off `html[lang="ja"]` to mirror that in Japanese: **Noto Sans
+JP** (ゴシック) for both headings and body, via the `--jp-display` and `--jp`
+stacks, each falling back through Hiragino / Yu / MS before the Latin stack.
+Headings take weight 700 rather than a Mincho face, matching the Latin
+weight-not-face split. It also resets the negative letter-spacing that is a
 Latin convention and mangles kana, loosens the line height for mixed script,
 and steps the heading sizes down, since CJK carries more weight per character
 and the Latin display scale reads as shouting.
 
-Only the JA page loads the Noto families; the EN page loads Inter and Playfair
-alone.
+Only the JA page loads Noto Sans JP; the EN page loads Inter alone.
 
 ---
 
@@ -120,19 +122,35 @@ alone.
 One scrolling page per language. The section sequence follows
 `a3technologygroup.com`; the content is PetalX's own.
 
-| # | Section | id | Mirrors the reference's |
-|---|---------|----|--------------------------|
-| 1 | Hero | n/a | Company name as `h1`, the triad as an italic subtitle, one paragraph, "Learn more". |
-| 2 | At a glance | n/a | *(no equivalent, four PetalX facts: location, clients, time zone, languages)* |
-| 3 | Who we are | `#about` | "We connect technology with human potential", heading left, narrative right. |
-| 4 | Quote | n/a | The definitional pull quote, on a navy band. |
-| 5 | Triad | n/a | Foundation / Strength / Purpose, in three ruled columns. |
-| 6 | What we believe | `#beliefs` | "Innovation does not come from technology alone" plus three belief blocks. |
-| 7 | Five Petals | `#petals` | *(no equivalent. PetalX's own symbol and five strategies)* |
-| 8 | What we do | `#services` | The practice list. |
-| 9 | Our mission | `#mission` | "Helping people and organizations mobilize their full potential", plus three points. |
-| 10 | Invitation | n/a | The long "whether you are…" sentence and the line to remember. |
-| 11 | Contact | `#contact` | *(the reference has a contact page; PetalX keeps the form inline)* |
+| # | Section | id | Notes |
+|---|---------|----|-------|
+| 1 | Hero | n/a | Pill, offer-led `h1`, lead, two CTAs, three stats, code-window anchor. |
+| 2 | Industries | n/a | The strip where a client-logo row would go. **Placeholders.** |
+| 3 | News | `#news` | Dated updates. **Placeholders.** |
+| 4 | Strategy | `#petals` | The five petals, on the navy band. *Kept from the old site.* |
+| 5 | What we do | `#services` | The six practices. *Kept from the old site.* |
+| 6 | Track record | `#track` | Named engagements. **Placeholders.** |
+| 7 | Why us | `#why` | Three reasons to choose PetalX. |
+| 8 | Approach | `#approach` | Three numbered steps. |
+| 9 | Stack | `#stack` | Four groups of tools, drawn from the practice list. |
+| 10 | Partnership | `#partnership` | Engagement shape. **Commercial terms are placeholders.** |
+| 11 | Company | `#about` | The narrative that used to be "Who we are". |
+| 12 | Founders | `#founders` | **Placeholders. Never ship invented names.** |
+| 13 | FAQ | `#faq` | Real questions, **placeholder answers**. |
+| 14 | Contact | `#contact` | The inline form. |
+
+The section order mirrors `a3techgroup.com`, at the owner's request. Note this
+is a **different site** from the `a3technologygroup.com` that the original
+visual language was aligned to.
+
+**Everything marked "placeholders" renders as bracketed text or em-dashes on
+purpose**, styled by `.tbd`: muted andhalf-transparent, so an accidental deploy
+looks obviously unfinished rather than quietly false. Search the HTML for
+`TODO(petalx)` to find every one.
+
+Sections removed in this restructure: the pull quote, the Foundation /
+Strength / Purpose triad, "What we believe", "Our mission" and the closing
+invitation. Their CSS went with them.
 
 **Deliberate differences from the reference**
 
@@ -150,8 +168,12 @@ One scrolling page per language. The section sequence follows
   reference signs off "Together, we create new value.". PetalX says
   "Together, we build things that last."
 
-**The blossom is not in the hero.** It was, and having it twice weakened both
-places. All that remains up top is the drifting petal field at half opacity.
+**The blossom is in the hero again.** An earlier pass removed it for
+duplicating Five Petals; it came back when the hero was rebuilt as two columns,
+because the right half was otherwise empty. It earns the repeat by being
+treated differently in each place: in the hero it is a large, cropped,
+unlabelled graphic field drawn with its own dark-ground colours via `drawBloom`'s
+`colors` option; in Five Petals it is the labelled diagram you actually read.
 `main.js` treats every canvas as optional, so removing one does not break the
 page.
 

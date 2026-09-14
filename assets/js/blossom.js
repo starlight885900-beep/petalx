@@ -73,10 +73,17 @@ function drawStamens(ctx, R){
  *
  * @param {HTMLCanvasElement} canvas
  * @param {number} highlight  index 0–4 to light, or -1 for none
- * @param {{flat?:boolean, stamens?:boolean, radius?:number, spread?:number}} [opts]
+ * `colors` overrides individual palette entries for this call only, leaving the
+ * shared theme palette untouched. The hero uses it: that blossom sits on the
+ * dark navy band in BOTH themes, so it needs a dark core and a brass tip
+ * rather than the page palette's white, which greys out over navy.
+ *
+ * @param {{flat?:boolean, stamens?:boolean, radius?:number, spread?:number,
+ *          colors?:object}} [opts]
  */
 export function drawBloom(canvas, highlight = -1, opts = {}){
-  const {flat = false, stamens = true, radius = 0.46, spread = 0.62} = opts;
+  const {flat = false, stamens = true, radius = 0.46, spread = 0.62, colors = null} = opts;
+  const pal = colors ? Object.assign({}, palette, colors) : palette;
 
   const ctx = canvas.getContext('2d');
   const {width: W, height: H} = canvas;
@@ -106,26 +113,26 @@ export function drawBloom(canvas, highlight = -1, opts = {}){
     // outlines symmetric. One pass would let each petal's fill bury the
     // outline of the one before it, and the blossom reads as a blob.
     eachPetal(order, (i, lit) => {
-      ctx.fillStyle = lit ? palette.faceHi : palette.face;
+      ctx.fillStyle = lit ? pal.faceHi : pal.face;
       ctx.fill();
     });
     eachPetal(order, (i, lit) => {
       ctx.lineWidth = R * 0.0035;
-      ctx.strokeStyle = lit ? palette.edgeHi : palette.edge;
+      ctx.strokeStyle = lit ? pal.edgeHi : pal.edge;
       ctx.stroke();
     });
   } else {
     eachPetal(order, (i, lit) => {
       const grad = ctx.createLinearGradient(0, 0, 0, -R);
-      grad.addColorStop(0, palette.a);
-      grad.addColorStop(1, lit ? palette.hi : palette.b);
+      grad.addColorStop(0, pal.a);
+      grad.addColorStop(1, lit ? pal.hi : pal.b);
       ctx.fillStyle = grad;
       ctx.globalAlpha = lit ? 1 : 0.93;
       ctx.fill();
 
       ctx.globalAlpha = 1;
       ctx.lineWidth = R * 0.012;
-      ctx.strokeStyle = palette.stroke;
+      ctx.strokeStyle = pal.stroke;
       ctx.stroke();
     });
   }

@@ -68,16 +68,19 @@
   --petal-edge-hi:rgba(138,109,46,.32);
 
   /* --- type stacks ---
-     Display is a serif; body is Inter. That pairing is what makes the page
-     read institutional rather than startup-y. --jp / --jp-display put a
-     Japanese face in front for the /ja/ page: Mincho for headings, Gothic
-     for body, mirroring the serif/sans split. -------------------------------- */
+     One grotesk, set tight and heavy for display. The serif that used to sit
+     here read editorial - law firm, winery - which fought the company's
+     actual business. Weight and tracking now carry the hierarchy instead of
+     a change of face, which is how the software companies this was measured
+     against do it. --jp / --jp-display put a Japanese face in front for the
+     /ja/ page; both are now Gothic, mirroring the single-family Latin split.
+     -------------------------------------------------------------------------- */
   --font: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-display: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --jp: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic",
         "Yu Gothic UI", Meiryo, var(--font);
-  --jp-display: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho",
-                "YuMincho", "MS PMincho", var(--font-display);
+  --jp-display: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN",
+                "Yu Gothic", "Yu Gothic UI", Meiryo, var(--font-display);
 
   /* --- geometry + rhythm --- */
   --r:4px;              /* the reference is near-square; corners are a hint */

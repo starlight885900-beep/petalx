@@ -239,3 +239,99 @@
   .foot-in{grid-template-columns:1fr 1fr}
   .foot-in>div:first-child{grid-column:1/-1}
 }
+
+/* ===========================================================================
+   Components added for the a3-style restructure.
+   Reusable across sections, so they live here rather than in sections.css.
+   =========================================================================== */
+
+/* --- unfilled placeholder ------------------------------------------------
+   Anything still waiting on a real fact. Deliberately muted and slightly
+   transparent so a placeholder can never be mistaken for a claim, and so an
+   accidental deploy looks obviously unfinished rather than subtly wrong. */
+.tbd{color:var(--ink-3);opacity:.5;font-weight:500}
+
+/* --- status pill --------------------------------------------------------- */
+.pill{
+  display:inline-flex;align-items:center;gap:9px;margin:0 0 24px;
+  padding:6px 14px 6px 11px;border:1px solid rgba(255,255,255,.18);
+  border-radius:var(--r-pill);background:rgba(255,255,255,.05);
+  font-size:.6875rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--brass-lt);
+}
+.pill__dot{
+  width:7px;height:7px;border-radius:50%;background:var(--brass);flex:none;
+  box-shadow:0 0 0 3px rgba(200,160,77,.18);
+}
+.pill .sep{color:rgba(221,190,126,.45);margin-inline:.1em}
+html[lang="ja"] .pill{letter-spacing:.1em;text-transform:none}
+
+/* --- card grids ---------------------------------------------------------- */
+.cards-3,.cards-4{display:grid;gap:18px}
+.cards-3{grid-template-columns:repeat(3,1fr)}
+.cards-4{grid-template-columns:repeat(4,1fr)}
+.card{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+  padding:clamp(22px,2.4vw,30px);
+}
+.card h3{font-size:1.0625rem;margin-bottom:10px}
+.card p{color:var(--ink-2);font-size:.9375rem;line-height:1.75}
+.card .eyebrow{margin-bottom:12px}
+.card > .eyebrow + h3{font-size:1.5rem;letter-spacing:-.03em;margin-bottom:4px}
+.stack .card ul{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:7px}
+.stack .card li{
+  border:1px solid var(--line);border-radius:var(--r-pill);padding:4px 11px;
+  font-size:.8125rem;color:var(--ink-2);
+}
+.person__mark{
+  display:inline-flex;width:38px;height:38px;align-items:center;justify-content:center;
+  border:1px solid var(--hair);border-radius:50%;margin-bottom:16px;
+}
+.person__role{
+  font-size:.75rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent-ink);margin-bottom:10px;
+}
+html[lang="ja"] .person__role{letter-spacing:.06em;text-transform:none}
+
+/* --- FAQ accordion ------------------------------------------------------- */
+.faq{border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{
+  cursor:pointer;list-style:none;padding:20px 34px 20px 0;position:relative;
+  font-weight:600;font-size:1rem;letter-spacing:-.015em;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{                       /* a + that becomes a - when open */
+  content:"";position:absolute;right:4px;top:50%;width:13px;height:1px;
+  background:var(--accent-ink);
+}
+.faq summary::before{
+  content:"";position:absolute;right:10px;top:50%;width:1px;height:13px;
+  margin-top:-6px;background:var(--accent-ink);transition:opacity .18s var(--ease);
+}
+.faq details[open] summary::before{opacity:0}
+.faq details p{padding:0 40px 22px 0;color:var(--ink-2);font-size:.9375rem;line-height:1.8}
+
+/* --- code window ---------------------------------------------------------
+   The hero's technical anchor. Purely decorative, hence aria-hidden on the
+   wrapper: it is a picture of code, not code anyone needs to read aloud. */
+.code{
+  border-radius:8px;overflow:hidden;background:#0A1626;
+  border:1px solid rgba(221,190,126,.16);
+  box-shadow:0 30px 60px -24px rgba(0,0,0,.65);
+}
+.code__bar{
+  display:flex;gap:7px;padding:12px 14px;
+  background:rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.06);
+}
+.code__bar i{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.18)}
+.code__body{
+  margin:0;padding:20px clamp(16px,1.8vw,24px) 24px;overflow-x:auto;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:clamp(.75rem,1vw,.8125rem);line-height:1.85;
+  color:rgba(255,255,255,.82);letter-spacing:0;
+}
+.c-c{color:rgba(255,255,255,.34);font-style:italic}
+.c-k{color:#C8A04D}
+.c-s{color:#9FD3A8}
+.c-f{color:#8FB8E8}

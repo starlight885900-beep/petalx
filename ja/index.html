@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>PetalX｜ものづくり・協働・機会</title>
-<meta name="description" content="PetalXは島根県津和野町のIT企業です。日本のものづくりを、それを必要とする米国企業へ。ソフトウェア開発、クラウド、Web・モバイル、AI・データまで手がけています。">
+<title>PetalX｜技術・信頼・機会</title>
+<meta name="description" content="PetalXは島根県津和野町のIT企業です。米国企業に向けて、ソフトウェア開発、クラウド、Web・モバイル、AI・データまで手がけています。">
 <link rel="canonical" href="https://petalx.ai/ja/">
 
 <link rel="alternate" hreflang="en" href="https://petalx.ai/">
@@ -20,15 +20,15 @@
 <meta property="og:site_name" content="PetalX">
 <meta property="og:locale" content="ja_JP">
 <meta property="og:locale:alternate" content="en_US">
-<meta property="og:title" content="PetalX｜ものづくり・協働・機会">
-<meta property="og:description" content="島根県津和野町のIT企業。日本のものづくりを、それを必要とする米国企業へ。">
+<meta property="og:title" content="PetalX｜技術・信頼・機会">
+<meta property="og:description" content="島根県津和野町のIT企業。米国企業に向けて、ソフトウェアの開発と運用を手がけています。">
 <meta property="og:url" content="https://petalx.ai/ja/">
 <meta property="og:image" content="https://petalx.ai/assets/img/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="PetalX｜ものづくり・協働・機会">
-<meta name="twitter:description" content="島根県津和野町のIT企業。日本のものづくりを、それを必要とする米国企業へ。">
+<meta name="twitter:title" content="PetalX｜技術・信頼・機会">
+<meta name="twitter:description" content="島根県津和野町のIT企業。米国企業に向けて、ソフトウェアの開発と運用を手がけています。">
 <meta name="twitter:image" content="https://petalx.ai/assets/img/og-image.png">
 
 <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
@@ -37,7 +37,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap">
 
 <!-- Cascade order matters: tokens → base → components → sections -->
 <link rel="stylesheet" href="../assets/css/tokens.css">
@@ -66,7 +66,7 @@
   "name": "PetalX",
   "url": "https://petalx.ai/ja/",
   "logo": "https://petalx.ai/assets/img/logo.svg",
-  "description": "島根県津和野町を拠点に、日本のものづくりを米国企業へ届けるIT企業。",
+  "description": "島根県津和野町を拠点に、米国企業へソフトウェアの開発と運用を提供するIT企業。",
   "address": {
     "@type": "PostalAddress",
     "addressLocality": "津和野町",
@@ -105,11 +105,12 @@
       PetalX
     </a>
     <ul class="nav-links" id="navLinks">
-      <li><a href="#top">ホーム</a></li>
-      <li><a href="#about">私たちについて</a></li>
-      <li><a href="#petals">五つの花びら</a></li>
+      <li><a href="#petals">戦略</a></li>
       <li><a href="#services">事業内容</a></li>
-      <li><a href="#mission">私たちの使命</a></li>
+      <li><a href="#why">選ばれる理由</a></li>
+      <li><a href="#partnership">パートナーシップ</a></li>
+      <li><a href="#about">会社について</a></li>
+      <li><a href="#faq">FAQ</a></li>
       <li class="nav-links__cta"><a href="#contact">お問い合わせ</a></li>
     </ul>
     <a class="lang" href="../" hreflang="en" lang="en">English</a>
@@ -123,107 +124,76 @@
 <main id="main">
 <span id="top"></span>
 
-<!-- ======================================================= HERO ========= -->
+<!-- ================================================== HERO ==== -->
 <section class="hero">
   <canvas class="hero__field" id="petalField" aria-hidden="true"></canvas>
   <div class="rail">
     <div class="hero-in">
-      <p class="hero-kicker rv" style="--d:40ms">島根県津和野町・日本</p>
-      <h1 class="rv" style="--d:80ms">PetalX</h1>
-      <p class="hero-tag rv" style="--d:120ms">ものづくり<span class="sep">・</span>技術<span class="sep">・</span>機会をつなぐ</p>
-      <p class="lead rv" style="--d:180ms">PetalXは、島根県津和野町でIT事業として始まり、技術を核に成長してきました。いま私たちの仕事は、ITだけにとどまりません。日本のものづくりを、それを必要とする企業へ。そしてこの地域の人に、かつては町を離れなければ得られなかった仕事を。</p>
-      <div class="hero-cta rv" style="--d:250ms">
-        <a class="btn btn-primary btn-lg" href="#about">詳しく見る</a>
-        <a class="btn btn-ghost btn-lg" href="#contact">お問い合わせ</a>
+      <div class="hero-copy">
+        <p class="pill rv" style="--d:40ms"><span class="pill__dot" aria-hidden="true"></span>技術<span class="sep">・</span>信頼<span class="sep">・</span>機会</p>
+        <h1 class="rv" style="--d:80ms">日本でつくる、<em>米国</em>のためのソフトウェア。</h1>
+        <p class="lead rv" style="--d:140ms">PetalXは、島根県津和野町のIT企業です。開発、クラウド、Web・モバイル、AI・データ。ITは私たちの仕事の一部ではなく、そのすべてです。会社はいま成長を続け、新たなお客様をお迎えしています。</p>
+        <div class="hero-cta rv" style="--d:200ms">
+          <a class="btn btn-primary btn-lg" href="#contact">お問い合わせ <svg class="arw" width="16" height="16" aria-hidden="true"><use href="#arrow-right"/></svg></a>
+          <a class="btn btn-ghost btn-lg" href="#services">事業内容を見る</a>
+        </div>
+        <!-- TODO(petalx): 「創業からの年数」はプレースホルダーです。実数を入れるか、この枠を削除してください。 -->
+        <dl class="hero-stats rv" style="--d:240ms">
+          <div><dt class="tbd">&mdash;</dt><dd>創業からの年数</dd></div>
+          <div><dt>フルスタック</dt><dd>Web・クラウド・AI・データ</dd></div>
+          <div><dt>米国</dt><dd>お客様の所在地</dd></div>
+        </dl>
+      </div>
+      <div class="hero-art rv" style="--d:260ms" aria-hidden="true">
+        <div class="code">
+          <div class="code__bar"><i></i><i></i><i></i></div>
+<pre class="code__body"><span class="c-c">// PetalX &mdash; Shimane, Japan</span>
+<span class="c-k">const</span> engagement = <span class="c-k">await</span> petalx.<span class="c-f">start</span>({
+  scope: <span class="c-s">&apos;greenfield | modernisation&apos;</span>,
+  stack: [<span class="c-s">&apos;TypeScript&apos;</span>, <span class="c-s">&apos;Go&apos;</span>, <span class="c-s">&apos;AWS&apos;</span>],
+  hours: <span class="c-f">overlapWith</span>(<span class="c-s">&apos;US&apos;</span>),
+});
+
+engagement.<span class="c-f">ship</span>();   <span class="c-c">// and keep it running.</span></pre>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ================================================== AT A GLANCE ======== -->
-<section class="glance-wrap">
-  <div class="rail">
-    <dl class="glance rv">
-      <div><dt>拠点</dt><dd>島根県津和野町<span class="sub">日本・山陰</span></dd></div>
-      <div><dt>お客様</dt><dd>アメリカ合衆国<span class="sub">主に米国企業</span></dd></div>
-      <div><dt>タイムゾーン</dt><dd>JST・UTC+9<span class="sub">米国より13〜16時間先</span></dd></div>
-      <div><dt>対応言語</dt><dd>日本語・English<span class="sub">毎日、両方で</span></dd></div>
-    </dl>
+<!-- ============================================ INDUSTRIES ==== -->
+<!-- TODO(petalx): 以下の業種はすべてプレースホルダーです。実績のある業種に置き換えるか、
+     このセクションごと削除してください。 -->
+<section class="industries">
+  <div class="rail industries__in rv">
+    <p class="industries__label">導入業界</p>
+    <ul class="industries__list">
+      <li class="tbd">[業種]</li><li class="tbd">[業種]</li><li class="tbd">[業種]</li>
+      <li class="tbd">[業種]</li><li class="tbd">[業種]</li><li class="tbd">[業種]</li>
+    </ul>
   </div>
 </section>
 
-<!-- ====================================================== ABOUT ========= -->
-<section class="sec" id="about">
-  <div class="rail split rv">
-    <div>
-      <p class="eyebrow">私たちについて</p>
-      <h2 class="h2">日本のものづくりを、世界の挑戦へつなぐ</h2>
-    </div>
-    <div class="split__body">
-      <p>私たちはサーバーとコード、そしてシステムを動かし続けるという地道な仕事から始まりました。技術はいまも中核にありますが、技術そのものが目的だったことは一度もありません。私たちが実際に行っているのは、めったに出会わない二つを結ぶこと。日本のエンジニアリングの規律と、正しく作られたソフトウェアを必要とする地球の反対側の企業を、です。</p>
-      <p>お客様の多くは米国に、エンジニアは島根に。その間にあるのは、アメリカの一日が終わる頃に始まる私たちの一日と、不具合を「対処するもの」ではなく「起こさないもの」として扱う流儀です。</p>
-      <p>私たちは意図して小さな会社です。小さくあり続けることが、設計した本人が三年後も同じシステムの問いに答えられる理由になっています。</p>
-      <a class="link" href="#beliefs">私たちの信条 <svg width="16" height="16" aria-hidden="true"><use href="#arrow-right"/></svg></a>
-    </div>
-  </div>
-</section>
-
-<!-- ====================================================== QUOTE ========= -->
-<section class="quote">
-  <div class="rail rv">
-    <div class="mark" aria-hidden="true"></div>
-    <blockquote>ソフトウェアは、打ち込むものではなく、つくるもの。知識と規律、道具、そして最後まで仕上げる忍耐から生まれます。</blockquote>
-    <cite>私たちの考える、ものづくり</cite>
-  </div>
-</section>
-
-<!-- ====================================================== TRIAD ========= -->
-<section class="sec sec--tight">
-  <div class="rail">
-    <dl class="triad rv">
-      <div>
-        <dt>私たちの基盤</dt>
-        <dd><b>技術</b><p>この会社が始まった場所であり、いまも最も得意とすること。ほかのすべては、その上に建っています。</p></dd>
-      </div>
-      <div>
-        <dt>私たちの強み</dt>
-        <dd><b>人</b><p>辞めない小さなチーム。設計した本人が、数年後も同じシステムの問いに答えています。</p></dd>
-      </div>
-      <div>
-        <dt>私たちの目的</dt>
-        <dd><b>機会</b><p>ここでの仕事と、あちらでのより良いソフトウェア。同じ働きから生まれる二つです。</p></dd>
-      </div>
-    </dl>
-  </div>
-</section>
-
-<!-- ==================================================== BELIEFS ========= -->
-<section class="sec sec--tight" id="beliefs">
+<!-- ================================================== NEWS ==== -->
+<!-- TODO(petalx): 4行すべてプレースホルダーです。実際の更新に置き換えるか削除を。
+     古いまま放置されたニュースは、ないほうがましです。 -->
+<section class="sec sec--tight" id="news">
   <div class="rail">
     <div class="sec-head rv">
-      <p class="eyebrow">私たちの信条</p>
-      <h2 class="h2">ソフトウェアは道具だけからは生まれません。人から生まれます。</h2>
-      <p class="lead">誰もが技能を持っています。それらが協働と明確な分担を通じて出会うとき、ひとりでは決してつくれなかったものが現れます。</p>
+      <p class="eyebrow">ニュース</p>
+      <h2 class="h2">最新情報</h2>
     </div>
-    <div class="beliefs">
-      <div class="belief rv">
-        <h3>技能は、さまざまな場所にある</h3>
-        <p>エンジニア、デザイナー、テスター。そして同じように、職場を支える人、町を知る人、次の世代を育てる人。それぞれが、仕事に必要な何かを持っています。</p>
-      </div>
-      <div class="belief rv" style="--d:90ms">
-        <h3>協働が価値を生む</h3>
-        <p>異なる技能が協働と明確な分担を通じて出会うとき、ひとりでは決してつくれなかったものが生まれます。</p>
-      </div>
-      <div class="belief rv" style="--d:180ms">
-        <h3>機会が可能性を開く</h3>
-        <p>まだ機会に恵まれていないだけで、自分の力に気づいていない人がいます。私たちの採用の多くは、その前提に立っています。</p>
-      </div>
-    </div>
+    <ul class="news rv">
+      <li><time class="tbd">[日付]</time><span class="tag tbd">[種別]</span><p class="tbd">[見出し]</p></li>
+      <li><time class="tbd">[日付]</time><span class="tag tbd">[種別]</span><p class="tbd">[見出し]</p></li>
+      <li><time class="tbd">[日付]</time><span class="tag tbd">[種別]</span><p class="tbd">[見出し]</p></li>
+      <li><time class="tbd">[日付]</time><span class="tag tbd">[種別]</span><p class="tbd">[見出し]</p></li>
+    </ul>
   </div>
 </section>
 
 <!-- ==================================================== 5 PETALS ======== -->
-<section class="sec" id="petals">
+<section class="sec sec--dark" id="petals">
   <div class="rail">
     <div class="sec-head rv">
       <p class="eyebrow">私たちの信条</p>
@@ -266,7 +236,7 @@
 <section class="sec sec--tight" id="services">
   <div class="rail">
     <div class="sec-head rv">
-      <p class="eyebrow">事業内容</p>
+      <p class="eyebrow">01・事業内容</p>
       <h2 class="h2">技術を軸に、六つの領域で</h2>
       <p class="lead">多くのお客様は一つの領域から始まり、やがて他の領域へ広がります。六つすべてを同じチームが担当します。</p>
     </div>
@@ -311,39 +281,146 @@
   </div>
 </section>
 
-<!-- ==================================================== MISSION ========= -->
-<section class="sec sec--tight" id="mission">
+<!-- ========================================== TRACK RECORD ==== -->
+<!-- TODO(petalx): プロジェクト名はプレースホルダーです。公開の許諾が取れた案件のみ記載を。 -->
+<section class="sec sec--tight" id="track">
   <div class="rail">
-    <div class="mission rv">
-      <div class="mission__head">
-        <p class="eyebrow">私たちの使命</p>
-        <h2 class="h2">人と企業が、持てるものを使い切れるように</h2>
-        <p class="lead">この会社を動かしているのは二つのこと。それは同じことを、別の方向から見たものです。</p>
-      </div>
-      <ul class="mission-list">
-        <li>
-          <b>すでにある可能性を伸ばす</b>
-          <p>人は肩書き以上のことができます。当社の上級エンジニアの多くは、書類上そう見える前に採用されました。</p>
-        </li>
-        <li>
-          <b>技術を、それと共に生きる人へつなぐ</b>
-          <p>私たちがいなくても運用できるようになって、はじめてシステムは完成します。</p>
-        </li>
-        <li>
-          <b>地域に価値を残す</b>
-          <p>製品のなかだけではなく。この規模の町は、留まる仕事の一つひとつを実感します。</p>
-        </li>
-      </ul>
+    <div class="sec-head sec-head--mid rv">
+      <p class="eyebrow">実績</p>
+      <h2 class="h2">積み上げてきた実績</h2>
+      <p class="lead">単発の開発ではなく、長く続く関係を。これまで手がけたシステムの多くは、いまも動いています。</p>
+    </div>
+    <div class="cards-4 rv">
+      <article class="card"><h3 class="tbd">[案件名]</h3><p class="tbd">[内容を一行で]</p></article>
+      <article class="card"><h3 class="tbd">[案件名]</h3><p class="tbd">[内容を一行で]</p></article>
+      <article class="card"><h3 class="tbd">[案件名]</h3><p class="tbd">[内容を一行で]</p></article>
+      <article class="card"><h3 class="tbd">[案件名]</h3><p class="tbd">[内容を一行で]</p></article>
     </div>
   </div>
 </section>
 
-<!-- ============================================== COLLABORATION ========= -->
-<section class="collab">
-  <div class="rail rv">
-    <h2>経営者の方、エンジニアの方、研究者の方、そして自分に何ができるのかを確かめたい方へ。PetalXは協働に開かれています。</h2>
-    <p class="collab__tag">ともに、長く残るものを。</p>
-    <a class="btn btn-primary" href="#contact">お問い合わせ <svg class="arw" width="16" height="16" aria-hidden="true"><use href="#arrow-right"/></svg></a>
+<!-- ================================================ WHY US ==== -->
+<section class="sec sec--tight" id="why">
+  <div class="rail">
+    <div class="sec-head sec-head--mid rv">
+      <p class="eyebrow">02・選ばれる理由</p>
+      <h2 class="h2">PetalXを選ぶ理由</h2>
+      <p class="lead">依頼して終わりのベンダーではなく、つくったシステムに関わり続けるチームです。</p>
+    </div>
+    <div class="cards-3 rv">
+      <article class="card">
+        <h3>少人数であること</h3>
+        <p>少人数を保つからこそ、システムを設計した本人が、三年後も質問に答えられます。</p>
+      </article>
+      <article class="card">
+        <h3>米国の夕方が、私たちの朝</h3>
+        <p>私たちの一日は、米国の一日が終わる頃に始まります。終業時にお預かりした作業は、翌朝には進んでいます。</p>
+      </article>
+      <article class="card">
+        <h3>復旧より、予防</h3>
+        <p>不具合は「直すもの」ではなく「起こさないもの」として扱います。初期の手間は増え、その後の毎年が軽くなります。</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================== APPROACH ==== -->
+<section class="sec sec--tight" id="approach">
+  <div class="rail">
+    <div class="sec-head sec-head--mid rv">
+      <p class="eyebrow">03・進め方</p>
+      <h2 class="h2">派手さより、確かさ</h2>
+    </div>
+    <ol class="steps rv">
+      <li><b>いまあるシステムを理解する</b><p>提案の前に、コードを読み、運用している方々に話を聞きます。何を残し、何を入れ替え、それぞれいくらかかるのか。</p></li>
+      <li><b>動く最小のものをつくる</b><p>完成予定の設計より、動いているもの。早い段階で実物をお見せし、そこから育てます。</p></li>
+      <li><b>公開したあとも、そばにいる</b><p>多くのベンダーが離れる「二日目」こそ本番です。自分たちで運用して初めて、正しくつくれたかが分かります。</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ================================================= STACK ==== -->
+<section class="sec sec--tight" id="stack">
+  <div class="rail">
+    <div class="sec-head sec-head--mid rv">
+      <p class="eyebrow">04・技術スタック</p>
+      <h2 class="h2">私たちが使う道具</h2>
+      <p class="lead">新しいからではなく、よく理解されているから選んでいます。</p>
+    </div>
+    <div class="cards-4 stack rv">
+      <article class="card"><h3>構築</h3><ul><li>Backend</li><li>APIs</li><li>レガシー刷新</li></ul></article>
+      <article class="card"><h3>運用</h3><ul><li>AWS</li><li>Kubernetes</li><li>IaC</li></ul></article>
+      <article class="card"><h3>画面</h3><ul><li>React</li><li>iOS</li><li>Android</li></ul></article>
+      <article class="card"><h3>AI・データ</h3><ul><li>LLM</li><li>RAG</li><li>Analytics</li></ul></article>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================== PARTNERSHIP ==== -->
+<section class="sec sec--tight" id="partnership">
+  <div class="rail">
+    <div class="sec-head sec-head--mid rv">
+      <p class="eyebrow">05・パートナーシップ</p>
+      <h2 class="h2">ともにつくり、長く続ける</h2>
+      <p class="lead">多くのお客様は一つの領域から始め、ほかの領域へ広がっていきます。同じチームが六つすべてを担います。</p>
+    </div>
+    <!-- TODO(petalx): 契約条件はプレースホルダーです。記入するか、この行を削除してください。 -->
+    <div class="cards-3 rv">
+      <article class="card"><p class="eyebrow">ご契約</p><h3 class="tbd">&mdash;</h3><p>標準的な始め方</p></article>
+      <article class="card"><p class="eyebrow">立ち上がり</p><h3 class="tbd">&mdash;</h3><p>チームが本格稼働するまで</p></article>
+      <article class="card"><p class="eyebrow">ご返信</p><h3 class="tbd">&mdash;</h3><p>初回お問い合わせへの目安</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================== COMPANY ==== -->
+<section class="sec sec--tight" id="about">
+  <div class="rail split rv">
+    <div>
+      <p class="eyebrow">06・会社について</p>
+      <h2 class="h2">島根のエンジニア、米国のお客様</h2>
+    </div>
+    <div class="split__body">
+      <p>私たちはサーバーとコード、そしてシステムを動かし続けるという地道な仕事から始まりました。いましていることも、まさにそれです。そこに加わったのが、もう半分の課題でした。地球の反対側で、きちんとつくられたソフトウェアを必要としている企業。そして、そのようにつくるチームです。</p>
+      <p>お客様の多くは米国に、エンジニアは島根にいます。その間にあるのは、米国の一日が終わる頃に始まる私たちの一日と、不具合を「直すもの」ではなく「起こさないもの」として扱う仕事の進め方です。</p>
+      <p>私たちは、意図して小さな会社です。小さくあり続けることが、システムを設計した本人が三年後も質問に答えられる状態を保ちます。</p>
+      <a class="link" href="#contact">ご相談はこちら <svg width="16" height="16" aria-hidden="true"><use href="#arrow-right"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================== FOUNDERS ==== -->
+<!-- TODO(petalx): 人物情報はプレースホルダーです。実在の創業メンバーに置き換えるか削除を。
+     架空の氏名を公開しないこと。 -->
+<section class="sec sec--tight" id="founders">
+  <div class="rail">
+    <div class="sec-head sec-head--mid rv">
+      <p class="eyebrow">07・創業メンバー</p>
+      <h2 class="h2">PetalXをつくる人たち</h2>
+    </div>
+    <div class="cards-3 rv">
+      <article class="card person"><span class="person__mark" aria-hidden="true"><svg width="20" height="20"><use href="#petal-mark"/></svg></span><h3 class="tbd">[氏名]</h3><p class="person__role tbd">[役職]</p><p class="tbd">[一行紹介]</p></article>
+      <article class="card person"><span class="person__mark" aria-hidden="true"><svg width="20" height="20"><use href="#petal-mark"/></svg></span><h3 class="tbd">[氏名]</h3><p class="person__role tbd">[役職]</p><p class="tbd">[一行紹介]</p></article>
+      <article class="card person"><span class="person__mark" aria-hidden="true"><svg width="20" height="20"><use href="#petal-mark"/></svg></span><h3 class="tbd">[氏名]</h3><p class="person__role tbd">[役職]</p><p class="tbd">[一行紹介]</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- =================================================== FAQ ==== -->
+<!-- TODO(petalx): 質問は実物ですが、回答はすべてプレースホルダーです。公開前に記入を。 -->
+<section class="sec sec--tight" id="faq">
+  <div class="rail">
+    <div class="sec-head sec-head--mid rv">
+      <p class="eyebrow">08・よくあるご質問</p>
+      <h2 class="h2">率直にお答えします</h2>
+    </div>
+    <div class="faq rv">
+      <details><summary>どのように始めればよいですか？</summary><p class="tbd">[回答]</p></details>
+      <details><summary>稼働時間は？米国との重なりはどのくらいですか？</summary><p class="tbd">[回答]</p></details>
+      <details><summary>すべて英語で進行できますか？</summary><p class="tbd">[回答]</p></details>
+      <details><summary>成果物の権利は誰に帰属しますか？</summary><p class="tbd">[回答]</p></details>
+      <details><summary>小さな案件でも相談できますか？</summary><p class="tbd">[回答]</p></details>
+    </div>
   </div>
 </section>
 
@@ -406,7 +483,6 @@
     </div>
   </div>
 </section>
-
 </main>
 
 <!-- ====================================================== FOOTER ======== -->
@@ -418,16 +494,17 @@
           <svg width="22" height="22" aria-hidden="true"><use href="#petal-mark"/></svg>
           PetalX
         </a>
-        <p>島根県津和野町を拠点に、日本のものづくりを米国企業へ届けるIT企業です。</p>
+        <p>島根県津和野町を拠点に、米国企業へソフトウェアの開発と運用を提供するIT企業です。</p>
       </div>
       <div>
         <h4>ナビゲーション</h4>
         <ul>
-          <li><a href="#about">私たちについて</a></li>
-          <li><a href="#beliefs">私たちの信条</a></li>
-          <li><a href="#petals">五つの花びら</a></li>
+          <li><a href="#petals">戦略</a></li>
           <li><a href="#services">事業内容</a></li>
-          <li><a href="#mission">私たちの使命</a></li>
+          <li><a href="#why">選ばれる理由</a></li>
+          <li><a href="#partnership">パートナーシップ</a></li>
+          <li><a href="#about">会社について</a></li>
+          <li><a href="#faq">FAQ</a></li>
         </ul>
       </div>
       <div>
