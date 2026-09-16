@@ -18,32 +18,52 @@ tool, if the social card typography needs to match the site exactly.
 
 import math
 import pathlib
+import sys
 from PIL import Image, ImageDraw, ImageFont
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 IMG = ROOT / "assets" / "img"
 
-BRASS = (200, 160, 77)
-BRASS_INK = (138, 109, 46)
-MIST = (234, 240, 247)
+ACCENT = (26, 86, 219)      # #1A56DB
+ACCENT_INK = (21, 70, 176)  # #1546B0
+# The petal outline needs to read against the petal fill, not just differ
+# from it: five flat accent petals with a near-accent edge merge into a blob.
+ACCENT_EDGE = (12, 45, 120)
+MIST = (243, 246, 251)      # #F3F6FB
 PAPER = (255, 255, 255)
-NAVY = (11, 37, 69)
+INK = (15, 27, 46)          # #0F1B2E
 SLATE = (82, 96, 109)
 
 SS = 4  # supersample factor, for antialiasing
 
-FONT_DIR = pathlib.Path("/usr/share/fonts/truetype")
+# Searched in order, first hit wins. Inter first on every platform, then the
+# host's own grotesk. ImageFont.load_default() is the last resort and ignores
+# the size argument, which renders the card's type at a few illegible pixels,
+# so keep a real TTF reachable on any machine that runs this.
+FONT_DIRS = [
+    pathlib.Path("/usr/share/fonts/truetype"),
+    pathlib.Path("C:/Windows/Fonts"),
+    pathlib.Path.home() / "AppData/Local/Microsoft/Windows/Fonts",
+    pathlib.Path("/Library/Fonts"),
+    pathlib.Path.home() / "Library/Fonts",
+]
 FONT_CANDIDATES = {
-    "bold": ["Inter-Bold.ttf", "liberation/LiberationSans-Bold.ttf", "dejavu/DejaVuSans-Bold.ttf"],
-    "regular": ["Inter-Regular.ttf", "liberation/LiberationSans-Regular.ttf", "dejavu/DejaVuSans.ttf"],
+    "bold": ["Inter-Bold.ttf", "Inter_28pt-Bold.ttf", "InterDisplay-Bold.ttf",
+             "liberation/LiberationSans-Bold.ttf", "segoeuib.ttf", "arialbd.ttf",
+             "Helvetica.ttc", "dejavu/DejaVuSans-Bold.ttf"],
+    "regular": ["Inter-Regular.ttf", "Inter_28pt-Regular.ttf", "InterDisplay-Regular.ttf",
+                "liberation/LiberationSans-Regular.ttf", "segoeui.ttf", "arial.ttf",
+                "Helvetica.ttc", "dejavu/DejaVuSans.ttf"],
 }
 
 
 def font(weight, size):
     for name in FONT_CANDIDATES[weight]:
-        path = FONT_DIR / name
-        if path.exists():
-            return ImageFont.truetype(str(path), size)
+        for base in FONT_DIRS:
+            path = base / name
+            if path.exists():
+                return ImageFont.truetype(str(path), size)
+    print("  ! no TTF found; text will render at default size", file=sys.stderr)
     return ImageFont.load_default()
 
 
@@ -90,10 +110,10 @@ def draw_bloom(draw, cx, cy, R):
             (cx + x * cos_a - y * sin_a, cy + x * sin_a + y * cos_a)
             for x, y in petal_points(R)
         ]
-        draw.polygon(rotated, fill=BRASS, outline=BRASS_INK)
+        draw.polygon(rotated, fill=ACCENT, outline=ACCENT_EDGE)
     draw.ellipse(
         [cx - R * .09, cy - R * .09, cx + R * .09, cy + R * .09],
-        fill=(*BRASS_INK, 140) if len(BRASS_INK) == 4 else BRASS_INK,
+        fill=(*ACCENT_INK, 140) if len(ACCENT_INK) == 4 else ACCENT_INK,
     )
 
 
@@ -105,15 +125,15 @@ def make_og():
     d.ellipse([610 * SS, -270 * SS, 1450 * SS, 570 * SS], fill=MIST)
     draw_bloom(d, 960 * SS, 330 * SS, 175 * SS)
 
-    d.text((90 * SS, 190 * SS), "P E T A L X", font=font("bold", 26 * SS), fill=BRASS_INK)
-    d.text((86 * SS, 262 * SS), "Craft &", font=font("bold", 80 * SS), fill=NAVY)
-    d.text((86 * SS, 352 * SS), "Collaboration", font=font("bold", 80 * SS), fill=NAVY)
+    d.text((90 * SS, 190 * SS), "P E T A L X", font=font("bold", 26 * SS), fill=ACCENT_INK)
+    d.text((86 * SS, 262 * SS), "Craft &", font=font("bold", 80 * SS), fill=INK)
+    d.text((86 * SS, 352 * SS), "Collaboration", font=font("bold", 80 * SS), fill=INK)
     d.text((90 * SS, 470 * SS), "An IT company in Tsuwano, Shimane, connecting Japanese", font=font("regular", 27 * SS), fill=SLATE)
     d.text((90 * SS, 508 * SS), "craft with companies in the United States.", font=font("regular", 27 * SS), fill=SLATE)
 
     for i in range(5):
         x = (90 + i * 20) * SS
-        d.ellipse([x, 570 * SS, x + 10 * SS, 580 * SS], fill=BRASS)
+        d.ellipse([x, 570 * SS, x + 10 * SS, 580 * SS], fill=ACCENT)
 
     img.resize((W, H), Image.LANCZOS).save(IMG / "og-image.png", optimize=True)
     return "og-image.png"

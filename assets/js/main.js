@@ -4,14 +4,13 @@
  */
 
 import {readPalette, onThemeChange} from './theme.js';
-import {drawBloom, linkCardsToPetals} from './blossom.js';
+import {linkCardsToPetals} from './blossom.js';
 import {initPetalField} from './petal-field.js';
 import {initReveal, initStickyNav, initSmoothScroll} from './reveal.js';
 import {initNav} from './nav.js';
 import {initForms} from './forms.js';
 
 const coreBloom = document.getElementById('bloomCore');
-const heroBloom = document.getElementById('bloomHero');
 const petalField = document.getElementById('petalField');
 
 readPalette();
@@ -35,25 +34,6 @@ const values = coreBloom
   ? linkCardsToPetals(coreBloom, document.querySelectorAll('.petal-card'), DIAGRAM)
   : null;
 
-// The hero mark: the brand blossom at its 0.62 default spread, drawn large as
-// the hero's visual anchor. No stamens and no highlight, because nothing here
-// is interactive; the labelled, selectable blossom is the one in Five Petals.
-const paintHero = () => {
-  if (!heroBloom) return;
-  drawBloom(heroBloom, -1, {
-    radius: 0.45,
-    stamens: false,
-    // Transparent at the centre, brass at the tips: the navy reads through the
-    // middle and the mark glows at its edge instead of sitting on the band.
-    colors: {
-      a: 'rgba(200,160,77,.03)',
-      b: 'rgba(221,190,126,.82)',
-      stroke: 'rgba(221,190,126,.26)'
-    }
-  });
-};
-paintHero();
-
 const field = petalField ? initPetalField(petalField) : null;
 
 initReveal();
@@ -65,10 +45,7 @@ initSmoothScroll();
 initForms();
 
 // Repaint the canvas when the viewer switches theme; CSS can't reach it.
-onThemeChange(() => {
-  paintHero();
-  if (values) values.redraw();
-});
+onThemeChange(() => values && values.redraw());
 
 // Re-seed the petal field when the hero changes size.
 let resizeTimer;
@@ -77,6 +54,5 @@ window.addEventListener('resize', () => {
   resizeTimer = setTimeout(() => {
     if (field) field.restart();
     if (values) values.redraw();
-    paintHero();
   }, 180);
 });

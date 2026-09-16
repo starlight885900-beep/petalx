@@ -6,16 +6,13 @@
  * function to replace when a backend exists. See README.md → "Wiring up the
  * form" for the payload it produces.
  *
- * Both language pages use the same ids, so this module needs no per-page
- * branching beyond the country labels.
+ * Both language pages use the same ids, and every label lives in the HTML,
+ * so this module needs no per-page branching at all.
  */
 
-import {COUNTRIES} from './data/countries.js';
 import {scrollBehavior} from './motion.js';
 
 /* ------------------------------------------------------------------ helpers */
-
-const isJapanese = () => document.documentElement.lang === 'ja';
 
 const fieldOf = (el) => el.closest('.field');
 
@@ -55,24 +52,6 @@ function watchFields(form){
   });
 }
 
-/**
- * Fill a <select> with the country list, leaving its placeholder in place.
- * The label follows the page language; the submitted value is always the
- * English name, so the backend sees one spelling from either page.
- */
-function fillCountries(select){
-  if (!select) return;
-  const ja = isJapanese();
-  const frag = document.createDocumentFragment();
-  for (const [en, jp] of COUNTRIES){
-    const option = document.createElement('option');
-    option.value = en;
-    option.textContent = ja ? jp : en;
-    frag.appendChild(option);
-  }
-  select.appendChild(frag);
-}
-
 /* --------------------------------------------------------------- submission */
 
 /**
@@ -102,7 +81,6 @@ export function initForms(){
   const inner = document.getElementById('contactInner');
   const done = document.getElementById('contactDone');
 
-  fillCountries(document.getElementById('c-country'));
   watchFields(form);
 
   form.addEventListener('submit', async (event) => {

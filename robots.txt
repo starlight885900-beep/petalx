@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://petalx.ai/sitemap.xml
+Sitemap: https://petalxtech.com/sitemap.xml

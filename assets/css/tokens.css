@@ -3,163 +3,116 @@
    Every colour, radius and rhythm value in the site resolves through here.
    Change a value in this file and it propagates everywhere.
 
-   Palette: navy and brass, in the restrained institutional register of the
-   reference this site was aligned to. The sakura stays the company's symbol, and
-   it is now drawn in brass rather than pink.
+   The system is aligned to a3techgroup.com at the owner's request: blue on
+   white, soft 12px cards, one grotesk. The sakura stays the company's symbol
+   and is drawn in the accent blue rather than brass.
 
-     Navy        #0B2545   primary, and the colour body text is set in
-     Navy 900    #071A33   the darker navy the hero sits on
-     Brass       #C8A04D   accent: fills, marks, petals
-     Brass Ink   #8A6D2E   brass dark enough to pass contrast AS TEXT
-     Mist        #EAF0F7   pale blue, for tinted panels
-     White       #FFFFFF   page background
+     Blue        #1A56DB   accent: buttons, marks, petals, kickers
+     Blue dark   #1546B0   hover, and blue dark enough to use as text
+     Ink         #0F1B2E   headings, body copy, the footer ground
+     Ink soft    #3A4A5F   secondary text
+     Muted       #6B7888   labels, captions
+     Paper       #FFFFFF   page background
+     Paper 2     #F3F6FB   alternating section bands
+     Line        #E3E8EF   every hairline on the site
+
+   LIGHT ONLY. The reference ships no dark theme, so neither do we: a
+   prefers-color-scheme block here would put the site somewhere the reference
+   never goes. Add one back by redefining the semantic tokens below (and only
+   those) inside a media query.
    =========================================================================== */
 
 :root{
   /* --- raw brand values, never used directly by components --- */
-  --navy:#0B2545;
-  --navy-2:#0F2E55;
-  --navy-900:#071A33;
-  --brass:#C8A04D;
-  --brass-lt:#DDBE7E;
-  --mist:#EAF0F7;
+  --blue:#1A56DB;
+  --blue-dk:#1546B0;
+  --blue-lt:#6096FF;
+  --ink-900:#0F1B2E;
+  --paper-2:#F3F6FB;
 
   /* --- semantic surface + ink --- */
   --ground:#FFFFFF;
   --surface:#FFFFFF;
-  --surface-2:#EAF0F7;
+  --surface-2:#F3F6FB;   /* the alternating band */
   --field:#FFFFFF;
-  --hero-bg:#071A33;
-  --ink:#0B2545;        /* navy, not black; the reference sets body copy in it */
-  --ink-2:#52606D;
-  --ink-3:#6B7684;
+  --hero-bg:#FFFFFF;     /* the hero is light here; the dark block is the band */
+  --ink:#0F1B2E;
+  --ink-2:#3A4A5F;
+  --ink-3:#6B7888;
 
-  /* --- accent (brass) --- */
-  --accent:#C8A04D;       /* fills, rules, marks, petals */
-  --accent-ink:#8A6D2E;   /* accent used as TEXT, contrast-safe, 4.9:1 on white */
-  --accent-soft:#F7F0E1;  /* tinted backgrounds */
-  --on-accent:#0B2545;    /* text sitting on --accent */
+  /* --- accent --- */
+  --accent:#1A56DB;      /* fills, rules, marks, petals */
+  --accent-ink:#1546B0;  /* accent used as TEXT: 7.4:1 on white */
+  --accent-soft:#EEF3FD; /* tinted backgrounds */
+  --on-accent:#FFFFFF;
 
-  /* --- primary action (navy in light, brass in dark, so a button is always
-         high-contrast against the page it sits on) --- */
-  --primary:#0B2545;
+  /* --- primary action --- */
+  --primary:#1A56DB;
   --on-primary:#FFFFFF;
-  --primary-hover:#0F2E55;
+  --primary-hover:#1546B0;
 
-  /* --- lines + elevation --- */
-  --line:rgba(11,37,69,.12);
-  --line-2:rgba(11,37,69,.18);
-  --hair:rgba(138,109,46,.28);
-  --shadow:0 1px 2px rgba(11,37,69,.04), 0 12px 32px -14px rgba(11,37,69,.16);
-  --shadow-lift:0 2px 4px rgba(11,37,69,.06), 0 26px 50px -18px rgba(11,37,69,.24);
+  /* --- lines + elevation ---
+     The reference leans on soft, far-thrown shadows rather than the hairline
+     borders this site used to use. Borders remain, but they are quiet. */
+  --line:#E3E8EF;
+  --line-2:#D6DEE9;
+  --hair:#E3E8EF;
+  --shadow:0 30px 50px -28px rgba(13,27,42,.28);
+  --shadow-lift:0 40px 80px -30px rgba(13,27,42,.5);
+  --shadow-btn:0 10px 24px -12px var(--accent);
+  --shadow-btn-hover:0 16px 32px -14px var(--accent);
+  --shadow-card:0 30px 70px -45px rgba(13,27,42,.4);
 
-  /* --- canvas blossom (read by JS via getComputedStyle) --- */
+  /* --- the dark band (Five Petals) and the footer --- */
+  --band:linear-gradient(160deg,#0F1B2E,#15294A 55%,#1B3666);
+  --on-dark:#FFFFFF;
+  --on-dark-2:#C2CCD6;
+  --on-dark-3:#93A2B2;
+
+  /* --- canvas blossom (read by JS via getComputedStyle) ---
+     Blue now, not brass. The gradient runs from near-white at the centre to
+     the accent at the tips; the flat faces are translucent accent, so the five
+     petals deepen where they overlap. */
   --petal-a:#FFFFFF;
-  --petal-b:#DDBE7E;
-  --petal-hi:#C8A04D;
-  --petal-stroke:rgba(138,109,46,.24);
-  /* Flat fill for the big Five Petals diagram. The hero blossom keeps its
-     white→brass gradient; these are translucent on purpose, so the five petals
-     deepen where they overlap and the copy reads against the page ground
-     rather than against the petal. */
-  --petal-face:rgba(200,160,77,.20);
-  --petal-face-hi:rgba(200,160,77,.46);
-  --petal-edge:rgba(138,109,46,.11);
-  --petal-edge-hi:rgba(138,109,46,.32);
+  --petal-b:#6096FF;
+  --petal-hi:#1A56DB;
+  --petal-stroke:rgba(26,86,219,.22);
+  --petal-face:rgba(26,86,219,.12);
+  --petal-face-hi:rgba(26,86,219,.34);
+  --petal-edge:rgba(26,86,219,.16);
+  --petal-edge-hi:rgba(26,86,219,.42);
 
   /* --- type stacks ---
-     One grotesk, set tight and heavy for display. The serif that used to sit
-     here read editorial - law firm, winery - which fought the company's
-     actual business. Weight and tracking now carry the hierarchy instead of
-     a change of face, which is how the software companies this was measured
-     against do it. --jp / --jp-display put a Japanese face in front for the
-     /ja/ page; both are now Gothic, mirroring the single-family Latin split.
-     -------------------------------------------------------------------------- */
+     One grotesk. The reference declares a --serif variable that resolves to
+     the same sans; the pairing is carried by weight, not by face. --jp puts a
+     Japanese face in front for the /ja/ page. -------------------------------- */
   --font: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-display: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --jp: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic",
+  --jp: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic",
         "Yu Gothic UI", Meiryo, var(--font);
-  --jp-display: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN",
+  --jp-display: "Noto Sans JP", "Hiragino Kaku Gothic ProN",
                 "Yu Gothic", "Yu Gothic UI", Meiryo, var(--font-display);
 
   /* --- geometry + rhythm --- */
-  --r:4px;              /* the reference is near-square; corners are a hint */
-  --r-sm:3px;
+  --r:12px;             /* cards, panels */
+  --r-sm:8px;           /* buttons */
+  --r-field:10px;       /* inputs */
   --r-pill:999px;
-  --rail:1120px;
-  --gut:clamp(20px, 5vw, 40px);
-  --sec:clamp(88px, 11vw, 148px);
+  --rail:1180px;
+  --gut:clamp(1.25rem,5vw,4rem);
+  --sec:clamp(4rem,9vw,7.5rem);
 
   /* --- motion --- */
-  --ease:cubic-bezier(.2,.7,.3,1);
-}
+  --ease:cubic-bezier(.22,1,.36,1);
 
-/* ---------------------------------------------------------------------------
-   Dark theme. Two selectors, deliberately:
-     1. the media query covers viewers on the default "system" setting, where
-        nothing is stamped on <html>; guarded so an explicit light choice wins.
-     2. the [data-theme="dark"] block covers an explicit dark choice.
-   Only TOKENS are redefined here, never component rules.
-   --------------------------------------------------------------------------- */
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --ground:#071426;
-    --surface:#0E1F33;
-    --surface-2:#12263C;
-    --field:#0A1B2C;
-    --hero-bg:#101F35;
-    --ink:#F2F5F9;
-    --ink-2:#A8B4C2;
-    --ink-3:#8A97A6;
-    --accent:#DDBE7E;
-    --accent-ink:#DDBE7E;
-    --accent-soft:rgba(221,190,126,.10);
-    --on-accent:#071426;
-    --primary:#C8A04D;
-    --on-primary:#0B2545;
-    --primary-hover:#DDBE7E;
-    --line:rgba(221,190,126,.16);
-    --line-2:rgba(221,190,126,.22);
-    --hair:rgba(221,190,126,.26);
-    --shadow:0 1px 2px rgba(0,0,0,.5), 0 18px 44px -18px rgba(0,0,0,.7);
-    --shadow-lift:0 2px 6px rgba(0,0,0,.5), 0 30px 60px -20px rgba(0,0,0,.8);
-    --petal-a:#12263C;
-    --petal-b:#DDBE7E;
-    --petal-hi:#F0DCB4;
-    --petal-stroke:rgba(221,190,126,.34);
-    --petal-face:rgba(221,190,126,.075);
-    --petal-face-hi:rgba(221,190,126,.20);
-    --petal-edge:rgba(221,190,126,.13);
-    --petal-edge-hi:rgba(221,190,126,.38);
-  }
-}
-:root[data-theme="dark"]{
-  --ground:#071426;
-  --surface:#0E1F33;
-  --surface-2:#12263C;
-  --field:#0A1B2C;
-  --hero-bg:#101F35;
-  --ink:#F2F5F9;
-  --ink-2:#A8B4C2;
-  --ink-3:#8A97A6;
-  --accent:#DDBE7E;
-  --accent-ink:#DDBE7E;
-  --accent-soft:rgba(221,190,126,.10);
-  --on-accent:#071426;
-  --primary:#C8A04D;
-  --on-primary:#0B2545;
-  --primary-hover:#DDBE7E;
-  --line:rgba(221,190,126,.16);
-  --line-2:rgba(221,190,126,.22);
-  --hair:rgba(221,190,126,.26);
-  --shadow:0 1px 2px rgba(0,0,0,.5), 0 18px 44px -18px rgba(0,0,0,.7);
-  --shadow-lift:0 2px 6px rgba(0,0,0,.5), 0 30px 60px -20px rgba(0,0,0,.8);
-  --petal-a:#12263C;
-  --petal-b:#DDBE7E;
-  --petal-hi:#F0DCB4;
-  --petal-stroke:rgba(221,190,126,.34);
-  --petal-face:rgba(221,190,126,.075);
-  --petal-face-hi:rgba(221,190,126,.20);
-  --petal-edge:rgba(221,190,126,.13);
-  --petal-edge-hi:rgba(221,190,126,.38);
+  /* --- legacy aliases -------------------------------------------------------
+     404.html and the SVG assets were written against the old navy-and-brass
+     names. They resolve to the current palette so nothing is stranded; prefer
+     the semantic names above in new work. */
+  --navy:#0F1B2E;
+  --navy-2:#15294A;
+  --navy-900:#0F1B2E;
+  --brass:#1A56DB;
+  --brass-lt:#6096FF;
+  --mist:#F3F6FB;
 }

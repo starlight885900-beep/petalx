@@ -7,11 +7,11 @@ Bilingual (English + 日本語), static, one page per language. No framework, no
 dependencies, no build step required. Five petals, five strategies:
 **Craftsmanship · Global Reach · Technology · Trust · Roots**.
 
-The visual language is navy and brass with hairline rules instead of shadows.
-The display face was a serif, aligned to `a3technologygroup.com` as a style
-reference; it is now a single grotesk set tight and heavy, because the serif
-read editorial rather than software. PetalX remains its own company: its own copy, its own positioning,
-and the sakura it is named for.
+The visual language is aligned to `a3techgroup.com` at the owner's request:
+accent blue on white, soft 12px cards that lift on hover, one grotesk carrying
+the hierarchy by weight. The palette that came before it was navy and brass.
+PetalX remains its own company: its own copy, its own positioning, and the
+sakura it is named for, now drawn in the accent blue.
 
 ---
 
@@ -55,8 +55,7 @@ Sakura/
 │   │   ├── petal-field.js      drifting petals behind the hero
 │   │   ├── reveal.js           scroll reveals, sticky nav, anchor scrolling
 │   │   ├── nav.js              the mobile menu disclosure
-│   │   ├── forms.js            contact form validation + the backend seam
-│   │   └── data/countries.js   48 countries, each as [english, 日本語]
+│   │   └── forms.js            contact form validation + the backend seam
 │   ├── img/                    favicon, logo, social card, touch icon
 │   └── fonts/                  empty, fonts load from Google Fonts (see below)
 ├── tools/
@@ -69,8 +68,8 @@ Sakura/
 ```
 
 **The rule that keeps this tidy:** page copy belongs in the HTML, not in JS.
-Crawlers and screen readers both get everything without executing a script. The
-only exception is the country list, which is 48 `<option>` tags of no SEO value.
+Crawlers and screen readers both get everything without executing a script.
+Nothing on either page is injected at runtime.
 
 ---
 
@@ -90,10 +89,10 @@ and `sitemap.xml` repeats those pairings. The nav shows a `.lang` link to the
 other language.
 
 **Both pages use the same element ids** (`contactForm`, `bloomHero`,
-`c-country`, …), so `assets/js/` needs no per-page branching. The one place
-language matters is the country list, which reads `document.documentElement.lang`
-to pick a label, while always submitting the **English** name as the value, so
-your backend sees one consistent spelling from either page.
+`c-topic`, …), so `assets/js/` needs no per-page branching at all. Where a
+control carries language, the HTML handles it: the topic `<option>` labels are
+translated, while every `value` stays **English**, so your backend sees one
+consistent spelling from either page.
 
 **If you edit copy in one language, edit the other.** Nothing enforces this.
 
@@ -160,9 +159,9 @@ invitation. Their CSS went with them.
 - **Six practices, not seven.** The reference lists seven. PetalX lists the
   six it actually does; padding that list would be inventing capabilities.
 - **The blossom stays.** The reference has no motif at all. The sakura is
-  PetalX's name and symbol, so it is kept, restyled in brass.
+  PetalX's name and symbol, so it is kept, restyled in the accent blue.
 - **The facts strip stays.** The reference makes no concrete claims. Location,
-  clients, time zone and working languages are facts, and they are what a US
+  clients and working languages are facts, and they are what a US
   buyer evaluating an overseas vendor actually needs.
 - **No copied lines.** The register is matched; the sentences are not. The
   reference signs off "Together, we create new value.". PetalX says
@@ -182,61 +181,61 @@ page.
 ## The design system
 
 Everything resolves through custom properties in `assets/css/tokens.css`. No
-component file contains a raw hex value except the charcoal contact band, which
-deliberately looks identical in both themes.
+component file contains a raw hex value except the few literals inside the dark
+band and the footer, which are white-on-dark by definition.
 
-| Token           | Light     | Role                                      |
-|-----------------|-----------|-------------------------------------------|
-| `--ground`      | `#FFFFFF` | Page background                           |
-| `--surface-2`   | `#EAF0F7` | Mist, pale blue, for tinted panels       |
-| `--ink`         | `#0B2545` | Navy. Body copy is set in it, not in black |
-| `--ink-2`       | `#52606D` | Secondary text                            |
-| `--accent`      | `#C8A04D` | Brass, rules, marks, petals              |
-| `--accent-ink`  | `#8A6D2E` | Brass dark enough to use **as text**      |
-| `--primary`     | `#0B2545` | Buttons                                   |
-| `--r`           | `4px`     | Corner radius, a hint, not a shape       |
+| Token          | Value     | Role                                        |
+|----------------|-----------|---------------------------------------------|
+| `--ground`     | `#FFFFFF` | Page background                             |
+| `--surface-2`  | `#F3F6FB` | The alternating band                        |
+| `--ink`        | `#0F1B2E` | Headings, body copy, and the footer ground  |
+| `--ink-2`      | `#3A4A5F` | Secondary text                              |
+| `--ink-3`      | `#6B7888` | Labels, captions, placeholders              |
+| `--accent`     | `#1A56DB` | Buttons, kickers, marks, petals             |
+| `--accent-ink` | `#1546B0` | Hover, and accent used as text              |
+| `--line`       | `#E3E8EF` | Every hairline on the site                  |
+| `--r`          | `12px`    | Cards and panels                            |
+| `--r-sm`       | `8px`     | Buttons                                     |
 
-**Section rhythm.** The reference alternates its section backgrounds and uses
-*two* navies rather than one, so its dark blocks never read as the same band
-repeated. PetalX follows that:
+**Elevation, not outline.** The card is the unit the whole page is built from:
+white, a 1px `--line` border, 12px corners, and a 3px accent bar that grows down
+the left edge on hover while the border fades out and a far-thrown shadow takes
+over. Buttons carry a shadow tinted in the accent itself. This replaced a
+hairline-only system that used no shadows at all.
+
+**Section rhythm.** White by default, with tinted bands breaking the run and one
+dark band carrying the brand:
 
 | Section | Background |
 |---------|------------|
-| Nav + hero | `--hero-bg` `#071A33`, the darker navy |
-| At a glance, Who we are | white |
-| Quote | `--navy` `#0B2545` |
-| Triad | white |
-| What we believe | `--surface-2` `#EAF0F7` |
-| Five Petals | white |
-| What we do | `--surface-2` |
-| Our mission | white, with a pale panel |
-| Invitation | `--surface-2` |
-| Contact, footer | white, with a navy band |
+| Nav, hero | white |
+| Industries strip | `--surface-2`, ruled top and bottom |
+| News | white |
+| Five Petals | the navy gradient `--band`, white type |
+| What we do, Track record, Why us | white |
+| Approach | `--surface-2` |
+| Stack | white |
+| Partnership, Company | `--surface-2` |
+| Founders | white |
+| FAQ | `--surface-2` |
+| Contact | white, two cards |
+| Footer | `--ink`, white type |
 
-`--hero-bg` is a token rather than a literal because on the near-black dark
-theme a `#071A33` hero would vanish into the page; there it lightens instead.
+**One dark band.** The section that explains the company's name sits on a navy
+gradient with an accent bloom behind the heading, which is what the reference
+does with the block that explains its own name. It is the only dark section
+above the footer, so it reads as the brand statement rather than as a stripe.
 
-**The nav follows the hero.** It sits above the hero rather than over it, so at
-rest it takes the hero's own colour and the two read as one dark block. Once
-`reveal.js` sees the hero scroll past, `.stuck` returns it to the light bar the
-rest of the page needs. Those inverted styles are scoped to `.js`, so a page
-whose module never runs keeps the light nav rather than stranding white type on
-white. The sticky sentinel is the hero element, not `#top`.
+**The nav is light in every state.** It sits above a white hero, so `.stuck`
+only adds the bottom hairline once the page scrolls. The inverted nav that the
+old navy hero needed is gone, along with the `.js`-scoped overrides that made it
+safe.
 
-**Why two brasses.** `#C8A04D` on white measures about 2.6:1, under the 4.5:1
-needed for body text. So brass does every rule, mark and petal, and the derived
-`#8A6D2E` (4.9:1) carries eyebrows, links and small type. Same hue, no visible
-break. This is the same discipline the old pink palette used.
-
-**Why `--primary` is separate from `--accent`.** A navy button is invisible on a
-navy-black page, so `--primary` flips to brass in the dark theme while
-`--accent` stays brass in both. Buttons are always high-contrast against the
-page they sit on.
-
-**Dark theme.** Tokens are redefined in two places in `tokens.css`: a
-`prefers-color-scheme` media query for viewers on the system default, and a
-`[data-theme="dark"]` block for an explicit choice. Component rules never appear
-inside either, only token definitions. To ship light-only, delete both blocks.
+**Light only.** The reference ships no dark theme, so neither does this. The
+`prefers-color-scheme` and `[data-theme="dark"]` blocks that used to sit in
+`tokens.css` are gone, and the pages declare a single `theme-color`. To add a
+dark theme back, redefine the semantic tokens (and only those) inside a media
+query; `theme.js` already re-reads them and repaints the canvas on a change.
 
 ---
 
@@ -260,13 +259,12 @@ The mark itself is one bezier petal in `blossom.js`, stamped five times, and
   The diagram opens to 0.74 so a paragraph at body size fits inside a petal
   without crossing the outline. **Do not change the default**, it would change
   the logo. Past about 0.8 the petals merge and the blossom reads as a blob.
-- **`flat`**, one flat face per petal instead of the white→pink gradient. Copy
-  sits on these petals, and the gradient's midpoint leaves text on muddy mauve
-  in dark mode. The faces are the translucent `--petal-face*` / `--petal-edge*`
-  tokens: the five petals deepen where they overlap, and the copy reads against
-  the page ground rather than against the petal, so `--ink` works in either
-  theme. **`--petal-face` is the one value to change if the blossom wants to be
-  stronger or fainter.**
+- **`flat`**, one flat face per petal instead of the white→blue gradient. Copy
+  sits on these petals, so a gradient would leave text on a moving ground. The
+  faces are the translucent `--petal-face*` / `--petal-edge*` tokens: the five
+  petals deepen where they overlap. On the dark band the diagram overrides both
+  with lighter values passed as `drawBloom`'s `colors` option, because tokens
+  tuned for white go muddy on navy; `main.js` holds that override.
 - **`stamens`**, off for the diagram; at this size they clutter the centre where
   the five petals converge.
 
@@ -321,12 +319,34 @@ Payload, keyed by the `name` attributes already on the inputs:
 | `name`    |                                                    |
 | `company` |                                                    |
 | `email`   |                                                    |
-| `country` | always the English name, from either page          |
+| `topic`   | the practice chosen; the value is always English, from either page |
 | `message` |                                                    |
 | `locale`  | added by `submitForm`, `en` or `ja`, so you can reply in the right language |
 
 Client-side validation is a convenience, never a guarantee, **re-validate
 everything server side** and rate-limit the endpoint.
+
+---
+
+## Booking calls
+
+The contact band carries Calendly's inline embed under the form, on both pages:
+a `.calendly-inline-widget` div whose `data-url` names the event type, plus
+`widget.js` from `assets.calendly.com`.
+
+Both pages point at `https://calendly.com/hirotanaka-petalxtech/30min`, which
+lives in *two* places per page: the widget's `data-url` and the plain link
+beneath it. Change one and you must change the other. That link is deliberately
+ordinary HTML, so anyone whose browser blocks the third-party script can still
+book a call.
+
+The `data-url` carries `background_color`, `text_color` and `primary_color`, so
+the iframe matches the navy band around it. Those are Calendly's own embed
+parameters; the widget is an iframe, so CSS in this repo cannot reach inside it.
+
+`vercel.json` allows `assets.calendly.com` in `script-src` and `style-src`, and
+`calendly.com` in `frame-src` and `connect-src`. Without all four the widget is
+blocked silently.
 
 ---
 
@@ -368,7 +388,8 @@ or a nonce, which a static host cannot generate per request.
 
 **If you add anything third-party** (analytics, a form backend, embedded video,
 a web font from another host), it will be blocked until you add its origin to
-the matching CSP directive.
+the matching CSP directive. Calendly is already allowed; see
+[Booking calls](#booking-calls).
 
 ---
 
@@ -376,11 +397,11 @@ the matching CSP directive.
 
 - [ ] **Commit.** The repository has no commits yet, so there is nothing for
       Vercel to build from. `git add -A && git commit` then push.
-- [ ] **Attach the domain.** Every page declares `https://petalx.ai/` as its
+- [ ] **Attach the domain.** Every page declares `https://petalxtech.com/` as its
       canonical and in its `hreflang` pair. Until that domain points at the
       deployment, those tags name a site that is not the one being served,
       which will confuse crawlers that reach the `.vercel.app` URL.
-- [ ] Replace the `hello@petalx.ai` placeholder.
+- [ ] Replace the `hello@petalxtech.com` placeholder.
 - [ ] Point `submitForm` at a real endpoint and delete the two demo notices.
 
 ---
@@ -413,9 +434,8 @@ has to match the site exactly.
 
 Placeholders that are **not** real and must be replaced:
 
-- [ ] `hello@petalx.ai`, invented. Appears in both footers and both contact
+- [ ] `hello@petalxtech.com`, invented. Appears in both footers and both contact
       sections. Replace with the real address.
-- [ ] `https://petalx.ai/`, in both pages, `robots.txt` and `sitemap.xml`.
 - [ ] The footer address is town + prefecture only. Add the full postal address,
       and whatever company registration details Japanese practice expects.
 
