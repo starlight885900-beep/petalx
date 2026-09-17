@@ -76,7 +76,7 @@ function check(label, cond, extra){
   check("sends to hirotanaka@petalxtech.com", sent.body.to[0] === "hirotanaka@petalxtech.com", sent.body.to);
   check("reply_to is the visitor", sent.body.reply_to === "jane@acme.com", sent.body.reply_to);
   check("subject carries topic and name",
-        sent.body.subject === "PetalX enquiry — AI & Data — Jane Doe", sent.body.subject);
+        sent.body.subject === "Petalxtech enquiry — AI & Data — Jane Doe", sent.body.subject);
   check("body carries the message", sent.body.text.includes("retrieval system"));
   check("body notes the language", sent.body.text.includes("English"));
 

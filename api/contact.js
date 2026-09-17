@@ -16,7 +16,7 @@
  *   TO_EMAIL         optional, defaults below. Where enquiries land.
  *   FROM_EMAIL       optional, defaults below. MUST be on a domain verified
  *                    in Resend, or Resend rejects the send. Before petalxtech.com
- *                    is verified, "PetalX <onboarding@resend.dev>" works for
+ *                    is verified, "Petalxtech <onboarding@resend.dev>" works for
  *                    mail addressed to your own account.
  *
  * Client-side validation is a convenience, never a guarantee, so everything is
@@ -24,7 +24,7 @@
  */
 
 const TO_EMAIL = process.env.TO_EMAIL || 'hirotanaka@petalxtech.com';
-const FROM_EMAIL = process.env.FROM_EMAIL || 'PetalX site <noreply@petalxtech.com>';
+const FROM_EMAIL = process.env.FROM_EMAIL || 'Petalxtech site <noreply@petalxtech.com>';
 
 /** The topic values both pages submit. The JA page submits English too. */
 const TOPICS = [
@@ -132,7 +132,7 @@ module.exports = async function handler(req, res){
         from: FROM_EMAIL,
         to: [TO_EMAIL],
         reply_to: email,           // replying in your mail client reaches them
-        subject: `PetalX enquiry — ${oneLine(topic)} — ${oneLine(name)}`,
+        subject: `Petalxtech enquiry — ${oneLine(topic)} — ${oneLine(name)}`,
         text,
       }),
     });

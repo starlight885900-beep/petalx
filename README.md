@@ -1,6 +1,6 @@
-# PetalX
+# Petalxtech
 
-The company site for PetalX, an IT company in Tsuwano, Shimane, Japan, building
+The company site for Petalxtech, an IT company in Tsuwano, Shimane, Japan, building
 and running software for companies in the United States.
 
 Bilingual (English + 日本語), static, one page per language. No framework, no
@@ -10,7 +10,7 @@ dependencies, no build step required. Five petals, five strategies:
 The visual language is aligned to `a3techgroup.com` at the owner's request:
 accent blue on white, soft 12px cards that lift on hover, one grotesk carrying
 the hierarchy by weight. The palette that came before it was navy and brass.
-PetalX remains its own company: its own copy, its own positioning, and the
+Petalxtech remains its own company: its own copy, its own positioning, and the
 sakura it is named for, now drawn in the accent blue.
 
 ---
@@ -122,14 +122,14 @@ Only the JA page loads Noto Sans JP; the EN page loads Inter alone.
 ## Page architecture
 
 One scrolling page per language. The section sequence follows
-`a3technologygroup.com`; the content is PetalX's own.
+`a3technologygroup.com`; the content is Petalxtech's own.
 
 | # | Section | id | Notes |
 |---|---------|----|-------|
 | 1 | Hero | n/a | Eyebrow, offer-led `h1`, lead, two CTAs (message or book a call), two stats, the code card. |
 | 2 | Strategy | `#petals` | The five petals, on the navy gradient band. The section that explains the company's name. |
 | 3 | What we do | `#services` | The six practices. |
-| 4 | Why us | `#why` | Three reasons to choose PetalX. |
+| 4 | Why us | `#why` | Three reasons to choose Petalxtech. |
 | 5 | Approach | `#approach` | Three numbered steps. |
 | 6 | Stack | `#stack` | Four groups of tools, drawn from the practice list. |
 | 7 | Company | `#about` | The narrative. |
@@ -165,16 +165,16 @@ whenever those sections return.
 - **One page, not five.** The reference splits Home / About / What We Do /
   Our Philosophy / Contact. Keeping one page per language halves the surface
   that has to stay in sync across two languages.
-- **Six practices, not seven.** The reference lists seven. PetalX lists the
+- **Six practices, not seven.** The reference lists seven. Petalxtech lists the
   six it actually does; padding that list would be inventing capabilities.
 - **The blossom stays.** The reference has no motif at all. The sakura is
-  PetalX's name and symbol, so it is kept, restyled in the accent blue.
+  Petalxtech's name and symbol, so it is kept, restyled in the accent blue.
 - **The hero keeps its facts.** The reference makes no concrete claims. Where
-  PetalX can state a fact without inventing one &mdash; what it does, and where its
+  Petalxtech can state a fact without inventing one &mdash; what it does, and where its
   clients are &mdash; the hero states it, because that is what a US buyer evaluating
   an overseas vendor actually needs.
 - **No copied lines.** The register is matched; the sentences are not. The
-  reference signs off "Together, we create new value.". PetalX says
+  reference signs off "Together, we create new value.". Petalxtech says
   "Together, we build things that last."
 
 **The blossom is in the hero again.** An earlier pass removed it for

@@ -125,7 +125,7 @@ def make_og():
     d.ellipse([610 * SS, -270 * SS, 1450 * SS, 570 * SS], fill=MIST)
     draw_bloom(d, 960 * SS, 330 * SS, 175 * SS)
 
-    d.text((90 * SS, 190 * SS), "P E T A L X", font=font("bold", 26 * SS), fill=ACCENT_INK)
+    d.text((90 * SS, 190 * SS), "P E T A L X T E C H", font=font("bold", 26 * SS), fill=ACCENT_INK)
     d.text((86 * SS, 262 * SS), "Craft &", font=font("bold", 80 * SS), fill=INK)
     d.text((86 * SS, 352 * SS), "Collaboration", font=font("bold", 80 * SS), fill=INK)
     d.text((90 * SS, 470 * SS), "An IT company in Tsuwano, Shimane, connecting Japanese", font=font("regular", 27 * SS), fill=SLATE)
