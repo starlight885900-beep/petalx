@@ -300,7 +300,9 @@ only be undone by JS is a blank page waiting to happen.
 
 ## The contact form
 
-The form POSTs JSON to **`/api/contact`**, a Vercel Function that hands the
+The form POSTs JSON to **`/api/contact/`** — with the trailing slash, because
+`vercel.json` sets `trailingSlash: true` and would otherwise 308 every
+submission — a Vercel Function that hands the
 enquiry to [Resend](https://resend.com), which emails it. Nothing is stored,
 and no third party sees the message: the endpoint is same-origin, which is why
 the CSP's `connect-src 'self'` needed no widening.

@@ -12,7 +12,11 @@
 
 import {scrollBehavior} from './motion.js';
 
-const ENDPOINT = '/api/contact';
+// Trailing slash on purpose. vercel.json sets `trailingSlash: true`, so a
+// POST to /api/contact is answered with a 308 to /api/contact/. Browsers do
+// follow that and keep the body, but it costs every submission an extra
+// round trip for nothing.
+const ENDPOINT = '/api/contact/';
 
 const isJapanese = () => document.documentElement.lang === 'ja';
 
