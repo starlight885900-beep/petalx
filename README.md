@@ -5,7 +5,7 @@ and running software for companies in the United States.
 
 Bilingual (English + 日本語), static, one page per language. No framework, no
 dependencies, no build step required. Five petals, five strategies:
-**Craftsmanship · Global Reach · Technology · Trust · Roots**.
+**Craftsmanship · Global Reach · Technology · Trust · People**.
 
 The visual language is aligned to `a3techgroup.com` at the owner's request:
 accent blue on white, soft 12px cards that lift on hover, one grotesk carrying
