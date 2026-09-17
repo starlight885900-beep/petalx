@@ -407,10 +407,16 @@ document.
   reachable at two paths.
 - **Security headers** on every route: `nosniff`, `Referrer-Policy`,
   `X-Frame-Options`, a `Permissions-Policy`, and a Content Security Policy.
-- **Cache-Control** on `/assets/*`. One hour with a day of
-  `stale-while-revalidate`, and a day for images. These files have no content
-  hash in their names, so a long `immutable` cache would strand viewers on stale
-  CSS after a deploy.
+- **Cache-Control**, split by asset type. CSS and JS are
+  `max-age=0, must-revalidate`; images and fonts keep a day with a week of
+  `stale-while-revalidate`. None of these files carries a content hash in its
+  name, and the HTML revalidates on every load, so any real cache lifetime on
+  the CSS means a returning viewer gets **new HTML styled by old CSS** until it
+  expires. That happened on the first production deploy: the contact section
+  rendered in the previous palette, with the honeypot field visible, because
+  `.hp-field` existed only in the newer stylesheet. ETags make revalidation a
+  304 and a few bytes, which is the right trade for files this small. If these
+  ever get content-hashed names, put the long `immutable` cache back.
 
 The CSP allows `'unsafe-inline'` for scripts and styles, which is required by
 three things the page genuinely uses: the reveal bootstrap in `<head>`, the
