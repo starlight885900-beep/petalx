@@ -471,9 +471,13 @@ engagement.<span class="c-f">ship</span>();   <span class="c-c">// and keep it r
               <span class="err">ご相談内容をご入力ください。</span>
             </div>
           </div>
+          <div class="hp-field" aria-hidden="true">
+            <label for="c-website">Website</label>
+            <input id="c-website" name="website" type="text" tabindex="-1" autocomplete="off">
+          </div>
+          <p class="form-error" id="contactError" role="alert" hidden></p>
           <button class="btn btn-primary btn-lg btn-block" type="submit">メッセージを送る <svg class="arw" width="16" height="16" aria-hidden="true"><use href="#arrow-right"/></svg></button>
           <p class="fine">いただいた内容は、ご相談への対応にのみ使用します。第三者に提供することはありません。</p>
-          <p class="fine">デモ版のため、この送信ボタンは検証のみを行い、実際には送信されません。<code>assets/js/forms.js</code> の <code>submitForm</code> を実際の送信先に接続したうえで、この一文を削除してください。</p>
         </form>
         <dl class="band-meta">
           <div><dt>所在地</dt><dd>島根県津和野町</dd></div>

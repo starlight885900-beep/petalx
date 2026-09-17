@@ -482,9 +482,13 @@ engagement.<span class="c-f">ship</span>();   <span class="c-c">// and keep it r
               <span class="err">Please tell us a little about the work.</span>
             </div>
           </div>
+          <div class="hp-field" aria-hidden="true">
+            <label for="c-website">Website</label>
+            <input id="c-website" name="website" type="text" tabindex="-1" autocomplete="off">
+          </div>
+          <p class="form-error" id="contactError" role="alert" hidden></p>
           <button class="btn btn-primary btn-lg btn-block" type="submit">Send message <svg class="arw" width="16" height="16" aria-hidden="true"><use href="#arrow-right"/></svg></button>
           <p class="fine">Sending this means we may contact you about your enquiry. We never pass your details to anyone else.</p>
-          <p class="fine">Demo build. This form validates but does not yet send. Wire <code>submitForm</code> in <code>assets/js/forms.js</code> to a real endpoint, then delete this line.</p>
         </form>
         <dl class="band-meta">
           <div><dt>Location</dt><dd>Tsuwano, Shimane, Japan</dd></div>

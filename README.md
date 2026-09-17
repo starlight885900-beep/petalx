@@ -58,9 +58,12 @@ Sakura/
 │   │   └── forms.js            contact form validation + the backend seam
 │   ├── img/                    favicon, logo, social card, touch icon
 │   └── fonts/                  empty, fonts load from Google Fonts (see below)
+├── api/
+│   └── contact.js              the contact form's endpoint; emails via Resend
 ├── tools/
 │   ├── build.py                bundles source → dist/ single files
-│   └── make-images.py          regenerates the PNG assets
+│   ├── make-images.py          regenerates the PNG assets
+│   └── test-contact.js         exercises the endpoint; `node tools/test-contact.js`
 ├── dist/                       build output, gitignored
 ├── site.webmanifest
 ├── robots.txt
@@ -295,36 +298,63 @@ only be undone by JS is a blank page waiting to happen.
 
 ---
 
-## Wiring up the form
+## The contact form
 
-**The contact form is front-end only right now.** It validates and shows a
-success panel, but nothing is stored or emailed, and both pages say so in small
-print under the submit button, delete those two `<p class="fine">` lines once a
-backend exists.
+The form POSTs JSON to **`/api/contact`**, a Vercel Function that hands the
+enquiry to [Resend](https://resend.com), which emails it. Nothing is stored,
+and no third party sees the message: the endpoint is same-origin, which is why
+the CSP's `connect-src 'self'` needed no widening.
 
-One function is the seam. In `assets/js/forms.js`:
+### Before it can send
 
-```js
-async function submitForm(form){
-  const res = await fetch('/api/contact', {method: 'POST', body: new FormData(form)});
-  if (!res.ok) throw new Error(await res.text());
-  return {ok: true};
-}
-```
+Set these in Vercel → Project → Settings → Environment Variables:
 
-Payload, keyed by the `name` attributes already on the inputs:
+| Variable | Required | Notes |
+|----------|----------|-------|
+| `RESEND_API_KEY` | yes | From resend.com/api-keys. Without it the endpoint logs loudly and answers the visitor with a generic failure. |
+| `TO_EMAIL` | no | Where enquiries land. Defaults to `hirotanaka@petalxtech.com`. |
+| `FROM_EMAIL` | no | Defaults to `noreply@petalxtech.com`. **Must** be on a domain verified in Resend, which means adding their DNS records at GoDaddy. Until that is done, `onboarding@resend.dev` sends to your own account's address. |
 
-| Field     | Notes                                              |
-|-----------|----------------------------------------------------|
-| `name`    |                                                    |
-| `company` |                                                    |
-| `email`   |                                                    |
-| `topic`   | the practice chosen; the value is always English, from either page |
-| `message` |                                                    |
-| `locale`  | added by `submitForm`, `en` or `ja`, so you can reply in the right language |
+`reply_to` is set to whatever the visitor typed, so replying in your mail client
+reaches them rather than the noreply address.
 
-Client-side validation is a convenience, never a guarantee, **re-validate
-everything server side** and rate-limit the endpoint.
+### The payload
+
+Keyed by the `name` attributes already on the inputs:
+
+| Field     | Notes                                                        |
+|-----------|--------------------------------------------------------------|
+| `name`    | required                                                      |
+| `company` | optional                                                      |
+| `email`   | required                                                      |
+| `topic`   | required; the value is always English, from either page       |
+| `message` | required                                                      |
+| `website` | the honeypot. People never see it; a filled one gets a silent 200 and no email |
+| `locale`  | added by the client, `en` or `ja`, so you can reply in the right language |
+
+### What the endpoint enforces
+
+Client-side validation is a convenience, never a guarantee, so `api/contact.js`
+re-checks every field, caps each length, rejects a topic outside the list both
+pages offer, and rate-limits to three posts per IP per minute. That limiter is
+an in-memory Map inside one warm instance, so treat it as a speed bump rather
+than a control; put something real in front if the endpoint is ever abused.
+
+### Checking it without deploying
+
+    node tools/test-contact.js
+
+Mocks the request and response and stubs `fetch`, so it covers the validation,
+the honeypot, the rate limit, the subject line and every failure path without
+sending mail or needing a key. No runner, no dependencies.
+
+### What the visitor sees
+
+The button disables and reads "Sending…" while the request is in flight, so one
+click sends once. On success the form is replaced by the thank-you panel. **On
+failure the form stays exactly as it was, still filled in, with the reason in a
+tinted box above the button** — a failed send must never look like a successful
+one.
 
 ---
 
@@ -402,7 +432,6 @@ the matching CSP directive. Calendly is already allowed; see
       deployment, those tags name a site that is not the one being served,
       which will confuse crawlers that reach the `.vercel.app` URL.
 - [ ] Replace the `hello@petalxtech.com` placeholder.
-- [ ] Point `submitForm` at a real endpoint and delete the two demo notices.
 
 ---
 
@@ -441,7 +470,8 @@ Placeholders that are **not** real and must be replaced:
 
 Then:
 
-- [ ] Point `submitForm` at a real endpoint; remove the two demo disclaimers
+- [ ] Set `RESEND_API_KEY` in Vercel and verify petalxtech.com with Resend,
+      or the contact form cannot send
 - [ ] Have a native speaker review the Japanese page (it was not written by one)
 - [ ] Re-export `og-image.png` with Inter installed
 - [ ] Consider adding what this site deliberately does not claim: founding year,

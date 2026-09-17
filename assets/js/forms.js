@@ -1,16 +1,29 @@
 /**
  * forms.js: the contact form, on both the English and Japanese pages.
  *
- * The form is FRONT-END ONLY today: it populates, validates, and swaps in a
- * success panel, but nothing leaves the browser. `submitForm` below is the one
- * function to replace when a backend exists. See README.md → "Wiring up the
- * form" for the payload it produces.
+ * The form POSTs JSON to /api/contact, which emails the enquiry (see
+ * api/contact.js). Same origin, so the CSP's `connect-src 'self'` already
+ * allows it and no third party sees the message.
  *
- * Both language pages use the same ids, and every label lives in the HTML,
- * so this module needs no per-page branching at all.
+ * Both language pages use the same ids, and every label lives in the HTML, so
+ * this module needs no per-page branching beyond the two strings below, which
+ * are shown only when the request fails.
  */
 
 import {scrollBehavior} from './motion.js';
+
+const ENDPOINT = '/api/contact';
+
+const isJapanese = () => document.documentElement.lang === 'ja';
+
+const TEXT = {
+  sending: ['Sending…', '送信中…'],
+  failed: [
+    'Could not send your message. Please try again, or email hirotanaka@petalxtech.com directly.',
+    '送信できませんでした。時間をおいて再度お試しいただくか、hirotanaka@petalxtech.com までメールでご連絡ください。',
+  ],
+};
+const say = (key) => TEXT[key][isJapanese() ? 1 : 0];
 
 /* ------------------------------------------------------------------ helpers */
 
@@ -55,21 +68,37 @@ function watchFields(form){
 /* --------------------------------------------------------------- submission */
 
 /**
- * The backend seam. Today it resolves immediately; swap the body for a fetch:
+ * POST the form and resolve only if the server actually accepted it.
  *
- *   const res = await fetch('/api/contact', {method:'POST', body: new FormData(form)});
- *   if (!res.ok) throw new Error(await res.text());
- *
- * Re-validate everything server side. Client-side validation is a
- * convenience, never a guarantee.
+ * The server's own message is used on the English page; the Japanese page
+ * shows its own line, because api/contact.js answers in English.
  *
  * @param {HTMLFormElement} form
+ * @throws {Error} with a message fit to show the visitor
  */
 async function submitForm(form){
   const payload = Object.fromEntries(new FormData(form).entries());
   payload.locale = document.documentElement.lang;
-  console.info('[petalx] contact submitted (demo, not persisted)', payload);
-  return {ok: true};
+
+  let res;
+  try {
+    res = await fetch(ENDPOINT, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(payload),
+    });
+  } catch {
+    throw new Error(say('failed'));       // offline, DNS, blocked request
+  }
+
+  let data = null;
+  try { data = await res.json(); } catch { /* an error page, not JSON */ }
+
+  if (!res.ok || !data || !data.ok){
+    const detail = data && data.error;
+    throw new Error(!detail || isJapanese() ? say('failed') : detail);
+  }
+  return data;
 }
 
 /* --------------------------------------------------------------------- form */
@@ -80,14 +109,42 @@ export function initForms(){
 
   const inner = document.getElementById('contactInner');
   const done = document.getElementById('contactDone');
+  const error = document.getElementById('contactError');
+  const button = form.querySelector('button[type="submit"]');
+  const buttonLabel = button ? button.innerHTML : '';
 
   watchFields(form);
 
+  /** Disable the button while the request is in flight, so one click sends once. */
+  const setPending = (pending) => {
+    if (!button) return;
+    button.disabled = pending;
+    if (pending) button.textContent = say('sending');
+    else button.innerHTML = buttonLabel;
+  };
+
+  const showError = (message) => {
+    if (!error) return;
+    error.textContent = message;
+    error.hidden = false;
+  };
+
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
+    if (error) error.hidden = true;
     if (!validateForm(form)) return;
 
-    await submitForm(form);
+    setPending(true);
+    try {
+      await submitForm(form);
+    } catch (err){
+      // The form stays on screen with everything the visitor typed still in
+      // it: a failed send must never look like a successful one.
+      showError(err.message);
+      setPending(false);
+      return;
+    }
+    setPending(false);
 
     inner.style.display = 'none';
     done.classList.add('on');
