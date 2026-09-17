@@ -126,33 +126,39 @@ One scrolling page per language. The section sequence follows
 
 | # | Section | id | Notes |
 |---|---------|----|-------|
-| 1 | Hero | n/a | Pill, offer-led `h1`, lead, two CTAs, three stats, code-window anchor. |
-| 2 | Industries | n/a | The strip where a client-logo row would go. **Placeholders.** |
-| 3 | News | `#news` | Dated updates. **Placeholders.** |
-| 4 | Strategy | `#petals` | The five petals, on the navy band. *Kept from the old site.* |
-| 5 | What we do | `#services` | The six practices. *Kept from the old site.* |
-| 6 | Track record | `#track` | Named engagements. **Placeholders.** |
-| 7 | Why us | `#why` | Three reasons to choose PetalX. |
-| 8 | Approach | `#approach` | Three numbered steps. |
-| 9 | Stack | `#stack` | Four groups of tools, drawn from the practice list. |
-| 10 | Partnership | `#partnership` | Engagement shape. **Commercial terms are placeholders.** |
-| 11 | Company | `#about` | The narrative that used to be "Who we are". |
-| 12 | Founders | `#founders` | **Placeholders. Never ship invented names.** |
-| 13 | FAQ | `#faq` | Real questions, **placeholder answers**. |
-| 14 | Contact | `#contact` | The inline form. |
+| 1 | Hero | n/a | Eyebrow, offer-led `h1`, lead, two CTAs (message or book a call), two stats, the code card. |
+| 2 | Strategy | `#petals` | The five petals, on the navy gradient band. The section that explains the company's name. |
+| 3 | What we do | `#services` | The six practices. |
+| 4 | Why us | `#why` | Three reasons to choose PetalX. |
+| 5 | Approach | `#approach` | Three numbered steps. |
+| 6 | Stack | `#stack` | Four groups of tools, drawn from the practice list. |
+| 7 | Company | `#about` | The narrative. |
+| 8 | FAQ | `#faq` | Three questions, answered. |
+| 9 | Contact | `#contact` | The message card and the booking card. |
 
 The section order mirrors `a3techgroup.com`, at the owner's request. Note this
 is a **different site** from the `a3technologygroup.com` that the original
 visual language was aligned to.
 
-**Everything marked "placeholders" renders as bracketed text or em-dashes on
-purpose**, styled by `.tbd`: muted andhalf-transparent, so an accidental deploy
-looks obviously unfinished rather than quietly false. Search the HTML for
-`TODO(petalx)` to find every one.
+**Nothing on either page is a placeholder any more.** Industries, News, Track
+record, Founders and the Partnership terms were removed rather than invented:
+every one of them needed a fact only the company has (sectors delivered into,
+dated updates, named engagements with client permission, real people, real
+commercial terms). An empty section that claims nothing is better than a
+bracketed one that looks unfinished, and far better than a plausible one that
+is false. The `.tbd` style and the `TODO(petalx)` convention are still in the
+CSS and worth reusing if a section is ever staged again.
 
-Sections removed in this restructure: the pull quote, the Foundation /
-Strength / Purpose triad, "What we believe", "Our mission" and the closing
-invitation. Their CSS went with them.
+**Two FAQ questions were dropped with those sections**, because their answers
+are commitments rather than descriptions: who owns the code, and the smallest
+project taken on. Both are worth adding back once the company has settled them
+in writing.
+
+Sections removed across the two restructures: the pull quote, the Foundation /
+Strength / Purpose triad, "What we believe", "Our mission", the closing
+invitation, and then the five placeholder sections above. Their CSS went with
+them; `.news`, `.industries` and `.person` rules remain in the stylesheets for
+whenever those sections return.
 
 **Deliberate differences from the reference**
 
@@ -163,9 +169,10 @@ invitation. Their CSS went with them.
   six it actually does; padding that list would be inventing capabilities.
 - **The blossom stays.** The reference has no motif at all. The sakura is
   PetalX's name and symbol, so it is kept, restyled in the accent blue.
-- **The facts strip stays.** The reference makes no concrete claims. Location,
-  clients and working languages are facts, and they are what a US
-  buyer evaluating an overseas vendor actually needs.
+- **The hero keeps its facts.** The reference makes no concrete claims. Where
+  PetalX can state a fact without inventing one &mdash; what it does, and where its
+  clients are &mdash; the hero states it, because that is what a US buyer evaluating
+  an overseas vendor actually needs.
 - **No copied lines.** The register is matched; the sentences are not. The
   reference signs off "Together, we create new value.". PetalX says
   "Together, we build things that last."
@@ -212,15 +219,11 @@ dark band carrying the brand:
 | Section | Background |
 |---------|------------|
 | Nav, hero | white |
-| Industries strip | `--surface-2`, ruled top and bottom |
-| News | white |
-| Five Petals | the navy gradient `--band`, white type |
-| What we do, Track record, Why us | white |
+| Strategy | the navy gradient `--band`, white type |
+| What we do, Why us | white |
 | Approach | `--surface-2` |
 | Stack | white |
-| Partnership, Company | `--surface-2` |
-| Founders | white |
-| FAQ | `--surface-2` |
+| Company, FAQ | `--surface-2` |
 | Contact | white, two cards |
 | Footer | `--ink`, white type |
 
@@ -439,7 +442,6 @@ the matching CSP directive. Calendly is already allowed; see
       canonical and in its `hreflang` pair. Until that domain points at the
       deployment, those tags name a site that is not the one being served,
       which will confuse crawlers that reach the `.vercel.app` URL.
-- [ ] Replace the `hello@petalxtech.com` placeholder.
 
 ---
 
@@ -471,8 +473,6 @@ has to match the site exactly.
 
 Placeholders that are **not** real and must be replaced:
 
-- [ ] `hello@petalxtech.com`, invented. Appears in both footers and both contact
-      sections. Replace with the real address.
 - [ ] The footer address is town + prefecture only. Add the full postal address,
       and whatever company registration details Japanese practice expects.
 
