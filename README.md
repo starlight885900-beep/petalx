@@ -75,6 +75,7 @@ Sakura/
 │   │   ├── nav.js              the mobile menu disclosure
 │   │   └── forms.js            contact form validation + the backend seam
 │   ├── img/                    favicon, logo, social card, touch icon
+│   │   └── photos/             the three site photos, WebP + JPEG, two widths each
 │   └── fonts/                  empty, fonts load from Google Fonts (see below)
 ├── api/
 │   └── contact.js              the contact form's endpoint; emails via Resend
@@ -258,15 +259,47 @@ band carrying the brand:
 **The header collapses at Tailwind's `md` (768px).** `nav.js` closes the panel
 past that width, so its `DESKTOP` constant must match.
 
-**Photos go in the Company section.** Its right-hand column is a decorated
-panel with an HTML comment marking the slot. Replace it with an `<img>` from
-`assets/img/photos/` once real photos exist. Never stock images presented as the
-team or the office: on a page whose pitch is a small, real team, that is the one
-thing a buyer can catch.
+**Photos are credited, and replaceable.** See [Photos](#photos).
 
 **Light only.** To add a dark theme, override the `@theme` colours inside a
 `prefers-color-scheme` media query; `theme.js` already repaints the canvases on
 a change.
+
+---
+
+## Photos
+
+Three photographs, all from Wikimedia Commons under Creative Commons licences:
+
+| File stem | Source | Author | Licence |
+|-----------|--------|--------|---------|
+| `tsuwano-canal` | [Waterway in Tsuwano, Kanoashi, Shimane 1.jpg](https://commons.wikimedia.org/wiki/File:Waterway_in_Tsuwano,_Kanoashi,_Shimane_1.jpg) | そらみみ | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) |
+| `tsuwano-valley` | [Ushiroda, Tsuwano, Kanoashi District, Shimane Prefecture 699-5605, Japan - panoramio (2).jpg](https://commons.wikimedia.org/wiki/File:Ushiroda,_Tsuwano,_Kanoashi_District,_Shimane_Prefecture_699-5605,_Japan_-_panoramio_(2).jpg) | shikabane taro | [CC BY 3.0](https://creativecommons.org/licenses/by/3.0) |
+| `servers` | [Wikimedia Foundation Servers 2015-88.jpg](https://commons.wikimedia.org/wiki/File:Wikimedia_Foundation_Servers_2015-88.jpg) | VGrigas (WMF) | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) |
+
+**Where they sit.** The canal is the Company section's image; the valley is the
+full-width band between Company and FAQ; the cabling sits under the Stack
+heading. None of them shows a person, and none is captioned as the company's
+office or team: two show the town the company is rooted in, one is generic
+infrastructure. Keep it that way. Stock people presented as staff are the one
+thing a buyer can catch.
+
+**The licences need three things, all already in place.** Attribution (title,
+author, source and licence) is the credits line in both footers. The note that
+the images were cropped and resized is on the same line. And the two CC BY-SA
+photos stay CC BY-SA: our crops of them are adaptations and carry the same
+licence. None of this touches the rest of the site.
+
+**Each photo ships as WebP with a JPEG fallback, at two widths**, served through
+`<picture>` with `srcset`, explicit `width`/`height` so nothing jumps while
+loading, and `loading="lazy"`. EXIF is stripped. `CREDITS.json` beside them
+records where each came from.
+
+**Replacing one with your own.** Drop the new image into `assets/img/photos/`
+under the same stem and sizes (`name-800.webp`, `name-800.jpg`, and so on), or
+change the paths in both pages. Remove its entry from the footer credits line if
+you own the photo outright. Real photos of the team or the workspace are worth
+more than any of these.
 
 ---
 

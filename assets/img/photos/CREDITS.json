@@ -1,0 +1,47 @@
+[
+ {
+  "title": "File:Waterway in Tsuwano, Kanoashi, Shimane 1.jpg",
+  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4f/Waterway_in_Tsuwano%2C_Kanoashi%2C_Shimane_1.jpg/3840px-Waterway_in_Tsuwano%2C_Kanoashi%2C_Shimane_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "page": "https://commons.wikimedia.org/wiki/File:Waterway_in_Tsuwano,_Kanoashi,_Shimane_1.jpg",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "artist": "そらみみ",
+  "name": "tsuwano-canal",
+  "ratio": 1.3333333333333333,
+  "widths": [
+   800,
+   1200
+  ],
+  "height_at_max": 900
+ },
+ {
+  "title": "File:Ushiroda, Tsuwano, Kanoashi District, Shimane Prefecture 699-5605, Japan - panoramio (2).jpg",
+  "src": "https://upload.wikimedia.org/wikipedia/commons/0/01/Ushiroda%2C_Tsuwano%2C_Kanoashi_District%2C_Shimane_Prefecture_699-5605%2C_Japan_-_panoramio_%282%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+  "page": "https://commons.wikimedia.org/wiki/File:Ushiroda,_Tsuwano,_Kanoashi_District,_Shimane_Prefecture_699-5605,_Japan_-_panoramio_(2).jpg",
+  "license": "CC BY 3.0",
+  "license_url": "https://creativecommons.org/licenses/by/3.0",
+  "artist": "shikabane taro",
+  "name": "tsuwano-valley",
+  "ratio": 2.2857142857142856,
+  "widths": [
+   1200,
+   2400
+  ],
+  "height_at_max": 1050
+ },
+ {
+  "title": "File:Wikimedia Foundation Servers 2015-88.jpg",
+  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f1/Wikimedia_Foundation_Servers_2015-88.jpg/3840px-Wikimedia_Foundation_Servers_2015-88.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "page": "https://commons.wikimedia.org/wiki/File:Wikimedia_Foundation_Servers_2015-88.jpg",
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "artist": "VGrigas (WMF)",
+  "name": "servers",
+  "ratio": 2.3333333333333335,
+  "widths": [
+   1000,
+   2000
+  ],
+  "height_at_max": 857
+ }
+]
