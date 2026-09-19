@@ -1,7 +1,7 @@
 /**
  * nav.js: the mobile navigation disclosure.
  *
- * Below the 900px breakpoint the link list collapses behind a Menu button.
+ * Below the 768px (md) breakpoint the link list collapses behind a Menu button.
  * The panel is a plain disclosure, not a modal: it pushes nothing, traps
  * nothing, and closes on Escape, on choosing a link, and on growing past the
  * breakpoint.
@@ -11,7 +11,8 @@
  * only be opened by script must never be the only way to navigate.
  */
 
-const DESKTOP = 900;
+// Tailwind's md breakpoint, where the header shows the links inline.
+const DESKTOP = 768;
 
 export function initNav(nav){
   if (!nav) return;

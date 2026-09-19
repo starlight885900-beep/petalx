@@ -2,3 +2,12 @@
 tools/
 dist/
 README.md
+
+# The Tailwind toolchain. Its output, assets/css/app.css, is committed, so
+# Vercel serves it as a static file and never needs to install or build.
+# Leaving package.json out also stops Vercel detecting a Node project and
+# running an install on every deploy.
+styles/
+node_modules/
+package.json
+package-lock.json

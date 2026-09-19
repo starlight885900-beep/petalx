@@ -32,7 +32,9 @@ import sys
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 DIST = ROOT / "dist"
 
-CSS_ORDER = ["tokens.css", "base.css", "components.css", "sections.css"]
+# One compiled Tailwind stylesheet. Run `npm run css` first: this inlines
+# whatever assets/css/app.css currently holds.
+CSS_ORDER = ["app.css"]
 JS_ORDER = [
     "motion.js",
     "theme.js",
@@ -53,7 +55,7 @@ PAGES = [
 # Matches the stylesheet block and the module tag on either page, whose asset
 # paths differ only by the ../ prefix used from ja/.
 CSS_BLOCK = re.compile(
-    r'<!-- Cascade order.*?<link rel="stylesheet" href="(?:\.\./)?assets/css/sections\.css">',
+    r'<!-- One compiled stylesheet.*?<link rel="stylesheet" href="(?:\.\./)?assets/css/app\.css">',
     re.S,
 )
 JS_TAG = re.compile(

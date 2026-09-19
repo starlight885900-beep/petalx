@@ -38,11 +38,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap">
 
-<!-- Cascade order matters: tokens → base → components → sections -->
-<link rel="stylesheet" href="../assets/css/tokens.css">
-<link rel="stylesheet" href="../assets/css/base.css">
-<link rel="stylesheet" href="../assets/css/components.css">
-<link rel="stylesheet" href="../assets/css/sections.css">
+<!-- One compiled stylesheet: Tailwind v4 + the site's behaviour rules.
+     Source is styles/app.css; rebuild with `npm run css`. -->
+<link rel="stylesheet" href="../assets/css/app.css">
 
 <!-- Reveal bootstrap. See the English page for the full explanation. -->
 <script>
@@ -76,14 +74,25 @@
 }
 </script>
 </head>
-<body>
+<body class="bg-white font-sans text-ink antialiased">
 
-<a class="skip" href="#main">本文へ</a>
+<a class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded-md focus:bg-brand-600 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white" href="#main">本文へ</a>
 
-<!-- 五枚の花びらのマーク。一度定義して <use> で参照する。 -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
-  <symbol id="petal-mark" viewBox="0 0 24 24">
-    <g fill="#1A56DB" fill-opacity=".9" stroke="rgba(21,70,176,.5)" stroke-width=".6">
+<svg aria-hidden="true" focusable="false" height="0" style="position:absolute" width="0">
+<symbol id="petal-mark" viewbox="0 0 24 24">
+<g fill="#1A56DB" fill-opacity=".9" stroke="rgba(21,70,176,.5)" stroke-width=".6">
+<path d="M12 12C12 12 9.6 9.4 10 6.6 10.3 4.6 11.4 3.6 12 3.6c.6 0 1.7 1 2 3 .4 2.8-2 5.4-2 5.4Z"></path>
+<path d="M12 12C12 12 9.6 9.4 10 6.6 10.3 4.6 11.4 3.6 12 3.6c.6 0 1.7 1 2 3 .4 2.8-2 5.4-2 5.4Z" transform="rotate(72 12 12)"></path>
+<path d="M12 12C12 12 9.6 9.4 10 6.6 10.3 4.6 11.4 3.6 12 3.6c.6 0 1.7 1 2 3 .4 2.8-2 5.4-2 5.4Z" transform="rotate(144 12 12)"></path>
+<path d="M12 12C12 12 9.6 9.4 10 6.6 10.3 4.6 11.4 3.6 12 3.6c.6 0 1.7 1 2 3 .4 2.8-2 5.4-2 5.4Z" transform="rotate(216 12 12)"></path>
+<path d="M12 12C12 12 9.6 9.4 10 6.6 10.3 4.6 11.4 3.6 12 3.6c.6 0 1.7 1 2 3 .4 2.8-2 5.4-2 5.4Z" transform="rotate(288 12 12)"></path>
+</g>
+</symbol>
+<symbol id="arrow-right" viewbox="0 0 16 16">
+<path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"></path>
+</symbol>
+  <symbol id="petal-mark-light" viewBox="0 0 24 24">
+    <g fill="#FFFFFF" fill-opacity=".92" stroke="rgba(255,255,255,.35)" stroke-width=".6">
       <path d="M12 12C12 12 9.6 9.4 10 6.6 10.3 4.6 11.4 3.6 12 3.6c.6 0 1.7 1 2 3 .4 2.8-2 5.4-2 5.4Z"/>
       <path d="M12 12C12 12 9.6 9.4 10 6.6 10.3 4.6 11.4 3.6 12 3.6c.6 0 1.7 1 2 3 .4 2.8-2 5.4-2 5.4Z" transform="rotate(72 12 12)"/>
       <path d="M12 12C12 12 9.6 9.4 10 6.6 10.3 4.6 11.4 3.6 12 3.6c.6 0 1.7 1 2 3 .4 2.8-2 5.4-2 5.4Z" transform="rotate(144 12 12)"/>
@@ -91,376 +100,430 @@
       <path d="M12 12C12 12 9.6 9.4 10 6.6 10.3 4.6 11.4 3.6 12 3.6c.6 0 1.7 1 2 3 .4 2.8-2 5.4-2 5.4Z" transform="rotate(288 12 12)"/>
     </g>
   </symbol>
-  <symbol id="arrow-right" viewBox="0 0 16 16">
-    <path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-  </symbol>
 </svg>
 
-<!-- ======================================================== NAV ========= -->
-<header class="nav" id="nav">
-  <div class="rail nav-in">
-    <a class="brand" href="#top">
-      <svg width="24" height="24" aria-hidden="true"><use href="#petal-mark"/></svg>
+<!-- ======================================================== HEADER ====== -->
+<header class="nav sticky top-0 z-50 border-b border-transparent bg-white/85 backdrop-blur-md transition-colors" id="nav">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex h-16 items-center gap-8">
+    <a class="flex items-center gap-2 text-lg font-bold tracking-tight text-ink" href="#top">
+      <svg class="size-6" aria-hidden="true"><use href="#petal-mark"/></svg>
       Petalxtech
     </a>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#petals">戦略</a></li>
-      <li><a href="#services">事業内容</a></li>
-      <li><a href="#why">選ばれる理由</a></li>
-      <li><a href="#about">会社について</a></li>
-      <li><a href="#faq">FAQ</a></li>
-      <li class="nav-links__cta"><a href="#contact">お問い合わせ</a></li>
-    </ul>
-    <a class="lang" href="../" hreflang="en" lang="en">English</a>
-    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navLinks">
-      <span class="nav-toggle__bars" aria-hidden="true"><i></i><i></i></span>メニュー
-    </button>
-    <a class="nav-cta" href="#contact">お問い合わせ <svg width="16" height="16" aria-hidden="true"><use href="#arrow-right"/></svg></a>
+    <div class="flex min-w-0 flex-1 items-center justify-end gap-4 md:justify-between">
+      <nav aria-label="メイン">
+        <ul class="nav-links flex flex-wrap items-center gap-x-7 gap-y-2 text-sm font-medium" id="navLinks">
+          <li><a class="text-ink-soft transition hover:text-brand-600" href="#petals">戦略</a></li>
+          <li><a class="text-ink-soft transition hover:text-brand-600" href="#services">事業内容</a></li>
+          <li><a class="text-ink-soft transition hover:text-brand-600" href="#why">選ばれる理由</a></li>
+          <li><a class="text-ink-soft transition hover:text-brand-600" href="#about">会社について</a></li>
+          <li><a class="text-ink-soft transition hover:text-brand-600" href="#faq">FAQ</a></li>
+          <li class="nav-links__cta md:hidden"><a class="font-semibold text-brand-600" href="#contact">お問い合わせ</a></li>
+        </ul>
+      </nav>
+      <div class="flex items-center gap-2">
+        <a class="lang rounded-md px-2.5 py-1.5 text-sm font-medium text-muted transition hover:bg-paper-2 hover:text-ink" href="../" hreflang="en" lang="en">English</a>
+        <a class="hidden items-center gap-1.5 rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-700 md:inline-flex" href="#contact">お問い合わせ <svg class="size-4" aria-hidden="true"><use href="#arrow-right"/></svg></a>
+        <button class="nav-toggle inline-flex items-center gap-2 rounded-lg border border-line px-3 py-2 text-sm font-medium text-ink-soft transition hover:border-brand-600 hover:text-brand-600 md:hidden" type="button" aria-expanded="false" aria-controls="navLinks"><svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>メニュー</button>
+      </div>
+    </div>
   </div>
 </header>
 
 <main id="main">
 <span id="top"></span>
 
-<!-- ================================================== HERO ==== -->
-<section class="hero">
-  <canvas class="hero__field" id="petalField" aria-hidden="true"></canvas>
-  <div class="rail">
-    <div class="hero-in">
-      <div class="hero-copy">
-        <p class="pill rv" style="--d:40ms"><span class="pill__dot" aria-hidden="true"></span>技術<span class="sep">・</span>信頼<span class="sep">・</span>機会</p>
-        <h1 class="rv" style="--d:80ms">日本でつくる、<em>米国</em>のためのソフトウェア。</h1>
-        <p class="lead rv" style="--d:140ms">Petalxtechは、島根県津和野町の小さなエンジニアリング企業です。開発、クラウド、Web・モバイル、AI・データ。ITは私たちの仕事の一部ではなく、そのすべてです。構想をお聞かせください。お話しするのは、実際に手を動かすエンジニアです。</p>
-        <div class="hero-cta rv" style="--d:200ms">
-          <a class="btn btn-primary btn-lg" href="#contact">お問い合わせ <svg class="arw" width="16" height="16" aria-hidden="true"><use href="#arrow-right"/></svg></a>
-          <a class="btn btn-ghost btn-lg" href="#contact">30分の相談枠を予約</a>
-        </div>
-        <dl class="hero-stats rv" style="--d:240ms">
-          <div><dt>フルスタック</dt><dd>Web・クラウド・AI・データ</dd></div>
-          <div><dt>米国</dt><dd>お客様の所在地</dd></div>
-        </dl>
+<!-- ========================================================== HERO ====== -->
+<section class="hero relative overflow-hidden bg-white">
+  <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(55%_55%_at_85%_15%,rgba(26,86,219,.12),transparent)]" aria-hidden="true"></div>
+  <canvas class="hero__field pointer-events-none absolute inset-0 size-full opacity-40" id="petalField" aria-hidden="true"></canvas>
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative grid grid-cols-1 items-center gap-14 py-16 sm:py-24 md:grid-cols-2 lg:py-28">
+    <div class="max-w-xl">
+      <p class="rv eyebrow inline-flex items-center gap-2 rounded-full bg-brand-50 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-widest text-brand-700 ring-1 ring-brand-100" style="--d:40ms"><span class="block size-1.5 rounded-full bg-brand-600" aria-hidden="true"></span>技術 <span class="text-brand-300" aria-hidden="true">·</span> 信頼 <span class="text-brand-300" aria-hidden="true">·</span> 機会</p>
+      <h1 class="rv mt-6 text-4xl font-bold tracking-tight text-balance text-ink sm:text-5xl lg:text-6xl/tight" style="--d:80ms">日本でつくる、<strong class="font-bold text-brand-600">米国</strong>のためのソフトウェア。</h1>
+      <p class="rv mt-6 text-base/relaxed text-pretty text-ink-soft sm:text-lg/relaxed" style="--d:140ms">Petalxtechは、島根県津和野町の小さなエンジニアリング企業です。開発、クラウド、Web・モバイル、AI・データ。ITは私たちの仕事の一部ではなく、そのすべてです。構想をお聞かせください。お話しするのは、実際に手を動かすエンジニアです。</p>
+      <div class="rv mt-9 flex flex-wrap gap-4" style="--d:200ms">
+        <a class="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-6 py-3.5 font-semibold text-white shadow-lg shadow-brand-600/25 transition hover:-translate-y-0.5 hover:bg-brand-700" href="#contact">お問い合わせ <svg class="size-4" aria-hidden="true"><use href="#arrow-right"/></svg></a>
+        <a class="inline-flex items-center rounded-lg border border-line bg-white px-6 py-3.5 font-semibold text-ink shadow-xs transition hover:-translate-y-0.5 hover:border-brand-600 hover:text-brand-600" href="#contact">30分の相談枠を予約</a>
       </div>
-      <div class="hero-art rv" style="--d:260ms" aria-hidden="true">
-        <div class="code">
-          <div class="code__bar"><i></i><i></i><i></i></div>
-<pre class="code__body"><span class="c-c">// Petalxtech &mdash; Shimane, Japan</span>
+      <dl class="rv mt-12 grid max-w-md grid-cols-2 gap-6 border-t border-line pt-6" style="--d:240ms">
+          <div><dt class="text-xl font-bold text-ink">フルスタック</dt><dd class="mt-1 text-sm text-muted">Web・クラウド・AI・データ</dd></div>
+          <div><dt class="text-xl font-bold text-ink">米国</dt><dd class="mt-1 text-sm text-muted">お客様の所在地</dd></div>
+      </dl>
+    </div>
+    <div class="rv relative min-w-0" style="--d:260ms" aria-hidden="true">
+      <div class="absolute -inset-10 rounded-full bg-brand-600/10 blur-3xl"></div>
+      <div class="relative mx-auto max-w-md overflow-hidden rounded-2xl bg-ink shadow-2xl shadow-ink/30 ring-1 ring-white/5 transition duration-500 hover:-translate-y-1">
+        <div class="flex gap-2 border-b border-white/10 px-4 py-3"><i class="block size-3 rounded-full bg-brand-600"></i><i class="block size-3 rounded-full bg-white/20"></i><i class="block size-3 rounded-full bg-white/20"></i></div>
+<pre class="overflow-x-auto p-6 font-mono text-[13px]/7 text-slate-300"><span class="c-c">// Petalxtech — Shimane, Japan</span>
 <span class="c-k">const</span> engagement = <span class="c-k">await</span> petalx.<span class="c-f">start</span>({
-  scope: <span class="c-s">&apos;greenfield | modernisation&apos;</span>,
-  stack: [<span class="c-s">&apos;TypeScript&apos;</span>, <span class="c-s">&apos;Go&apos;</span>, <span class="c-s">&apos;AWS&apos;</span>],
-  language: <span class="c-s">&apos;English&apos;</span>,
+  scope: <span class="c-s">'greenfield | modernisation'</span>,
+  stack: [<span class="c-s">'TypeScript'</span>, <span class="c-s">'Go'</span>, <span class="c-s">'AWS'</span>],
+  language: <span class="c-s">'English'</span>,
 });
 
 engagement.<span class="c-f">ship</span>();   <span class="c-c">// and keep it running.</span></pre>
-        </div>
       </div>
     </div>
   </div>
 </section>
 
-
-
-<!-- ==================================================== 5 PETALS ======== -->
-<section class="sec sec--dark" id="petals">
-  <div class="rail">
-    <div class="sec-head rv">
-      <p class="eyebrow">私たちの信条</p>
-      <h2 class="h2">五つの戦略が、ひとつの花になる</h2>
-      <p class="lead">桜は当社の象徴です。桜が五枚の花びらで開くように、私たちの仕事も五つの戦略で成り立っています。どれも同じ重さを持ち、どれ一つ欠けても成り立ちません。</p>
+<!-- ====================================================== STRATEGY ====== -->
+<section class="relative overflow-hidden bg-linear-to-br from-ink via-[#15294A] to-[#1B3666] py-20 text-white sm:py-28" id="petals">
+  <div class="pointer-events-none absolute top-[-18%] left-1/2 size-[640px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(26,86,219,.38),transparent_70%)]" aria-hidden="true"></div>
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
+    <div class="rv mx-auto max-w-2xl text-center">
+      <p class="eyebrow text-sm font-semibold uppercase tracking-widest text-brand-300">私たちの信条</p>
+      <h2 class="mt-3 text-3xl font-bold tracking-tight text-balance sm:text-4xl">五つの戦略が、ひとつの花になる</h2>
+      <p class="mt-5 text-base/relaxed text-pretty text-white/75 sm:text-lg/relaxed">桜は当社の象徴です。桜が五枚の花びらで開くように、私たちの仕事も五つの戦略で成り立っています。どれも同じ重さを持ち、どれ一つ欠けても成り立ちません。</p>
     </div>
   </div>
-
-  <!-- 桜だけは本文の版面より広く見せる、専用のラッパー。 -->
-  <div class="bloom-rail">
+  <div class="relative mx-auto mt-10 max-w-[1320px] px-4 sm:px-6 lg:px-8">
     <div class="bloom rv">
-      <canvas class="bloom__canvas" id="bloomCore" width="1280" height="1280"
-              role="img" aria-label="五つの戦略を五枚の桜の花びらに配した図"></canvas>
-
+      <canvas class="bloom__canvas" id="bloomCore" width="1280" height="1280" role="img" aria-label="五つの戦略を五枚の桜の花びらに配した図"></canvas>
       <article class="petal-card" data-petal="0" style="--x:50%;--y:23.1%">
-        <h3>ものづくり</h3>
-        <p>ものづくりの思想をソフトウェアへ。何年先も保守できる品質を。</p>
+        <h3 class="text-lg font-bold text-white sm:text-xl">ものづくり</h3>
+        <p class="mt-2 text-sm/relaxed text-white/75 lg:text-base/relaxed">ものづくりの思想をソフトウェアへ。何年先も保守できる品質を。</p>
       </article>
       <article class="petal-card" data-petal="1" style="--x:75.6%;--y:41.7%">
-        <h3>グローバル</h3>
-        <p>日本で開発し、米国のお客様へ。やり取りはすべて英語で。</p>
+        <h3 class="text-lg font-bold text-white sm:text-xl">グローバル</h3>
+        <p class="mt-2 text-sm/relaxed text-white/75 lg:text-base/relaxed">日本で開発し、米国のお客様へ。やり取りはすべて英語で。</p>
       </article>
       <article class="petal-card" data-petal="2" style="--x:65.8%;--y:71.8%">
-        <h3>テクノロジー</h3>
-        <p>流行ではなく適性で選ぶ技術。AIは価値を生む場面で。</p>
+        <h3 class="text-lg font-bold text-white sm:text-xl">テクノロジー</h3>
+        <p class="mt-2 text-sm/relaxed text-white/75 lg:text-base/relaxed">流行ではなく適性で選ぶ技術。AIは価値を生む場面で。</p>
       </article>
       <article class="petal-card" data-petal="3" style="--x:34.2%;--y:71.8%">
-        <h3>信頼</h3>
-        <p>受託ではなくパートナーとして。同じエンジニアが、正直に。</p>
+        <h3 class="text-lg font-bold text-white sm:text-xl">信頼</h3>
+        <p class="mt-2 text-sm/relaxed text-white/75 lg:text-base/relaxed">受託ではなくパートナーとして。同じエンジニアが、正直に。</p>
       </article>
       <article class="petal-card" data-petal="4" style="--x:24.4%;--y:41.7%">
-        <h3>世界の人材</h3>
-        <p>採用に地域の制限はありません。見るのは仕事であり、住んでいる場所ではありません。</p>
+        <h3 class="text-lg font-bold text-white sm:text-xl">世界の人材</h3>
+        <p class="mt-2 text-sm/relaxed text-white/75 lg:text-base/relaxed">採用に地域の制限はありません。見るのは仕事であり、住んでいる場所ではありません。</p>
       </article>
     </div>
   </div>
 </section>
 
-<!-- =================================================== SERVICES ========= -->
-<section class="sec sec--tight" id="services">
-  <div class="rail">
-    <div class="sec-head rv">
-      <p class="eyebrow">01・事業内容</p>
-      <h2 class="h2">技術を軸に、六つの領域で</h2>
-      <p class="lead">多くのお客様は一つの領域から始まり、やがて他の領域へ広がります。六つすべてを同じチームが担当します。</p>
+<!-- ====================================================== SERVICES ====== -->
+<section class="bg-white py-20 sm:py-28" id="services">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="rv max-w-2xl">
+      <p class="eyebrow text-sm font-semibold uppercase tracking-widest text-brand-600">01・事業内容</p>
+      <h2 class="mt-3 text-3xl font-bold tracking-tight text-balance text-ink sm:text-4xl">技術を軸に、六つの領域で</h2>
+      <p class="mt-5 text-base/relaxed text-pretty text-ink-soft sm:text-lg/relaxed">多くのお客様は一つの領域から始まり、やがて他の領域へ広がります。六つすべてを同じチームが担当します。</p>
     </div>
-    <div class="svc-grid rv">
-      <article class="svc">
-        <svg class="mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="m11 10-6 6 6 6M21 10l6 6-6 6M18.5 6l-5 20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <h3>ソフトウェア開発</h3>
-        <p>新規開発から、十年動き続けてきたシステムの刷新まで。</p>
-        <ul><li>バックエンド</li><li>API</li><li>既存刷新</li></ul>
+    <div class="rv mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <article class="group relative rounded-2xl border border-line bg-white p-7 shadow-xs transition duration-300 hover:-translate-y-1 hover:border-brand-200 hover:shadow-xl hover:shadow-brand-600/10">
+        <span class="inline-flex rounded-xl bg-brand-50 p-3 text-brand-600 transition duration-300 group-hover:bg-brand-600 group-hover:text-white"><svg aria-hidden="true" class="size-7" fill="none" viewbox="0 0 32 32"><path d="m11 10-6 6 6 6M21 10l6 6-6 6M18.5 6l-5 20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"></path></svg></span>
+        <h3 class="mt-5 text-lg font-bold text-ink">ソフトウェア開発</h3>
+        <p class="mt-2 text-sm/relaxed text-ink-soft">新規開発から、十年動き続けてきたシステムの刷新まで。</p>
+        <ul class="mt-5 flex flex-wrap gap-2"><li class="rounded-full bg-paper-2 px-3 py-1 text-xs font-medium text-ink-soft">バックエンド</li><li class="rounded-full bg-paper-2 px-3 py-1 text-xs font-medium text-ink-soft">API</li><li class="rounded-full bg-paper-2 px-3 py-1 text-xs font-medium text-ink-soft">既存刷新</li></ul>
       </article>
-      <article class="svc">
-        <svg class="mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M9.5 25a6 6 0 0 1-.6-11.97 8 8 0 0 1 15.44 1.55A5.5 5.5 0 0 1 23.5 25h-14Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
-        <h3>クラウド・インフラ</h3>
-        <p>AWS・Azure・Google Cloud の設計、移行、そして運用まで。</p>
-        <ul><li>AWS</li><li>Kubernetes</li><li>IaC</li></ul>
+      <article class="group relative rounded-2xl border border-line bg-white p-7 shadow-xs transition duration-300 hover:-translate-y-1 hover:border-brand-200 hover:shadow-xl hover:shadow-brand-600/10">
+        <span class="inline-flex rounded-xl bg-brand-50 p-3 text-brand-600 transition duration-300 group-hover:bg-brand-600 group-hover:text-white"><svg aria-hidden="true" class="size-7" fill="none" viewbox="0 0 32 32"><path d="M9.5 25a6 6 0 0 1-.6-11.97 8 8 0 0 1 15.44 1.55A5.5 5.5 0 0 1 23.5 25h-14Z" stroke="currentColor" stroke-linejoin="round" stroke-width="1.6"></path></svg></span>
+        <h3 class="mt-5 text-lg font-bold text-ink">クラウド・インフラ</h3>
+        <p class="mt-2 text-sm/relaxed text-ink-soft">AWS・Azure・Google Cloud の設計、移行、そして運用まで。</p>
+        <ul class="mt-5 flex flex-wrap gap-2"><li class="rounded-full bg-paper-2 px-3 py-1 text-xs font-medium text-ink-soft">AWS</li><li class="rounded-full bg-paper-2 px-3 py-1 text-xs font-medium text-ink-soft">Kubernetes</li><li class="rounded-full bg-paper-2 px-3 py-1 text-xs font-medium text-ink-soft">IaC</li></ul>
       </article>
-      <article class="svc">
-        <svg class="mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="2" stroke="currentColor" stroke-width="1.6"/><rect x="21" y="12" width="7.5" height="14.5" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M9 22.5h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-        <h3>Web・モバイル</h3>
-        <p>実際に使われるインターフェースを。アクセシブルで、速く、実機で検証済み。</p>
-        <ul><li>React</li><li>iOS</li><li>Android</li></ul>
+      <article class="group relative rounded-2xl border border-line bg-white p-7 shadow-xs transition duration-300 hover:-translate-y-1 hover:border-brand-200 hover:shadow-xl hover:shadow-brand-600/10">
+        <span class="inline-flex rounded-xl bg-brand-50 p-3 text-brand-600 transition duration-300 group-hover:bg-brand-600 group-hover:text-white"><svg aria-hidden="true" class="size-7" fill="none" viewbox="0 0 32 32"><rect height="13" rx="2" stroke="currentColor" stroke-width="1.6" width="17" x="3.5" y="5.5"></rect><rect height="14.5" rx="2" stroke="currentColor" stroke-width="1.6" width="7.5" x="21" y="12"></rect><path d="M9 22.5h5" stroke="currentColor" stroke-linecap="round" stroke-width="1.6"></path></svg></span>
+        <h3 class="mt-5 text-lg font-bold text-ink">Web・モバイル</h3>
+        <p class="mt-2 text-sm/relaxed text-ink-soft">実際に使われるインターフェースを。アクセシブルで、速く、実機で検証済み。</p>
+        <ul class="mt-5 flex flex-wrap gap-2"><li class="rounded-full bg-paper-2 px-3 py-1 text-xs font-medium text-ink-soft">React</li><li class="rounded-full bg-paper-2 px-3 py-1 text-xs font-medium text-ink-soft">iOS</li><li class="rounded-full bg-paper-2 px-3 py-1 text-xs font-medium text-ink-soft">Android</li></ul>
       </article>
-      <article class="svc">
-        <svg class="mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 3.5 18.6 12l8.5 2.6-8.5 2.6L16 25.7l-2.6-8.5-8.5-2.6L13.4 12 16 3.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="25.5" cy="24.5" r="3" stroke="currentColor" stroke-width="1.5"/></svg>
-        <h3>AI・データ</h3>
-        <p>自社データに基づくLLM・データ基盤。検索も評価も、監査できる形で。</p>
-        <ul><li>LLM</li><li>RAG</li><li>データ分析</li></ul>
+      <article class="group relative rounded-2xl border border-line bg-white p-7 shadow-xs transition duration-300 hover:-translate-y-1 hover:border-brand-200 hover:shadow-xl hover:shadow-brand-600/10">
+        <span class="inline-flex rounded-xl bg-brand-50 p-3 text-brand-600 transition duration-300 group-hover:bg-brand-600 group-hover:text-white"><svg aria-hidden="true" class="size-7" fill="none" viewbox="0 0 32 32"><path d="M16 3.5 18.6 12l8.5 2.6-8.5 2.6L16 25.7l-2.6-8.5-8.5-2.6L13.4 12 16 3.5Z" stroke="currentColor" stroke-linejoin="round" stroke-width="1.5"></path><circle cx="25.5" cy="24.5" r="3" stroke="currentColor" stroke-width="1.5"></circle></svg></span>
+        <h3 class="mt-5 text-lg font-bold text-ink">AI・データ</h3>
+        <p class="mt-2 text-sm/relaxed text-ink-soft">自社データに基づくLLM・データ基盤。検索も評価も、監査できる形で。</p>
+        <ul class="mt-5 flex flex-wrap gap-2"><li class="rounded-full bg-paper-2 px-3 py-1 text-xs font-medium text-ink-soft">LLM</li><li class="rounded-full bg-paper-2 px-3 py-1 text-xs font-medium text-ink-soft">RAG</li><li class="rounded-full bg-paper-2 px-3 py-1 text-xs font-medium text-ink-soft">データ分析</li></ul>
       </article>
-      <article class="svc">
-        <svg class="mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M6 25V13M12.7 25V7M19.3 25v-9M26 25v-14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-        <h3>ITコンサルティング</h3>
-        <p>いまあるシステムを外の目で。残すもの、置き換えるもの、そしてそれぞれの費用を明らかにします。</p>
-        <ul><li>アーキテクチャ</li><li>診断</li><li>ロードマップ</li></ul>
+      <article class="group relative rounded-2xl border border-line bg-white p-7 shadow-xs transition duration-300 hover:-translate-y-1 hover:border-brand-200 hover:shadow-xl hover:shadow-brand-600/10">
+        <span class="inline-flex rounded-xl bg-brand-50 p-3 text-brand-600 transition duration-300 group-hover:bg-brand-600 group-hover:text-white"><svg aria-hidden="true" class="size-7" fill="none" viewbox="0 0 32 32"><path d="M6 25V13M12.7 25V7M19.3 25v-9M26 25v-14" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"></path></svg></span>
+        <h3 class="mt-5 text-lg font-bold text-ink">ITコンサルティング</h3>
+        <p class="mt-2 text-sm/relaxed text-ink-soft">いまあるシステムを外の目で。残すもの、置き換えるもの、そしてそれぞれの費用を明らかにします。</p>
+        <ul class="mt-5 flex flex-wrap gap-2"><li class="rounded-full bg-paper-2 px-3 py-1 text-xs font-medium text-ink-soft">アーキテクチャ</li><li class="rounded-full bg-paper-2 px-3 py-1 text-xs font-medium text-ink-soft">診断</li><li class="rounded-full bg-paper-2 px-3 py-1 text-xs font-medium text-ink-soft">ロードマップ</li></ul>
       </article>
-      <article class="svc">
-        <svg class="mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 6.5v7l5 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="16" cy="16" r="11" stroke="currentColor" stroke-width="1.6"/></svg>
-        <h3>業務自動化</h3>
-        <p>繰り返しの多い工程はソフトウェアへ。人は判断の要る仕事に集中できます。</p>
-        <ul><li>ワークフロー</li><li>連携</li><li>レポート</li></ul>
-      </article>
-    </div>
-  </div>
-</section>
-
-
-<!-- ================================================ WHY US ==== -->
-<section class="sec sec--tight" id="why">
-  <div class="rail">
-    <div class="sec-head sec-head--mid rv">
-      <p class="eyebrow">02・選ばれる理由</p>
-      <h2 class="h2">Petalxtechを選ぶ理由</h2>
-      <p class="lead">依頼して終わりのベンダーではなく、つくったシステムに関わり続け、率直にお伝えするチームです。</p>
-    </div>
-    <div class="cards-3 rv">
-      <article class="card">
-        <h3>少人数であること</h3>
-        <p>少人数を保つからこそ、システムを設計した本人が、三年後も質問に答えられます。私たちの名前をご存じのまま、私たちもお客様のコードを知り続けます。</p>
-      </article>
-      <article class="card">
-        <h3>すべて英語で</h3>
-        <p>打ち合わせも、資料も、コードレビューも英語で。コードを書く本人がそのまま対応しますので、伝言の途中で失われるものはありません。</p>
-      </article>
-      <article class="card">
-        <h3>復旧より、予防</h3>
-        <p>不具合は「直すもの」ではなく「起こさないもの」として扱います。最初のひと月の手間は少し増え、その後の毎年がずっと軽くなります。多くのベンダーがその頃にはいないため、経験することのない部分です。</p>
+      <article class="group relative rounded-2xl border border-line bg-white p-7 shadow-xs transition duration-300 hover:-translate-y-1 hover:border-brand-200 hover:shadow-xl hover:shadow-brand-600/10">
+        <span class="inline-flex rounded-xl bg-brand-50 p-3 text-brand-600 transition duration-300 group-hover:bg-brand-600 group-hover:text-white"><svg aria-hidden="true" class="size-7" fill="none" viewbox="0 0 32 32"><path d="M16 6.5v7l5 3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path><circle cx="16" cy="16" r="11" stroke="currentColor" stroke-width="1.6"></circle></svg></span>
+        <h3 class="mt-5 text-lg font-bold text-ink">業務自動化</h3>
+        <p class="mt-2 text-sm/relaxed text-ink-soft">繰り返しの多い工程はソフトウェアへ。人は判断の要る仕事に集中できます。</p>
+        <ul class="mt-5 flex flex-wrap gap-2"><li class="rounded-full bg-paper-2 px-3 py-1 text-xs font-medium text-ink-soft">ワークフロー</li><li class="rounded-full bg-paper-2 px-3 py-1 text-xs font-medium text-ink-soft">連携</li><li class="rounded-full bg-paper-2 px-3 py-1 text-xs font-medium text-ink-soft">レポート</li></ul>
       </article>
     </div>
   </div>
 </section>
 
-<!-- ============================================== APPROACH ==== -->
-<section class="sec sec--tight" id="approach">
-  <div class="rail">
-    <div class="sec-head sec-head--mid rv">
-      <p class="eyebrow">03・進め方</p>
-      <h2 class="h2">派手さより、確かさ</h2>
-      <p class="lead">三つの段階だけ。早い段階で実物をご覧いただき、費用も常に明確にします。</p>
+<!-- ======================================================== WHY US ====== -->
+<section class="bg-paper-2 py-20 sm:py-28" id="why">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="rv mx-auto max-w-2xl text-center">
+      <p class="eyebrow text-sm font-semibold uppercase tracking-widest text-brand-600">02・選ばれる理由</p>
+      <h2 class="mt-3 text-3xl font-bold tracking-tight text-balance text-ink sm:text-4xl">Petalxtechを選ぶ理由</h2>
+      <p class="mt-5 text-base/relaxed text-pretty text-ink-soft sm:text-lg/relaxed">依頼して終わりのベンダーではなく、つくったシステムに関わり続け、率直にお伝えするチームです。</p>
     </div>
-        <ol class="steps rv">
-      <li><b>いまあるシステムを理解する</b><p>提案の前に、コードを読み、運用している方々に話を聞きます。何を残し、何を入れ替え、それぞれいくらかかるのか。ご想像より小さな手当てで足りる場合も、そのままお伝えします。</p></li>
-      <li><b>動く最小のものをつくる</b><p>完成予定の設計より、動いているもの。早い段階で実物をお見せし、実際のデータと現場での動きを見ながら育てていきます。</p></li>
-      <li><b>公開したあとも、そばにいる</b><p>多くのベンダーが離れる「二日目」こそ本番です。自分たちで運用して初めて、正しくつくれたかが分かります。</p></li>
+    <div class="rv mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
+      <article class="rounded-2xl border border-line bg-white p-7 shadow-xs transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-ink/5">
+        <span class="inline-flex size-10 items-center justify-center rounded-full bg-brand-600 text-white shadow-md shadow-brand-600/30"><svg class="size-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 1 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0Z" clip-rule="evenodd"/></svg></span>
+        <h3 class="mt-5 text-lg font-bold text-ink">少人数であること</h3>
+        <p class="mt-3 text-sm/relaxed text-ink-soft">少人数を保つからこそ、システムを設計した本人が、三年後も質問に答えられます。私たちの名前をご存じのまま、私たちもお客様のコードを知り続けます。</p>
+      </article>
+      <article class="rounded-2xl border border-line bg-white p-7 shadow-xs transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-ink/5">
+        <span class="inline-flex size-10 items-center justify-center rounded-full bg-brand-600 text-white shadow-md shadow-brand-600/30"><svg class="size-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 1 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0Z" clip-rule="evenodd"/></svg></span>
+        <h3 class="mt-5 text-lg font-bold text-ink">すべて英語で</h3>
+        <p class="mt-3 text-sm/relaxed text-ink-soft">打ち合わせも、資料も、コードレビューも英語で。コードを書く本人がそのまま対応しますので、伝言の途中で失われるものはありません。</p>
+      </article>
+      <article class="rounded-2xl border border-line bg-white p-7 shadow-xs transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-ink/5">
+        <span class="inline-flex size-10 items-center justify-center rounded-full bg-brand-600 text-white shadow-md shadow-brand-600/30"><svg class="size-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 1 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0Z" clip-rule="evenodd"/></svg></span>
+        <h3 class="mt-5 text-lg font-bold text-ink">復旧より、予防</h3>
+        <p class="mt-3 text-sm/relaxed text-ink-soft">不具合は「直すもの」ではなく「起こさないもの」として扱います。最初のひと月の手間は少し増え、その後の毎年がずっと軽くなります。多くのベンダーがその頃にはいないため、経験することのない部分です。</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================== APPROACH ====== -->
+<section class="bg-white py-20 sm:py-28" id="approach">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="rv mx-auto max-w-2xl text-center">
+      <p class="eyebrow text-sm font-semibold uppercase tracking-widest text-brand-600">03・進め方</p>
+      <h2 class="mt-3 text-3xl font-bold tracking-tight text-balance text-ink sm:text-4xl">派手さより、確かさ</h2>
+      <p class="mt-5 text-base/relaxed text-pretty text-ink-soft sm:text-lg/relaxed">三つの段階だけ。早い段階で実物をご覧いただき、費用も常に明確にします。</p>
+    </div>
+    <ol class="rv mt-14 grid grid-cols-1 gap-6 lg:grid-cols-3">
+      <li class="relative rounded-2xl border border-line bg-white p-7">
+        <span class="flex size-11 items-center justify-center rounded-xl bg-brand-600 text-lg font-bold text-white shadow-md shadow-brand-600/30">1</span>
+        <h3 class="mt-5 text-lg font-bold text-ink">いまあるシステムを理解する</h3>
+        <p class="mt-3 text-sm/relaxed text-ink-soft">提案の前に、コードを読み、運用している方々に話を聞きます。何を残し、何を入れ替え、それぞれいくらかかるのか。ご想像より小さな手当てで足りる場合も、そのままお伝えします。</p>
+      </li>
+      <li class="relative rounded-2xl border border-line bg-white p-7">
+        <span class="flex size-11 items-center justify-center rounded-xl bg-brand-600 text-lg font-bold text-white shadow-md shadow-brand-600/30">2</span>
+        <h3 class="mt-5 text-lg font-bold text-ink">動く最小のものをつくる</h3>
+        <p class="mt-3 text-sm/relaxed text-ink-soft">完成予定の設計より、動いているもの。早い段階で実物をお見せし、実際のデータと現場での動きを見ながら育てていきます。</p>
+      </li>
+      <li class="relative rounded-2xl border border-line bg-white p-7">
+        <span class="flex size-11 items-center justify-center rounded-xl bg-brand-600 text-lg font-bold text-white shadow-md shadow-brand-600/30">3</span>
+        <h3 class="mt-5 text-lg font-bold text-ink">公開したあとも、そばにいる</h3>
+        <p class="mt-3 text-sm/relaxed text-ink-soft">多くのベンダーが離れる「二日目」こそ本番です。自分たちで運用して初めて、正しくつくれたかが分かります。</p>
+      </li>
     </ol>
   </div>
 </section>
 
-<!-- ================================================= STACK ==== -->
-<section class="sec sec--tight" id="stack">
-  <div class="rail">
-    <div class="sec-head sec-head--mid rv">
-      <p class="eyebrow">04・技術スタック</p>
-      <h2 class="h2">私たちが使う道具</h2>
-      <p class="lead">新しいからではなく、よく理解されているから選んでいます。この一覧にない技術をお使いでも、ぜひご相談ください。私たちの仕事の多くは、他社が書いたコードから始まります。</p>
+<!-- ========================================================= STACK ====== -->
+<section class="bg-paper-2 py-20 sm:py-28" id="stack">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="rv mx-auto max-w-2xl text-center">
+      <p class="eyebrow text-sm font-semibold uppercase tracking-widest text-brand-600">04・技術スタック</p>
+      <h2 class="mt-3 text-3xl font-bold tracking-tight text-balance text-ink sm:text-4xl">私たちが使う道具</h2>
+      <p class="mt-5 text-base/relaxed text-pretty text-ink-soft sm:text-lg/relaxed">新しいからではなく、よく理解されているから選んでいます。この一覧にない技術をお使いでも、ぜひご相談ください。私たちの仕事の多くは、他社が書いたコードから始まります。</p>
     </div>
-    <div class="cards-4 stack rv">
-      <article class="card"><h3>構築</h3><ul><li>Backend</li><li>APIs</li><li>レガシー刷新</li></ul></article>
-      <article class="card"><h3>運用</h3><ul><li>AWS</li><li>Kubernetes</li><li>IaC</li></ul></article>
-      <article class="card"><h3>画面</h3><ul><li>React</li><li>iOS</li><li>Android</li></ul></article>
-      <article class="card"><h3>AI・データ</h3><ul><li>LLM</li><li>RAG</li><li>Analytics</li></ul></article>
-    </div>
-  </div>
-</section>
-
-
-<!-- =============================================== COMPANY ==== -->
-<section class="sec sec--tight" id="about">
-  <div class="rail split rv">
-    <div>
-      <p class="eyebrow">05・会社について</p>
-      <h2 class="h2">世界から集めたチームで、米国のお客様へ</h2>
-    </div>
-    <div class="split__body">
-      <p>私たちはサーバーとコード、そしてシステムを動かし続けるという地道な仕事から始まりました。いましていることも、まさにそれです。そこに加わったのが、もう半分の課題でした。地球の反対側で、きちんとつくられたソフトウェアを必要としている企業。そして、そのようにつくるチームです。</p>
-      <p>お客様の多くは米国にいらっしゃいます。エンジニアは、島根県津和野町を拠点としながら、世界のどこに住む人でも採用しています。仕事をつなぐのは共通の言語と、不具合を「直すもの」ではなく「起こさないもの」として扱う進め方です。</p>
-      <p>私たちは、意図して小さな会社です。そしていま、新しいお客様をお迎えしています。これからつくるシステム、作り直したいシステム、動かし続けたいシステム。どれでもお聞かせください。</p>
-      <a class="link" href="#contact">構想をお聞かせください <svg width="16" height="16" aria-hidden="true"><use href="#arrow-right"/></svg></a>
+    <div class="rv mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <article class="rounded-2xl border border-line bg-white p-6">
+        <h3 class="text-base font-bold text-ink">構築</h3>
+        <ul class="mt-4 space-y-2.5"><li class="flex items-center gap-2.5 text-sm text-ink-soft"><svg class="size-4 shrink-0 text-brand-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 1 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0Z" clip-rule="evenodd"/></svg>Backend</li><li class="flex items-center gap-2.5 text-sm text-ink-soft"><svg class="size-4 shrink-0 text-brand-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 1 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0Z" clip-rule="evenodd"/></svg>APIs</li><li class="flex items-center gap-2.5 text-sm text-ink-soft"><svg class="size-4 shrink-0 text-brand-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 1 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0Z" clip-rule="evenodd"/></svg>レガシー刷新</li></ul>
+      </article>
+      <article class="rounded-2xl border border-line bg-white p-6">
+        <h3 class="text-base font-bold text-ink">運用</h3>
+        <ul class="mt-4 space-y-2.5"><li class="flex items-center gap-2.5 text-sm text-ink-soft"><svg class="size-4 shrink-0 text-brand-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 1 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0Z" clip-rule="evenodd"/></svg>AWS</li><li class="flex items-center gap-2.5 text-sm text-ink-soft"><svg class="size-4 shrink-0 text-brand-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 1 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0Z" clip-rule="evenodd"/></svg>Kubernetes</li><li class="flex items-center gap-2.5 text-sm text-ink-soft"><svg class="size-4 shrink-0 text-brand-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 1 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0Z" clip-rule="evenodd"/></svg>IaC</li></ul>
+      </article>
+      <article class="rounded-2xl border border-line bg-white p-6">
+        <h3 class="text-base font-bold text-ink">画面</h3>
+        <ul class="mt-4 space-y-2.5"><li class="flex items-center gap-2.5 text-sm text-ink-soft"><svg class="size-4 shrink-0 text-brand-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 1 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0Z" clip-rule="evenodd"/></svg>React</li><li class="flex items-center gap-2.5 text-sm text-ink-soft"><svg class="size-4 shrink-0 text-brand-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 1 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0Z" clip-rule="evenodd"/></svg>iOS</li><li class="flex items-center gap-2.5 text-sm text-ink-soft"><svg class="size-4 shrink-0 text-brand-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 1 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0Z" clip-rule="evenodd"/></svg>Android</li></ul>
+      </article>
+      <article class="rounded-2xl border border-line bg-white p-6">
+        <h3 class="text-base font-bold text-ink">AI・データ</h3>
+        <ul class="mt-4 space-y-2.5"><li class="flex items-center gap-2.5 text-sm text-ink-soft"><svg class="size-4 shrink-0 text-brand-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 1 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0Z" clip-rule="evenodd"/></svg>LLM</li><li class="flex items-center gap-2.5 text-sm text-ink-soft"><svg class="size-4 shrink-0 text-brand-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 1 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0Z" clip-rule="evenodd"/></svg>RAG</li><li class="flex items-center gap-2.5 text-sm text-ink-soft"><svg class="size-4 shrink-0 text-brand-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 1 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0Z" clip-rule="evenodd"/></svg>Analytics</li></ul>
+      </article>
     </div>
   </div>
 </section>
 
-
-<!-- =================================================== FAQ ==== -->
-<section class="sec sec--tight" id="faq">
-  <div class="rail">
-    <div class="sec-head sec-head--mid rv">
-      <p class="eyebrow">06・よくあるご質問</p>
-      <h2 class="h2">率直にお答えします</h2>
-      <p class="lead">最初のご相談の前に、よくいただくご質問です。</p>
+<!-- ======================================================= COMPANY ====== -->
+<section class="bg-white py-20 sm:py-28" id="about">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid grid-cols-1 items-center gap-14 lg:grid-cols-2">
+    <div class="rv">
+      <p class="eyebrow text-sm font-semibold uppercase tracking-widest text-brand-600">05・会社について</p>
+      <h2 class="mt-3 text-3xl font-bold tracking-tight text-balance text-ink sm:text-4xl">世界から集めたチームで、米国のお客様へ</h2>
+      <div class="mt-6 space-y-4 text-base/relaxed text-ink-soft">
+        <p>私たちはサーバーとコード、そしてシステムを動かし続けるという地道な仕事から始まりました。いましていることも、まさにそれです。そこに加わったのが、もう半分の課題でした。地球の反対側で、きちんとつくられたソフトウェアを必要としている企業。そして、そのようにつくるチームです。</p>
+        <p>お客様の多くは米国にいらっしゃいます。エンジニアは、島根県津和野町を拠点としながら、世界のどこに住む人でも採用しています。仕事をつなぐのは共通の言語と、不具合を「直すもの」ではなく「起こさないもの」として扱う進め方です。</p>
+        <p>私たちは、意図して小さな会社です。そしていま、新しいお客様をお迎えしています。これからつくるシステム、作り直したいシステム、動かし続けたいシステム。どれでもお聞かせください。</p>
+      </div>
+      <a class="mt-8 inline-flex items-center gap-2 font-semibold text-brand-600 transition hover:gap-3 hover:text-brand-700" href="#contact">構想をお聞かせください <svg class="size-4" aria-hidden="true"><use href="#arrow-right"/></svg></a>
     </div>
-    <div class="faq rv">
-      <details><summary>どのように始めればよいですか？</summary><p>フォームから課題をお送りいただくか、カレンダーから30分の枠をお選びください。最初の対話を担当するのは営業ではなくエンジニアで、目的はご相談内容に私たちが適任かどうかを見極めることだけです。適任でなければ、その旨をお伝えします。</p></details>
-      <details><summary>既存の開発チームと一緒に進められますか？</summary><p>はい。むしろその形が適している場合が多くあります。リポジトリ、レビュー、朝会に加わり、成果物を最後にまとめてお渡しする外部業者ではなく、チームの一部として動きます。</p></details>
-      <details><summary>すべて英語で進行できますか？</summary><p>はい。打ち合わせ、ドキュメント、コードレビュー、コミットメッセージまで英語で対応します。担当するのは実際に開発するエンジニアで、営業が伝言することはありません。</p></details>
+    <!-- PHOTO SLOT. When the company photos arrive, replace this panel with
+         <img class="aspect-[4/3] w-full rounded-3xl object-cover shadow-2xl"
+              src="../assets/img/photos/NAME.jpg" alt="WHAT IT SHOWS">
+         and drop the aria-hidden. Real photos only: never stock presented as
+         the team or the office. -->
+    <div class="rv relative" aria-hidden="true">
+      <div class="absolute -inset-6 rounded-[2.5rem] bg-brand-600/10 blur-2xl"></div>
+      <div class="relative flex aspect-[4/3] items-center justify-center overflow-hidden rounded-3xl bg-linear-to-br from-brand-600 to-brand-800 shadow-2xl shadow-brand-600/25">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_28%_18%,rgba(255,255,255,.22),transparent_55%)]"></div>
+        <div class="absolute -right-16 -bottom-16 size-72 rounded-full border border-white/15"></div>
+        <div class="absolute -right-4 -bottom-4 size-44 rounded-full border border-white/10"></div>
+        <svg class="relative size-40 drop-shadow-xl sm:size-48"><use href="#petal-mark-light"/></svg>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ==================================================== CONTACT ========= -->
-<section class="sec sec--tight" id="contact">
-  <div class="rail">
-    <div class="sec-head sec-head--mid rv">
-      <p class="eyebrow">お問い合わせ</p>
-      <h2 class="h2">構想をお聞かせください</h2>
-      <p class="lead">課題をお送りいただくか、カレンダーから枠をお選びください。いずれの場合も、最初の対話を担当するのは営業ではなくエンジニアです。</p>
+<!-- =========================================================== FAQ ====== -->
+<section class="bg-paper-2 py-20 sm:py-28" id="faq">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="rv mx-auto max-w-2xl text-center">
+      <p class="eyebrow text-sm font-semibold uppercase tracking-widest text-brand-600">06・よくあるご質問</p>
+      <h2 class="mt-3 text-3xl font-bold tracking-tight text-balance text-ink sm:text-4xl">率直にお答えします</h2>
+      <p class="mt-5 text-base/relaxed text-pretty text-ink-soft sm:text-lg/relaxed">最初のご相談の前に、よくいただくご質問です。</p>
     </div>
-    <div class="contact-grid rv">
-      <div class="contact-card" id="contactInner">
-        <h3 class="contact-card__title">メッセージを送る</h3>
-        <p class="contact-card__sub">いただいたご相談には、日本の営業日1日以内にご返信します。</p>
-        <form id="contactForm" novalidate>
-          <div class="form-grid">
+    <div class="rv mx-auto mt-14 max-w-3xl space-y-4">
+      <details class="faq-item group rounded-2xl border border-line bg-white p-6 transition open:border-brand-200 open:shadow-lg open:shadow-brand-600/5">
+        <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-ink">
+          <h3 class="text-base font-semibold">どのように始めればよいですか？</h3>
+          <span class="shrink-0 rounded-full bg-paper-2 p-1.5 text-brand-600 transition duration-300 group-open:rotate-45"><svg class="size-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 4a1 1 0 0 1 1 1v4h4a1 1 0 1 1 0 2h-4v4a1 1 0 1 1-2 0v-4H5a1 1 0 1 1 0-2h4V5a1 1 0 0 1 1-1Z"/></svg></span>
+        </summary>
+        <p class="mt-4 text-sm/relaxed text-ink-soft">フォームから課題をお送りいただくか、カレンダーから30分の枠をお選びください。最初の対話を担当するのは営業ではなくエンジニアで、目的はご相談内容に私たちが適任かどうかを見極めることだけです。適任でなければ、その旨をお伝えします。</p>
+      </details>
+      <details class="faq-item group rounded-2xl border border-line bg-white p-6 transition open:border-brand-200 open:shadow-lg open:shadow-brand-600/5">
+        <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-ink">
+          <h3 class="text-base font-semibold">既存の開発チームと一緒に進められますか？</h3>
+          <span class="shrink-0 rounded-full bg-paper-2 p-1.5 text-brand-600 transition duration-300 group-open:rotate-45"><svg class="size-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 4a1 1 0 0 1 1 1v4h4a1 1 0 1 1 0 2h-4v4a1 1 0 1 1-2 0v-4H5a1 1 0 1 1 0-2h4V5a1 1 0 0 1 1-1Z"/></svg></span>
+        </summary>
+        <p class="mt-4 text-sm/relaxed text-ink-soft">はい。むしろその形が適している場合が多くあります。リポジトリ、レビュー、朝会に加わり、成果物を最後にまとめてお渡しする外部業者ではなく、チームの一部として動きます。</p>
+      </details>
+      <details class="faq-item group rounded-2xl border border-line bg-white p-6 transition open:border-brand-200 open:shadow-lg open:shadow-brand-600/5">
+        <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-ink">
+          <h3 class="text-base font-semibold">すべて英語で進行できますか？</h3>
+          <span class="shrink-0 rounded-full bg-paper-2 p-1.5 text-brand-600 transition duration-300 group-open:rotate-45"><svg class="size-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 4a1 1 0 0 1 1 1v4h4a1 1 0 1 1 0 2h-4v4a1 1 0 1 1-2 0v-4H5a1 1 0 1 1 0-2h4V5a1 1 0 0 1 1-1Z"/></svg></span>
+        </summary>
+        <p class="mt-4 text-sm/relaxed text-ink-soft">はい。打ち合わせ、ドキュメント、コードレビュー、コミットメッセージまで英語で対応します。担当するのは実際に開発するエンジニアで、営業が伝言することはありません。</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================= CONTACT ====== -->
+<section class="bg-white py-20 sm:py-28" id="contact">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="rv mx-auto max-w-2xl text-center">
+      <p class="eyebrow text-sm font-semibold uppercase tracking-widest text-brand-600">お問い合わせ</p>
+      <h2 class="mt-3 text-3xl font-bold tracking-tight text-balance text-ink sm:text-4xl">構想をお聞かせください</h2>
+      <p class="mt-5 text-base/relaxed text-pretty text-ink-soft sm:text-lg/relaxed">課題をお送りいただくか、カレンダーから枠をお選びください。いずれの場合も、最初の対話を担当するのは営業ではなくエンジニアです。</p>
+    </div>
+    <div class="rv mt-14 grid grid-cols-1 items-start gap-8 lg:grid-cols-2">
+      <div class="rounded-2xl border border-line bg-white p-6 shadow-xl shadow-ink/5 sm:p-8" id="contactInner">
+        <h3 class="text-xl font-bold text-ink">メッセージを送る</h3>
+        <p class="mt-1 text-sm text-muted">いただいたご相談には、日本の営業日1日以内にご返信します。</p>
+        <form class="mt-7" id="contactForm" novalidate>
+          <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
             <div class="field">
-              <label for="c-name">お名前 <span class="req" aria-hidden="true">*</span></label>
-              <input id="c-name" name="name" type="text" autocomplete="name" placeholder="山田 太郎" required>
-              <span class="err">お名前をご入力ください。</span>
+              <label class="mb-1.5 block text-sm font-medium text-ink-soft" for="c-name">お名前 <span aria-hidden="true" class="req text-brand-600">*</span></label>
+              <input autocomplete="name" class="w-full rounded-lg border border-line bg-white px-3.5 py-2.5 text-sm text-ink shadow-xs outline-none transition placeholder:text-muted/70 focus:border-brand-600 focus:ring-3 focus:ring-brand-600/15" id="c-name" name="name" placeholder="山田 太郎" required="" type="text"/>
+              <span class="err mt-1.5 text-xs font-medium text-brand-700">お名前をご入力ください。</span>
             </div>
             <div class="field">
-              <label for="c-email">メールアドレス <span class="req" aria-hidden="true">*</span></label>
-              <input id="c-email" name="email" type="email" autocomplete="email" placeholder="you@company.com" required>
-              <span class="err">有効なメールアドレスをご入力ください。</span>
+              <label class="mb-1.5 block text-sm font-medium text-ink-soft" for="c-email">メールアドレス <span aria-hidden="true" class="req text-brand-600">*</span></label>
+              <input autocomplete="email" class="w-full rounded-lg border border-line bg-white px-3.5 py-2.5 text-sm text-ink shadow-xs outline-none transition placeholder:text-muted/70 focus:border-brand-600 focus:ring-3 focus:ring-brand-600/15" id="c-email" name="email" placeholder="you@company.com" required="" type="email"/>
+              <span class="err mt-1.5 text-xs font-medium text-brand-700">有効なメールアドレスをご入力ください。</span>
             </div>
             <div class="field">
-              <label for="c-company">会社名 <span class="opt">（任意）</span></label>
-              <input id="c-company" name="company" type="text" autocomplete="organization" placeholder="株式会社〇〇">
+              <label class="mb-1.5 block text-sm font-medium text-ink-soft" for="c-company">会社名 <span class="opt font-normal text-muted">（任意）</span></label>
+              <input autocomplete="organization" class="w-full rounded-lg border border-line bg-white px-3.5 py-2.5 text-sm text-ink shadow-xs outline-none transition placeholder:text-muted/70 focus:border-brand-600 focus:ring-3 focus:ring-brand-600/15" id="c-company" name="company" placeholder="株式会社〇〇" type="text"/>
             </div>
             <div class="field">
-              <label for="c-topic">ご相談の種類 <span class="req" aria-hidden="true">*</span></label>
-              <select id="c-topic" name="topic" required>
-                <option value="" selected disabled>選択してください</option>
-                <option value="Software Development">ソフトウェア開発</option>
-                <option value="Cloud &amp; Infrastructure">クラウド・インフラ</option>
-                <option value="Web &amp; Mobile">Web・モバイル</option>
-                <option value="AI &amp; Data">AI・データ</option>
-                <option value="IT Consulting">ITコンサルティング</option>
-                <option value="Business Automation">業務自動化</option>
-                <option value="Something else">その他</option>
-              </select>
-              <span class="err">ご相談の種類をお選びください。</span>
+              <label class="mb-1.5 block text-sm font-medium text-ink-soft" for="c-topic">ご相談の種類 <span aria-hidden="true" class="req text-brand-600">*</span></label>
+              <select class="w-full rounded-lg border border-line bg-white px-3.5 py-2.5 text-sm text-ink shadow-xs outline-none transition placeholder:text-muted/70 focus:border-brand-600 focus:ring-3 focus:ring-brand-600/15" id="c-topic" name="topic" required="">
+<option disabled="" selected="" value="">選択してください</option>
+<option value="Software Development">ソフトウェア開発</option>
+<option value="Cloud &amp; Infrastructure">クラウド・インフラ</option>
+<option value="Web &amp; Mobile">Web・モバイル</option>
+<option value="AI &amp; Data">AI・データ</option>
+<option value="IT Consulting">ITコンサルティング</option>
+<option value="Business Automation">業務自動化</option>
+<option value="Something else">その他</option>
+</select>
+              <span class="err mt-1.5 text-xs font-medium text-brand-700">ご相談の種類をお選びください。</span>
             </div>
-            <div class="field span2">
-              <label for="c-message">ご相談内容 <span class="req" aria-hidden="true">*</span></label>
-              <textarea id="c-message" name="message" placeholder="現在のシステム、課題、目指したい状態を数行でお聞かせください…" required></textarea>
-              <span class="err">ご相談内容をご入力ください。</span>
+            <div class="field sm:col-span-2">
+              <label class="mb-1.5 block text-sm font-medium text-ink-soft" for="c-message">ご相談内容 <span aria-hidden="true" class="req text-brand-600">*</span></label>
+              <textarea class="w-full rounded-lg border border-line bg-white px-3.5 py-2.5 text-sm text-ink shadow-xs outline-none transition placeholder:text-muted/70 focus:border-brand-600 focus:ring-3 focus:ring-brand-600/15 min-h-32 resize-y" id="c-message" name="message" placeholder="現在のシステム、課題、目指したい状態を数行でお聞かせください…" required=""></textarea>
+              <span class="err mt-1.5 text-xs font-medium text-brand-700">ご相談内容をご入力ください。</span>
             </div>
           </div>
-          <div class="hp-field" aria-hidden="true">
-            <label for="c-website">Website</label>
-            <input id="c-website" name="website" type="text" tabindex="-1" autocomplete="off">
-          </div>
-          <p class="form-error" id="contactError" role="alert" hidden></p>
-          <button class="btn btn-primary btn-lg btn-block" type="submit">メッセージを送る <svg class="arw" width="16" height="16" aria-hidden="true"><use href="#arrow-right"/></svg></button>
-          <p class="fine">いただいた内容は、ご相談への対応にのみ使用します。第三者に提供することはありません。</p>
+          <div aria-hidden="true" class="hp-field">
+<label for="c-website">Website</label>
+<input autocomplete="off" id="c-website" name="website" tabindex="-1" type="text"/>
+</div>
+          <p class="form-error mt-5 rounded-lg border border-brand-600/25 bg-brand-600/10 px-4 py-3 text-sm text-brand-700" id="contactError" role="alert" hidden></p>
+          <button class="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-brand-600 px-6 py-3.5 font-semibold text-white shadow-lg shadow-brand-600/25 transition hover:bg-brand-700" type="submit">メッセージを送る <svg class="size-4" aria-hidden="true"><use href="#arrow-right"/></svg></button>
+          <p class="mt-4 text-center text-xs/relaxed text-muted">いただいた内容は、ご相談への対応にのみ使用します。第三者に提供することはありません。</p>
         </form>
-        <dl class="band-meta">
-          <div><dt>所在地</dt><dd>島根県津和野町</dd></div>
-          <div><dt>ご返信</dt><dd>日本の営業日1日以内</dd></div>
-          <div><dt>対応言語</dt><dd>英語・<span lang="ja">日本語</span></dd></div>
+        <dl class="mt-8 divide-y divide-line border-t border-line">
+          <div class="flex items-baseline justify-between gap-4 py-3"><dt class="text-xs font-medium uppercase tracking-widest text-muted">所在地</dt><dd class="text-right text-sm font-semibold text-ink">島根県津和野町</dd></div>
+          <div class="flex items-baseline justify-between gap-4 py-3"><dt class="text-xs font-medium uppercase tracking-widest text-muted">ご返信</dt><dd class="text-right text-sm font-semibold text-ink">日本の営業日1日以内</dd></div>
+          <div class="flex items-baseline justify-between gap-4 py-3"><dt class="text-xs font-medium uppercase tracking-widest text-muted">対応言語</dt><dd class="text-right text-sm font-semibold text-ink">英語・<span lang="ja">日本語</span></dd></div>
         </dl>
       </div>
-      <div class="contact-card done" id="contactDone">
-        <div class="tick" aria-hidden="true">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="done rounded-2xl border border-line bg-white p-8 text-center shadow-xl shadow-ink/5" id="contactDone">
+        <div class="mx-auto flex size-14 items-center justify-center rounded-full bg-brand-600 text-white shadow-lg shadow-brand-600/30" aria-hidden="true">
+          <svg class="size-6" viewBox="0 0 24 24" fill="none"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
-        <h3>ありがとうございます。承りました</h3>
-        <p>日本の営業日1日以内にご返信します。お急ぎの場合は、その旨を追ってお知らせください。優先して対応いたします。</p>
+        <h3 class="mt-5 text-xl font-bold text-ink">ありがとうございます。承りました</h3>
+        <p class="mx-auto mt-2 max-w-sm text-sm/relaxed text-ink-soft">日本の営業日1日以内にご返信します。お急ぎの場合は、その旨を追ってお知らせください。優先して対応いたします。</p>
       </div>
-      <div class="contact-card contact-card--booking book">
-            <h3>直接お話ししませんか</h3>
-      <p class="book__lead">カレンダーから30分の枠をお選びください。担当するのはエンジニアです。</p>
-      <div class="calendly-inline-widget" data-url="https://calendly.com/hirotanaka-petalxtech/30min?hide_gdpr_banner=1&amp;background_color=FFFFFF&amp;text_color=0F1B2E&amp;primary_color=1A56DB"></div>
-      <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
-      <p class="book__alt"><a class="link" href="https://calendly.com/hirotanaka-petalxtech/30min" target="_blank" rel="noopener">カレンダーを新しいタブで開く <svg width="16" height="16" aria-hidden="true"><use href="#arrow-right"/></svg></a></p>
+      <div class="book rounded-2xl border border-line bg-paper-2 p-6 sm:p-8">
+        <h3 class="text-xl font-bold text-ink">直接お話ししませんか</h3>
+        <p class="mt-1 mb-6 text-sm text-muted">カレンダーから30分の枠をお選びください。担当するのはエンジニアです。</p>
+        <div class="calendly-inline-widget" data-url="https://calendly.com/hirotanaka-petalxtech/30min?hide_gdpr_banner=1&amp;background_color=FFFFFF&amp;text_color=0F1B2E&amp;primary_color=1A56DB"></div>
+        <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+        <p class="mt-4"><a class="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-600 transition hover:text-brand-700" href="https://calendly.com/hirotanaka-petalxtech/30min" target="_blank" rel="noopener">カレンダーを新しいタブで開く <svg class="size-4" aria-hidden="true"><use href="#arrow-right"/></svg></a></p>
       </div>
     </div>
   </div>
 </section>
 </main>
 
-<!-- ====================================================== FOOTER ======== -->
-<footer class="foot">
-  <div class="rail">
-    <div class="foot-in">
+<!-- ======================================================== FOOTER ====== -->
+<footer class="bg-ink text-white">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 pb-8">
+    <div class="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.3fr]">
       <div>
-        <a class="brand" href="#top">
-          <svg width="22" height="22" aria-hidden="true"><use href="#petal-mark"/></svg>
-          Petalxtech
-        </a>
-        <p>島根県津和野町を拠点に、米国企業へソフトウェアの開発と運用を提供するIT企業です。</p>
+        <a class="flex items-center gap-2 text-lg font-bold" href="#top"><svg class="size-6" aria-hidden="true"><use href="#petal-mark"/></svg>Petalxtech</a>
+        <p class="mt-4 max-w-xs text-sm/relaxed text-slate-400">島根県津和野町を拠点に、米国企業へソフトウェアの開発と運用を提供するIT企業です。</p>
       </div>
+        <div>
+          <h4 class="text-sm font-semibold text-white">ナビゲーション</h4>
+          <ul class="mt-4 space-y-3 text-sm">
+            <li><a class="text-slate-300 transition hover:text-brand-400" href="#petals">戦略</a></li>
+            <li><a class="text-slate-300 transition hover:text-brand-400" href="#services">事業内容</a></li>
+            <li><a class="text-slate-300 transition hover:text-brand-400" href="#why">選ばれる理由</a></li>
+            <li><a class="text-slate-300 transition hover:text-brand-400" href="#about">会社について</a></li>
+            <li><a class="text-slate-300 transition hover:text-brand-400" href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-sm font-semibold text-white">事業内容</h4>
+          <ul class="mt-4 space-y-3 text-sm">
+            <li><a class="text-slate-300 transition hover:text-brand-400" href="#services">ソフトウェア開発</a></li>
+            <li><a class="text-slate-300 transition hover:text-brand-400" href="#services">クラウド・インフラ</a></li>
+            <li><a class="text-slate-300 transition hover:text-brand-400" href="#services">Web・モバイル</a></li>
+            <li><a class="text-slate-300 transition hover:text-brand-400" href="#services">AI・データ</a></li>
+          </ul>
+        </div>
       <div>
-        <h4>ナビゲーション</h4>
-        <ul>
-          <li><a href="#petals">戦略</a></li>
-          <li><a href="#services">事業内容</a></li>
-          <li><a href="#why">選ばれる理由</a></li>
-              <li><a href="#about">会社について</a></li>
-          <li><a href="#faq">FAQ</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>事業内容</h4>
-        <ul><li><a href="#services">ソフトウェア開発</a></li><li><a href="#services">クラウド・インフラ</a></li><li><a href="#services">Web・モバイル</a></li><li><a href="#services">AI・データ</a></li></ul>
-      </div>
-      <div>
-        <h4>お問い合わせ先</h4>
-        <dl class="foot-rows">
-          <div><dt>ウェブサイト</dt><dd>petalxtech.com</dd></div>
-          <div><dt>メール</dt><dd><a href="mailto:hirotanaka@petalxtech.com">hirotanaka@petalxtech.com</a></dd></div>
-          <div><dt>所在地</dt><dd>島根県鹿足郡津和野町<br>日本</dd></div>
-          <div><dt>言語</dt><dd><a href="../" hreflang="en" lang="en">English page</a></dd></div>
+        <h4 class="text-sm font-semibold text-white">お問い合わせ先</h4>
+        <dl class="mt-4 space-y-4 text-sm">
+            <div><dt class="text-xs uppercase tracking-widest text-slate-500">ウェブサイト</dt><dd class="mt-1 text-slate-300">petalxtech.com</dd></div>
+            <div><dt class="text-xs uppercase tracking-widest text-slate-500">メール</dt><dd class="mt-1 text-slate-300"><a class="text-white underline decoration-brand-600 underline-offset-4 transition hover:text-brand-400" href="mailto:hirotanaka@petalxtech.com">hirotanaka@petalxtech.com</a></dd></div>
+            <div><dt class="text-xs uppercase tracking-widest text-slate-500">所在地</dt><dd class="mt-1 text-slate-300">島根県鹿足郡津和野町<br/>日本</dd></div>
+            <div><dt class="text-xs uppercase tracking-widest text-slate-500">言語</dt><dd class="mt-1 text-slate-300"><a class="text-white underline decoration-brand-600 underline-offset-4 transition hover:text-brand-400" href="../" hreflang="en" lang="en">English page</a></dd></div>
         </dl>
       </div>
     </div>
-    <div class="foot-base">
-      <span>&copy; 2026 Petalxtech. 島根県津和野町。</span>
-      <span class="foot-tag">ものづくりと技術と機会を、つなぐ。</span>
-      <span class="petals-row" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+    <div class="mt-14 flex flex-col gap-3 border-t border-white/10 pt-6 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+      <p>© 2026 Petalxtech. 島根県津和野町。</p>
+      <p class="text-slate-400">ものづくりと技術と機会を、つなぐ。</p>
+      <span class="flex gap-2" aria-hidden="true"><i class="block size-1.5 rounded-full bg-brand-600"></i><i class="block size-1.5 rounded-full bg-brand-600"></i><i class="block size-1.5 rounded-full bg-brand-600"></i><i class="block size-1.5 rounded-full bg-brand-600"></i><i class="block size-1.5 rounded-full bg-brand-600"></i></span>
     </div>
   </div>
 </footer>

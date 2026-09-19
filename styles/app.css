@@ -1,0 +1,178 @@
+/* ===========================================================================
+   styles/app.css: the source of assets/css/app.css.
+
+       npm install        once
+       npm run css        rebuild after changing classes in the HTML
+       npm run css:watch  while editing
+
+   Tailwind v4, with the markup assembled from HyperUI's marketing blocks
+   (MIT, github.com/markmead/hyperui). The compiled file is committed, so the
+   deployed site has no build step and no runtime dependency.
+
+   Two kinds of rule live here:
+
+   1. @theme tokens. The palette the rest of the site was built on, exposed as
+      Tailwind colours: text-ink, bg-brand-600, border-line, and so on.
+
+   2. BEHAVIOUR rules, deliberately UNLAYERED. Unlayered CSS beats every
+      Tailwind layer regardless of specificity, which is exactly what these
+      need: the reveal safety net, the mobile menu, the blossom geometry and
+      the form states must never lose to a utility class someone adds later.
+      Keep anything decorative in utilities, and only behaviour down here.
+   =========================================================================== */
+
+@import "tailwindcss" source(none);
+
+/* Scan only what ships. Automatic detection would also read README.md and
+   dist/, and turn prose words like "flex" into classes nobody uses. */
+@source "../index.html";
+@source "../ja/index.html";
+@source "../404.html";
+@source "../assets/js";
+
+@theme {
+  --color-brand-50:  #EEF3FD;
+  --color-brand-100: #DCE7FB;
+  --color-brand-200: #B9CFF7;
+  --color-brand-300: #8AAEF1;
+  --color-brand-400: #6096FF;
+  --color-brand-500: #2F6BE6;
+  --color-brand-600: #1A56DB;   /* the accent */
+  --color-brand-700: #1546B0;   /* hover, and accent as text: 7.4:1 on white */
+  --color-brand-800: #123A8E;
+
+  --color-ink:      #0F1B2E;
+  --color-ink-soft: #3A4A5F;
+  --color-muted:    #6B7888;
+  --color-line:     #E3E8EF;
+  --color-paper-2:  #F3F6FB;
+
+  --font-sans: Inter, "Noto Sans JP", ui-sans-serif, system-ui, -apple-system,
+               "Segoe UI", Roboto, sans-serif;
+}
+
+/* Read by assets/js/theme.js and painted into the canvases. Kept as plain
+   custom properties because JS reads them by these exact names. */
+:root{
+  --petal-a:#FFFFFF;
+  --petal-b:#6096FF;
+  --petal-hi:#1A56DB;
+  --petal-stroke:rgba(26,86,219,.22);
+  --petal-face:rgba(26,86,219,.12);
+  --petal-face-hi:rgba(26,86,219,.34);
+  --petal-edge:rgba(26,86,219,.16);
+  --petal-edge-hi:rgba(26,86,219,.42);
+}
+
+@layer base{
+  html{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  ::selection{background:var(--color-brand-600);color:#fff}
+  :focus-visible{outline:2px solid var(--color-brand-600);outline-offset:3px;border-radius:2px}
+  /* The header is sticky and 64px tall; anchored sections would otherwise
+     land under it. Applies to scrollIntoView as well as :target. */
+  section[id],span[id]{scroll-margin-top:5rem}
+}
+
+/* ================================================================ BEHAVIOUR
+   Unlayered on purpose. See the note at the top of the file.
+   ========================================================================== */
+
+/* --- scroll reveal ---------------------------------------------------------
+   Gated on .js, which the inline bootstrap in <head> adds and takes straight
+   back off if reveal.js never confirms it is running. Without the class every
+   .rv renders normally, so a blocked module can never leave the page blank. */
+.js .rv{
+  opacity:0;transform:translateY(20px);
+  transition:opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1);
+  transition-delay:var(--d,0ms);
+}
+.js .rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}
+  .js .rv{opacity:1;transform:none}
+}
+
+/* --- header ----------------------------------------------------------------
+   .stuck is added by reveal.js once the hero scrolls away: only the hairline
+   changes. Below md the link list becomes a disclosure panel, but ONLY under
+   .js, so without the module the links stay visible and reachable. */
+.nav.stuck{border-bottom-color:var(--color-line)}
+html:not(.js) .nav-toggle{display:none}
+@media (max-width:767.98px){
+  .js .nav-links{
+    display:none;position:absolute;left:0;right:0;top:100%;
+    flex-direction:column;gap:0;padding:.5rem 1rem 1.25rem;
+    background:#fff;border-bottom:1px solid var(--color-line);
+    box-shadow:0 20px 40px -24px rgba(15,27,46,.25);
+  }
+  .js .nav.open .nav-links{display:flex}
+  .js .nav-links li{border-top:1px solid var(--color-line)}
+  .js .nav-links a{display:block;padding:.9rem .25rem;font-size:1rem}
+}
+
+/* --- the blossom -----------------------------------------------------------
+   Each strategy is written ON its petal. Text sits 0.56R along each petal's
+   axis at 72° intervals; those centres are the --x/--y pairs set inline in
+   the HTML:  0 → 50/23.1   1 → 75.6/41.7   2 → 65.8/71.8
+              3 → 34.2/71.8  4 → 24.4/41.7
+   Below 900px a blossom this size cannot hold readable text, so it shrinks to
+   a mark and the strategies become ordinary cards. */
+.bloom{position:relative;width:100%;max-width:1240px;margin-inline:auto;aspect-ratio:1}
+.bloom__canvas{position:absolute;inset:0;width:100%;height:100%}
+.petal-card{
+  position:absolute;left:var(--x);top:var(--y);transform:translate(-50%,-50%);
+  width:22.5%;max-width:288px;text-align:center;
+  transition:transform .4s cubic-bezier(.22,1,.36,1);
+}
+.petal-card:hover,.petal-card:focus-within{transform:translate(-50%,-50%) scale(1.04)}
+@media (max-width:899.98px){
+  .bloom{aspect-ratio:auto;display:grid;max-width:760px;gap:1rem;
+         grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+  .bloom__canvas{position:relative;inset:auto;grid-column:1/-1;width:170px;height:170px;margin:0 auto .5rem}
+  .petal-card{position:relative;left:auto;top:auto;transform:none;width:auto;max-width:none;
+              padding:1.75rem 1.5rem;border-radius:1rem;
+              background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12)}
+  .petal-card:hover,.petal-card:focus-within{transform:none;background:rgba(255,255,255,.09)}
+}
+
+/* --- contact form states ---------------------------------------------------
+   forms.js toggles .invalid on a .field; the message and the red edge follow.
+   The honeypot is off-screen rather than display:none, because some bots skip
+   hidden inputs. The success card replaces the form when .on is added. */
+.field .err{display:none}
+.field.invalid .err{display:block}
+.field.invalid :is(input,select,textarea){border-color:var(--color-brand-700)}
+.field select{
+  appearance:none;cursor:pointer;padding-right:2.5rem;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%236B7888' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right .9rem center;
+}
+.hp-field{position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none}
+.done{display:none}
+.done.on{display:block;animation:rise .6s cubic-bezier(.22,1,.36,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+button[type="submit"]:disabled{opacity:.7;cursor:progress}
+
+/* --- Calendly --------------------------------------------------------------
+   The widget is an iframe Calendly fills; it needs a height to fill. Its
+   colours come from the data-url parameters, not from here. */
+.book .calendly-inline-widget{width:100%;min-width:0;height:660px;border-radius:.75rem;overflow:hidden}
+@media (max-width:700px){.book .calendly-inline-widget{height:900px}}
+
+/* --- FAQ marker ------------------------------------------------------------ */
+.faq-item summary::-webkit-details-marker{display:none}
+
+/* --- code card syntax colours ---------------------------------------------- */
+.c-c{color:#6B7888}
+.c-k{color:#6096FF}
+.c-s{color:#9FD3A8}
+.c-f{color:#8FB8E8}
+
+/* --- Japanese --------------------------------------------------------------
+   Kana wants more line height than Latin, no negative tracking, and phrase-
+   aware line breaks: without auto-phrase the balancer splits words mid-way.
+   Browsers that lack it fall back to normal wrapping. */
+html[lang="ja"] body{line-height:1.9}
+html[lang="ja"] :is(h1,h2,h3){letter-spacing:.02em;line-height:1.45;word-break:auto-phrase}
+html[lang="ja"] .petal-card p{word-break:auto-phrase}
+html[lang="ja"] .eyebrow{letter-spacing:.1em;text-transform:none}

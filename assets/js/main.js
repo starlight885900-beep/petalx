@@ -20,14 +20,16 @@ readPalette();
 // a page without one simply skips that piece.
 const DIAGRAM = {
   flat: true, stamens: false, radius: 0.48, spread: 0.74,
-  // Strategy moved onto the navy band, so the light-theme petal tokens (brass
-  // at 20% on white) would go olive. These are tuned for the dark ground and
-  // are identical in both themes, as the band itself is.
+  // The diagram sits on the navy band, where the page's petal tokens (accent
+  // at 12% for a white ground) would all but vanish. These are the accent's
+  // lighter tints, tuned for the dark ground. They were brass until the blue
+  // redesign, and painted the blossom a muddy olive on navy until a headless
+  // render made it visible: check canvases in a browser, not just in CSS.
   colors: {
-    face: 'rgba(221,190,126,.22)',
-    faceHi: 'rgba(221,190,126,.50)',
-    edge: 'rgba(221,190,126,.34)',
-    edgeHi: 'rgba(221,190,126,.66)'
+    face: 'rgba(96,150,255,.13)',
+    faceHi: 'rgba(96,150,255,.34)',
+    edge: 'rgba(138,174,241,.42)',
+    edgeHi: 'rgba(170,198,255,.85)'
   }
 };
 const values = coreBloom

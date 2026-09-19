@@ -3,15 +3,18 @@
 The company site for Petalxtech, an IT company in Tsuwano, Shimane, Japan, building
 and running software for companies in the United States.
 
-Bilingual (English + 日本語), static, one page per language. No framework, no
-dependencies, no build step required. Five petals, five strategies:
+Bilingual (English + 日本語), static, one page per language. No framework and
+no runtime dependencies: the deployed site is plain HTML, one compiled
+stylesheet, a few ES modules and one serverless function. Five petals, five
+strategies:
 **Craftsmanship · Global Reach · Technology · Trust · People**.
 
-The visual language is aligned to `a3techgroup.com` at the owner's request:
-accent blue on white, soft 12px cards that lift on hover, one grotesk carrying
-the hierarchy by weight. The palette that came before it was navy and brass.
-Petalxtech remains its own company: its own copy, its own positioning, and the
-sakura it is named for, now drawn in the accent blue.
+The markup is assembled from [HyperUI](https://github.com/markmead/hyperui)'s
+marketing blocks (MIT) and styled with Tailwind CSS v4, compiled once and
+committed. The palette is the accent blue on white the site was aligned to
+earlier: `#1A56DB` on white, ink `#0F1B2E`, soft 12–16px cards that lift on
+hover. Petalxtech remains its own company: its own copy, its own positioning,
+and the sakura it is named for.
 
 ---
 
@@ -30,7 +33,25 @@ blossom, the drifting petals and the theme-aware repainting all stay dead,
 so serve it.
 
 Any static host works as-is: Netlify, Vercel, GitHub Pages, S3, nginx. Upload
-the repo root; there is nothing to compile.
+the repo root. The stylesheet is already compiled and committed, so the host
+has nothing to build.
+
+### Changing styles
+
+Styles are Tailwind utility classes written straight into the HTML, compiled
+into `assets/css/app.css`:
+
+```bash
+npm install          # once: installs tailwindcss and its CLI, nothing else
+npm run css          # after changing classes in the HTML
+npm run css:watch    # while editing
+```
+
+**Commit the regenerated `assets/css/app.css`.** Vercel serves it as a static
+file and never runs npm; `package.json`, `node_modules/` and `styles/` are all
+in `.vercelignore`, so Vercel does not even detect a Node project. A class you
+add to the HTML without re-running `npm run css` simply has no effect in
+production.
 
 ---
 
@@ -42,11 +63,8 @@ Sakura/
 ├── ja/
 │   └── index.html              the Japanese page, same structure and ids
 ├── assets/
-│   ├── css/                    loaded in this order; the cascade depends on it
-│   │   ├── tokens.css          ← design system. Change colours HERE, only here.
-│   │   ├── base.css            reset, typography (incl. JA), layout, reveal
-│   │   ├── components.css      buttons, nav, language switch, cards, forms, footer
-│   │   └── sections.css        hero, glance, blossom, flow, contact band
+│   ├── css/
+│   │   └── app.css             COMPILED by `npm run css`. Committed. Never edit.
 │   ├── js/
 │   │   ├── main.js             entry point; wires modules to the DOM
 │   │   ├── motion.js           single source of truth for reduced-motion
@@ -60,6 +78,9 @@ Sakura/
 │   └── fonts/                  empty, fonts load from Google Fonts (see below)
 ├── api/
 │   └── contact.js              the contact form's endpoint; emails via Resend
+├── styles/
+│   └── app.css                 the Tailwind source: palette (@theme) + behaviour rules
+├── package.json                build tooling only; excluded from the deploy
 ├── tools/
 │   ├── build.py                bundles source → dist/ single files
 │   ├── make-images.py          regenerates the PNG assets
@@ -106,7 +127,7 @@ from body copy by weight (800) and tight negative tracking rather than by a
 change of face. The old Playfair pairing read institutional in the wrong
 direction for an IT company.
 
-`base.css` keys off `html[lang="ja"]` to mirror that in Japanese: **Noto Sans
+`styles/app.css` keys off `html[lang="ja"]` to mirror that in Japanese: **Noto Sans
 JP** (ゴシック) for both headings and body, via the `--jp-display` and `--jp`
 stacks, each falling back through Hiragino / Yu / MS before the Latin stack.
 Headings take weight 700 rather than a Mincho face, matching the Latin
@@ -190,58 +211,62 @@ page.
 
 ## The design system
 
-Everything resolves through custom properties in `assets/css/tokens.css`. No
-component file contains a raw hex value except the few literals inside the dark
-band and the footer, which are white-on-dark by definition.
+Two layers, both in `styles/app.css`:
 
-| Token          | Value     | Role                                        |
-|----------------|-----------|---------------------------------------------|
-| `--ground`     | `#FFFFFF` | Page background                             |
-| `--surface-2`  | `#F3F6FB` | The alternating band                        |
-| `--ink`        | `#0F1B2E` | Headings, body copy, and the footer ground  |
-| `--ink-2`      | `#3A4A5F` | Secondary text                              |
-| `--ink-3`      | `#6B7888` | Labels, captions, placeholders              |
-| `--accent`     | `#1A56DB` | Buttons, kickers, marks, petals             |
-| `--accent-ink` | `#1546B0` | Hover, and accent used as text              |
-| `--line`       | `#E3E8EF` | Every hairline on the site                  |
-| `--r`          | `12px`    | Cards and panels                            |
-| `--r-sm`       | `8px`     | Buttons                                     |
+**1. Tokens, as Tailwind theme colours.** Declared once in `@theme` and used as
+ordinary utilities (`text-ink`, `bg-brand-600`, `border-line`):
 
-**Elevation, not outline.** The card is the unit the whole page is built from:
-white, a 1px `--line` border, 12px corners, and a 3px accent bar that grows down
-the left edge on hover while the border fades out and a far-thrown shadow takes
-over. Buttons carry a shadow tinted in the accent itself. This replaced a
-hairline-only system that used no shadows at all.
+| Class stem    | Value     | Role                                        |
+|---------------|-----------|---------------------------------------------|
+| `brand-600`   | `#1A56DB` | The accent: buttons, kickers, marks, petals |
+| `brand-700`   | `#1546B0` | Hover, and accent used as text (7.4:1)      |
+| `brand-50`    | `#EEF3FD` | Tinted chips and icon wells                 |
+| `ink`         | `#0F1B2E` | Headings, body copy, the footer ground      |
+| `ink-soft`    | `#3A4A5F` | Secondary text                              |
+| `muted`       | `#6B7888` | Labels, captions, placeholders              |
+| `line`        | `#E3E8EF` | Every hairline on the site                  |
+| `paper-2`     | `#F3F6FB` | The alternating band                        |
 
-**Section rhythm.** White by default, with tinted bands breaking the run and one
-dark band carrying the brand:
+**2. Behaviour rules, deliberately unlayered.** The reveal safety net, the mobile
+menu, the blossom geometry and the contact form's states. Unlayered CSS beats
+every Tailwind layer regardless of specificity, which is the point: a utility
+class added later can restyle any of these elements but can never break how they
+*work*. Keep decoration in utilities and only behaviour in that part of the file.
+
+**Every grid declares `grid-cols-1` for mobile**, which Tailwind compiles to
+`minmax(0, 1fr)`. A grid with no explicit columns sizes its single track to its
+widest unbreakable content, and the hero's code card alone is ~430px of
+monospace: on a 360px phone that silently widened the hero and clipped its
+text. If you add a grid, give it a base column count.
+
+**Section rhythm.** White by default, tinted bands breaking the run, one dark
+band carrying the brand:
 
 | Section | Background |
 |---------|------------|
-| Nav, hero | white |
-| Strategy | the navy gradient `--band`, white type |
-| What we do, Why us | white |
-| Approach | `--surface-2` |
-| Stack | white |
-| Company, FAQ | `--surface-2` |
+| Header, hero | white, with a soft accent wash behind the code card |
+| Strategy | navy gradient, white type |
+| What we do | white |
+| Why us | `paper-2` |
+| Approach | white |
+| Stack | `paper-2` |
+| Company | white, with the photo slot |
+| FAQ | `paper-2` |
 | Contact | white, two cards |
-| Footer | `--ink`, white type |
+| Footer | `ink`, white type |
 
-**One dark band.** The section that explains the company's name sits on a navy
-gradient with an accent bloom behind the heading, which is what the reference
-does with the block that explains its own name. It is the only dark section
-above the footer, so it reads as the brand statement rather than as a stripe.
+**The header collapses at Tailwind's `md` (768px).** `nav.js` closes the panel
+past that width, so its `DESKTOP` constant must match.
 
-**The nav is light in every state.** It sits above a white hero, so `.stuck`
-only adds the bottom hairline once the page scrolls. The inverted nav that the
-old navy hero needed is gone, along with the `.js`-scoped overrides that made it
-safe.
+**Photos go in the Company section.** Its right-hand column is a decorated
+panel with an HTML comment marking the slot. Replace it with an `<img>` from
+`assets/img/photos/` once real photos exist. Never stock images presented as the
+team or the office: on a page whose pitch is a small, real team, that is the one
+thing a buyer can catch.
 
-**Light only.** The reference ships no dark theme, so neither does this. The
-`prefers-color-scheme` and `[data-theme="dark"]` blocks that used to sit in
-`tokens.css` are gone, and the pages declare a single `theme-color`. To add a
-dark theme back, redefine the semantic tokens (and only those) inside a media
-query; `theme.js` already re-reads them and repaints the canvas on a change.
+**Light only.** To add a dark theme, override the `@theme` colours inside a
+`prefers-color-scheme` media query; `theme.js` already repaints the canvases on
+a change.
 
 ---
 
@@ -253,7 +278,7 @@ The petal is the card, set at normal body size. Hovering or tabbing to a
 strategy lights the petal under it.
 
 Text sits 0.56R along each petal's axis at 72° intervals; those centres are the
-`--x`/`--y` pairs set inline in the HTML and documented in `sections.css`.
+`--x`/`--y` pairs set inline in the HTML and documented in `styles/app.css`.
 Below 900px a blossom this size cannot hold readable text, so it shrinks to a
 mark and the strategies become ordinary cards.
 
@@ -448,6 +473,7 @@ the matching CSP directive. Calendly is already allowed; see
 ## Rebuilding assets
 
 ```bash
+npm run css                    # first: build.py inlines whatever app.css holds
 python3 tools/build.py         # → dist/index.html, dist/ja/index.html, dist/artifact.html
 python3 tools/make-images.py   # → og-image.png and apple-touch-icon.png
 ```
