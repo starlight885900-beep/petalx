@@ -1,7 +1,7 @@
 # Petalxtech
 
 The company site for Petalxtech, an IT company in Tsuwano, Shimane, Japan, building
-and running software for companies in the United States.
+and running software for companies around the world.
 
 Bilingual (English + 日本語), static, one page per language. No framework and
 no runtime dependencies: the deployed site is plain HTML, one compiled

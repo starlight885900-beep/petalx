@@ -129,7 +129,7 @@ def make_og():
     d.text((86 * SS, 262 * SS), "Craft &", font=font("bold", 80 * SS), fill=INK)
     d.text((86 * SS, 352 * SS), "Collaboration", font=font("bold", 80 * SS), fill=INK)
     d.text((90 * SS, 470 * SS), "An IT company in Tsuwano, Shimane, connecting Japanese", font=font("regular", 27 * SS), fill=SLATE)
-    d.text((90 * SS, 508 * SS), "craft with companies in the United States.", font=font("regular", 27 * SS), fill=SLATE)
+    d.text((90 * SS, 508 * SS), "craft with companies around the world.", font=font("regular", 27 * SS), fill=SLATE)
 
     for i in range(5):
         x = (90 + i * 20) * SS
