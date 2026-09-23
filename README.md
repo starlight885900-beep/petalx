@@ -61,7 +61,10 @@ production.
 Sakura/
 ├── index.html                  the English page, all copy lives here, for SEO
 ├── ja/
-│   └── index.html              the Japanese page, same structure and ids
+│   ├── index.html              the Japanese page, same structure and ids
+│   └── collaborate/index.html  the Japanese partner page
+├── collaborate/
+│   └── index.html              the partner page, for engineers rather than clients
 ├── assets/
 │   ├── css/
 │   │   └── app.css             COMPILED by `npm run css`. Committed. Never edit.
@@ -207,6 +210,32 @@ unlabelled graphic field drawn with its own dark-ground colours via `drawBloom`'
 `colors` option; in Five Petals it is the labelled diagram you actually read.
 `main.js` treats every canvas as optional, so removing one does not break the
 page.
+
+---
+
+## The partner page
+
+`/collaborate/` and `/ja/collaborate/` are aimed at **engineers, not clients**:
+the collaboration programme with engineers across America. The main pages stay
+pointed at buyers; only a footer link connects them, so cold outreach can send
+people straight to the partner page without the client pitch in the way.
+
+They share the site's header and footer markup, with in-page links re-pointed at
+the home page (`/#services`) and the language switch pointing at the other
+partner page. **When you change the header or footer on the main pages, change
+them here too** — nothing enforces it.
+
+The form is the same one, posting to the same `/api/contact/`, with one
+difference: a hidden `topic` field fixed to `Collaboration`, which the endpoint
+accepts alongside the six practice topics. Enquiries from engineers therefore
+arrive in the same inbox with a subject that says which page they came from.
+
+**On the earnings copy.** The programme's pitch is that what a collaboration
+returns grows as the work grows. That is written as the shape of the model
+("as engagements widen, so does what they return each month"), not as a
+guarantee that every month is larger than the last. Keep it that way unless the
+company can stand behind the stronger claim: it is read by people deciding
+whether to work with you, and a flat month should not make the site false.
 
 ---
 

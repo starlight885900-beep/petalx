@@ -30,6 +30,7 @@ const FROM_EMAIL = process.env.FROM_EMAIL || 'Petalxtech site <noreply@petalxtec
 const TOPICS = [
   'Software Development', 'Cloud & Infrastructure', 'Web & Mobile',
   'AI & Data', 'IT Consulting', 'Business Automation', 'Something else',
+  'Collaboration',        // the partner page at /collaborate/ always sends this
 ];
 
 const LIMITS = {name: 200, company: 200, email: 320, message: 5000};

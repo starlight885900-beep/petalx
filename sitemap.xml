@@ -17,4 +17,16 @@
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
+  <url>
+    <loc>https://petalxtech.com/collaborate/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://petalxtech.com/collaborate/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://petalxtech.com/ja/collaborate/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://petalxtech.com/collaborate/"/>
+  </url>
+  <url>
+    <loc>https://petalxtech.com/ja/collaborate/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://petalxtech.com/collaborate/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://petalxtech.com/ja/collaborate/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://petalxtech.com/collaborate/"/>
+  </url>
 </urlset>

@@ -80,6 +80,12 @@ function check(label, cond, extra){
   check("body carries the message", sent.body.text.includes("retrieval system"));
   check("body notes the language", sent.body.text.includes("English"));
 
+  // the partner page's fixed topic
+  res = mockRes();
+  await handler(req("POST", {...VALID, topic: "Collaboration"}, "9.9.9.20"), res);
+  check("the partner page topic is accepted", res.code === 200 && res.body.ok === true, res.body);
+  check("subject names it", sent.body.subject.includes("Collaboration"), sent.body.subject);
+
   // JA page
   res = mockRes();
   await handler(req("POST", {...VALID, locale: "ja"}, "9.9.9.8"), res);
