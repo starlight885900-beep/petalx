@@ -95,6 +95,10 @@ Sakura/
 └── sitemap.xml
 ```
 
+**House style: no em dashes.** The copy uses commas, colons and full stops
+instead, in both languages. If you regenerate or extend the copy, keep to it;
+`grep -n '—' *.html ja/*.html collaborate/index.html` should stay empty.
+
 **The rule that keeps this tidy:** page copy belongs in the HTML, not in JS.
 Crawlers and screen readers both get everything without executing a script.
 Nothing on either page is injected at runtime.

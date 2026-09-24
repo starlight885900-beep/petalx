@@ -122,7 +122,7 @@ module.exports = async function handler(req, res){
     '',
     message,
     '',
-    `— sent from the ${locale === 'ja' ? '/ja/' : '/'} contact form`,
+    `Sent from the ${locale === 'ja' ? '/ja/' : '/'} contact form.`,
   ].join('\n');
 
   try {
@@ -133,7 +133,7 @@ module.exports = async function handler(req, res){
         from: FROM_EMAIL,
         to: [TO_EMAIL],
         reply_to: email,           // replying in your mail client reaches them
-        subject: `Petalxtech enquiry — ${oneLine(topic)} — ${oneLine(name)}`,
+        subject: `Petalxtech enquiry: ${oneLine(topic)} (${oneLine(name)})`,
         text,
       }),
     });
